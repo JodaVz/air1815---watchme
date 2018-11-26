@@ -13,17 +13,17 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_movie_details);
+        setContentView(R.layout.activity_login_screen);
 
-        //Button buttonLogin = findViewById(R.id.confirm_login);
-        // Button buttonRegistration = findViewById(R.id.confirm_registration);
-        //buttonLogin.setOnClickListener(this);
-        //buttonRegistration.setOnClickListener(this);
+        Button buttonLogin = findViewById(R.id.confirm_login);
+        Button buttonRegistration = findViewById(R.id.confirm_registration);
+        buttonLogin.setOnClickListener(this);
+        buttonRegistration.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View viewLogin) {
-        /*switch (viewLogin.getId()){
+        switch (viewLogin.getId()){
             case R.id.confirm_login:
                 Intent intentLogin = new Intent(this, MainActivity.class);
                 startActivity(intentLogin);
@@ -34,6 +34,6 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
                 break;
             default:
                 break;
-        }*/
+        }
     }
 }
