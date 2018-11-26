@@ -50,68 +50,70 @@
                 android:layout_gravity="left"
                 android:layout_marginLeft="150dp"
                 android:layout_marginTop="80dp"
-                android:paddingTop="0dp"
-                android:gravity="center_horizontal">
+                android:gravity="center_horizontal"
+                android:paddingTop="0dp">
 
                 <TextView
                     android:id="@+id/output_movie_details_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="left"
                     android:layout_marginTop="45dp"
+                    android:gravity="left"
                     android:text="Spider-Man: Homecoming"
                     android:textColor="#FFFFFF"
                     android:textSize="21dp" />
 
                 <TextView
-                android:id="@+id/output_movie_details_year"
-                android:layout_width="55dp"
-                android:layout_height="30dp"
-                android:layout_below="@+id/output_movie_details_title"
-                android:layout_marginTop="10dp"
-                android:gravity="left"
-                android:text="2017"
-                android:textSize="21dp"
-                android:textColor="#FFFFFF"/>
-
-                <TextView
-                    android:id="@+id/devider_year_rating"
-                    android:layout_width="5dp"
+                    android:id="@+id/output_movie_details_year"
+                    android:layout_width="wrap_content"
                     android:layout_height="30dp"
                     android:layout_below="@+id/output_movie_details_title"
                     android:layout_marginTop="10dp"
-                    android:layout_marginLeft="55dp"
+                    android:gravity="left"
+                    android:text="2017"
+                    android:textColor="#FFFFFF"
+                    android:textSize="21dp" />
+
+                <TextView
+                    android:id="@+id/divider_year_rating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_toEndOf="@+id/output_movie_details_year"
+                    android:layout_below="@id/output_movie_details_title"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
                     android:gravity="left"
                     android:text="|"
-                    android:textSize="21dp"
-                    android:textColor="#FFFFFF"/>
+                    android:textColor="#FFFFFF"
+                    android:textSize="21dp" />
 
                 <TextView
                     android:id="@+id/output_movie_details_rating"
-                    android:layout_width="35dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="30dp"
                     android:layout_below="@+id/output_movie_details_title"
+                    android:layout_toEndOf="@id/divider_year_rating"
                     android:layout_marginTop="10dp"
-                    android:layout_marginLeft="65dp"
                     android:gravity="left"
                     android:text="7.5"
-                    android:textSize="21dp"
-                    android:textColor="#FFFFFF"/>
+                    android:textColor="#FFFFFF"
+                    android:textSize="21dp" />
 
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
-                android:layout_marginTop="200dp"
-                android:layout_marginLeft="135dp">
+                android:layout_marginLeft="135dp"
+                android:layout_marginTop="200dp">
 
-               <ImageButton
-                   android:id="@+id/input_movie_details_like"
-                   android:layout_width="30dp"
-                   android:layout_height="match_parent"
-                   android:layout_marginLeft="15dp"
-                   android:background="@drawable/ic_like"/>
+                <ImageButton
+                    android:id="@+id/input_movie_details_like"
+                    android:layout_width="30dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="15dp"
+                    android:background="@drawable/ic_like" />
 
                 <ImageButton
                     android:id="@+id/input_movie_details_dislike"
@@ -119,7 +121,7 @@
                     android:layout_height="match_parent"
                     android:layout_marginLeft="15dp"
                     android:layout_toRightOf="@id/input_movie_details_like"
-                    android:background="@drawable/ic_dislike"/>
+                    android:background="@drawable/ic_dislike" />
 
 
             </RelativeLayout>
@@ -129,11 +131,27 @@
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/output_movie_details_about"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:text="Peter Parker balances his life as an ordinary high school student in Queens with his superhero alter-ego Spider-Man, and finds himself on the trail of a new menace prowling the skies of New York City." />
+        android:layout_height="wrap_content">
 
+        <TextView
+            android:id="@+id/output_movie_details_about"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="0dp"
+            android:maxLines="2"
+            android:text="Peter Parker balances his life as an ordinary high school student in Queens with his superhero alter-ego Spider-Man, and finds himself on the trail of a new menace prowling the skies of New York City." />
+
+        <Button
+            android:id="@+id/action_movie_details_show_more"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_marginLeft="-20dp"
+            android:layout_toEndOf="@id/output_movie_details_about"
+            android:background="@drawable/ic_show_more" />
+    </RelativeLayout>
 </LinearLayout>
