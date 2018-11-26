@@ -22,7 +22,7 @@
         android:layout_centerVertical="true"
         android:layout_marginTop="40dp"
         android:background="@drawable/button_shape_rounded"
-        android:text="Login" />
+        android:text="@string/login" />
 
     <Button
         android:id="@+id/confirm_registration"
@@ -34,7 +34,7 @@
         android:layout_centerVertical="true"
         android:layout_marginTop="40dp"
         android:background="@drawable/button_shape_rounded"
-        android:text="Register" />
+        android:text="@string/register" />
 
     <EditText
         android:id="@+id/input_login_email_adress"
@@ -45,7 +45,7 @@
         android:drawableLeft="@drawable/ic_email"
         android:ems="10"
         android:gravity="center"
-        android:hint="Email adress"
+        android:hint="@string/email_adress"
         android:inputType="textEmailAddress"
         android:paddingLeft="5dp"
         android:textSize="21dp" />
@@ -64,7 +64,7 @@
         android:drawableLeft="@drawable/ic_password"
         android:ems="10"
         android:gravity="center"
-        android:hint="Password"
+        android:hint="@string/password"
         android:inputType="textPassword"
         android:paddingLeft="5dp"
         android:textSize="21dp" />

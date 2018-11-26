@@ -3,4 +3,13 @@
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="password">Password</string>
+    <string name="email_adress">Email adress</string>
+    <string name="most_popular">Popular</string>
+    <string name="movies">Movies</string>
+    <string name="tv_series">TV series</string>
+    <string name="settings">Settings</string>
 </resources>

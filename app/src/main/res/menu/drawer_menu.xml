@@ -4,13 +4,17 @@
     tools:showIn="navigation_view">
     <group android:checkableBehavior="single">
         <item
+            android:id="@+id/nav_popular"
+            android:icon="@drawable/ic_popular"
+            android:title="@string/most_popular" />
+        <item
             android:id="@+id/nav_movie"
             android:icon="@drawable/ic_movie"
-            android:title="Movies" />
+            android:title="@string/movies" />
         <item
             android:id="@+id/nav_tv_series"
             android:icon="@drawable/ic_tv_series"
-            android:title="TV series" />
+            android:title="@string/tv_series" />
     </group>
 
     <item android:title="Settings">
@@ -18,7 +22,7 @@
             <item
                 android:id="@+id/nav_settings"
                 android:icon="@drawable/ic_settings"
-                android:title="Settings" />
+                android:title="@string/settings" />
         </menu>
     </item>
 

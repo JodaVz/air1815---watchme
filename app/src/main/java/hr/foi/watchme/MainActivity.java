@@ -34,11 +34,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        //It will show movie fragment on create
+        //It will show popular fragment on create
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                     new MovieFragment()).commit();
-            navigationView.setCheckedItem(R.id.nav_tv_series);
+            navigationView.setCheckedItem(R.id.nav_popular);
         }
     }
 

@@ -50,28 +50,77 @@
                 android:layout_gravity="left"
                 android:layout_marginLeft="150dp"
                 android:layout_marginTop="80dp"
+                android:paddingTop="0dp"
                 android:gravity="center_horizontal">
 
                 <TextView
                     android:id="@+id/output_movie_details_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
                     android:gravity="left"
+                    android:layout_marginTop="45dp"
                     android:text="Spider-Man: Homecoming"
+                    android:textColor="#FFFFFF"
+                    android:textSize="21dp" />
+
+                <TextView
+                android:id="@+id/output_movie_details_year"
+                android:layout_width="55dp"
+                android:layout_height="30dp"
+                android:layout_below="@+id/output_movie_details_title"
+                android:layout_marginTop="10dp"
+                android:gravity="left"
+                android:text="2017"
+                android:textSize="21dp"
+                android:textColor="#FFFFFF"/>
+
+                <TextView
+                    android:id="@+id/devider_year_rating"
+                    android:layout_width="5dp"
+                    android:layout_height="30dp"
+                    android:layout_below="@+id/output_movie_details_title"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="55dp"
+                    android:gravity="left"
+                    android:text="|"
                     android:textSize="21dp"
                     android:textColor="#FFFFFF"/>
 
                 <TextView
-                    android:id="@+id/output_movie_details_year"
-                    android:layout_width="60dp"
+                    android:id="@+id/output_movie_details_rating"
+                    android:layout_width="35dp"
                     android:layout_height="30dp"
                     android:layout_below="@+id/output_movie_details_title"
-                    android:layout_marginTop="50dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="65dp"
                     android:gravity="left"
-                    android:text="2017"
+                    android:text="7.5"
                     android:textSize="21dp"
                     android:textColor="#FFFFFF"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginTop="200dp"
+                android:layout_marginLeft="135dp">
+
+               <ImageButton
+                   android:id="@+id/input_movie_details_like"
+                   android:layout_width="30dp"
+                   android:layout_height="match_parent"
+                   android:layout_marginLeft="15dp"
+                   android:background="@drawable/ic_like"/>
+
+                <ImageButton
+                    android:id="@+id/input_movie_details_dislike"
+                    android:layout_width="30dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="15dp"
+                    android:layout_toRightOf="@id/input_movie_details_like"
+                    android:background="@drawable/ic_dislike"/>
+
 
             </RelativeLayout>
 
