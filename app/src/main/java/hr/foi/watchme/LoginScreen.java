@@ -23,7 +23,7 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
 
     @Override
     public void onClick(View viewLogin) {
-        /*switch (viewLogin.getId()){
+       /* switch (viewLogin.getId()){
             case R.id.confirm_login:
                 Intent intentLogin = new Intent(this, MainActivity.class);
                 startActivity(intentLogin);

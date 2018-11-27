@@ -108,7 +108,7 @@ public class PlayerActivity extends AppCompatActivity {
         playerView.setPlayer(player);
 
         DataSource.Factory dataSourceFactory = new DefaultDataSourceFactory(this,userAgent);
-        Uri uri = Uri.parse(getString(R.string.media_url_mp4));
+        Uri uri = Uri.parse(getString(R.string.media_url_mp44));
         MediaSource mediaSource = new ExtractorMediaSource.Factory(dataSourceFactory).createMediaSource(uri);
         player.prepare(mediaSource,true,false);
         player.setPlayWhenReady(playWhenReady);
