@@ -8,25 +8,31 @@ import android.widget.Button;
 
 import com.example.player.PlayerActivity;
 
+import hr.foi.watchme.WebServiceApi.WatchMeWebServiceCaller;
+
 public class LoginScreen extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_movie_menu_by_category);
+        setContentView(R.layout.activity_login_screen);
 
-        //Button buttonLogin = findViewById(R.id.confirm_login);
-        //Button buttonRegistration = findViewById(R.id.confirm_registration);
-        //buttonLogin.setOnClickListener(this);
-        //buttonRegistration.setOnClickListener(this);
+        Button buttonLogin = findViewById(R.id.confirm_login);
+        Button buttonRegistration = findViewById(R.id.confirm_registration);
+        buttonLogin.setOnClickListener(this);
+        buttonRegistration.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View viewLogin) {
-       /* switch (viewLogin.getId()){
+        switch (viewLogin.getId()){
             case R.id.confirm_login:
-                Intent intentLogin = new Intent(this, MainActivity.class);
-                startActivity(intentLogin);
+                WatchMeWebServiceCaller webServiceCaller = new WatchMeWebServiceCaller();
+                webServiceCaller.getAllUsers();
+                if (webServiceCaller.delaj== true){
+                    Intent intentLogin = new Intent(this, MainActivity.class);
+                    startActivity(intentLogin);
+                }
                 break;
             case R.id.confirm_registration:
                 Intent intentTestPlayer = new Intent(this, PlayerActivity.class);
@@ -34,6 +40,6 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
                 break;
             default:
                 break;
-        }*/
+        }
     }
 }
