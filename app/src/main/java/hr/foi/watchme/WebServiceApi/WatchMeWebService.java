@@ -5,6 +5,6 @@ import retrofit2.http.GET;
 
 public interface WatchMeWebService {
 
-    @GET("/api/korisnici/users/1")
-    Call<User> getUsers();
+    @GET("api/korisnici/users/1")
+    Call<String> getUsers();
 }
