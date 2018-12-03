@@ -1,9 +1,13 @@
 package hr.foi.watchme.WebServiceApi;
 
+import android.app.ProgressDialog;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
 
+import java.util.concurrent.TimeUnit;
+
+import hr.foi.watchme.LoginScreen;
 import hr.foi.watchme.R;
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
@@ -13,11 +17,12 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class WatchMeWebServiceCaller {
-    public User user;
-    public String delaware;
-    public boolean wait = true;
+    //private String delaware;
+   // public User user;
+
     Retrofit retrofit;
     private final String baseUrl = "https://watchmeservices20181120093721.azurewebsites.net/";
+
 
     public WatchMeWebServiceCaller(){
 
@@ -30,7 +35,7 @@ public class WatchMeWebServiceCaller {
                 .build();
     }
 
-    public void getAllUsers(){
+    public void getAllUsers(final GetDataCallback getDataCallback){
 
         WatchMeWebService serviceCaller = retrofit.create(WatchMeWebService.class);
         Call<String> call = serviceCaller.getUsers();
@@ -38,12 +43,11 @@ public class WatchMeWebServiceCaller {
         call.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
-                delaware=response.body();
-
-                Gson gson = new Gson();
-                user = gson.fromJson(delaware,User.class);
-
-                wait=false;
+                if (response.isSuccessful()){
+                    getDataCallback.onGetUserData(response.body());
+                }else {
+                    System.out.print("Ne vela");
+                }
             }
 
             @Override
@@ -51,7 +55,6 @@ public class WatchMeWebServiceCaller {
                 t.printStackTrace();
             }
         });
-
     }
 
 
