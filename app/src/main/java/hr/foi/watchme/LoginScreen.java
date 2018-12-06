@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 import com.example.player.PlayerActivity;
 import hr.foi.watchme.WebServiceApi.GetStatusCallback;
-import hr.foi.watchme.WebServiceApi.User;
+import hr.foi.watchme.WebServiceApi.POJO.User;
 import hr.foi.watchme.WebServiceApi.WatchMeWebServiceCaller;
 
 public class LoginScreen extends AppCompatActivity implements View.OnClickListener {

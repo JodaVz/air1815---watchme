@@ -1,4 +1,4 @@
-package hr.foi.watchme.WebServiceApi;
+package hr.foi.watchme.WebServiceApi.POJO;
 
 public class User {
     public int ID;

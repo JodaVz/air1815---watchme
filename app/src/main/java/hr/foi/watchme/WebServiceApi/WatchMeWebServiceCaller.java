@@ -42,7 +42,7 @@ public class WatchMeWebServiceCaller {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
                 if (response.isSuccessful()){
-                    getDataCallback.onGetUserData(response.body());
+                    getDataCallback.onGetData(response.body());
                 }else {
                     System.out.print("Ne vela");
                 }
@@ -51,6 +51,27 @@ public class WatchMeWebServiceCaller {
             @Override
             public void onFailure(Call<String> call, Throwable t) {
                 t.printStackTrace();
+            }
+        });
+    }
+
+    public void getMovies(final GetDataCallback getDataCallback){
+        WatchMeWebService serviceCaller = retrofit.create(WatchMeWebService.class);
+        Call<String> call = serviceCaller.getMovies();
+
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                if (response.isSuccessful()){
+                    getDataCallback.onGetData(response.body());
+                }else{
+                    Log.d(TAG,"Nisu došli filmeki: " + response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                Log.d(TAG,"Nije moguće povezivanje s bazom ");
             }
         });
     }

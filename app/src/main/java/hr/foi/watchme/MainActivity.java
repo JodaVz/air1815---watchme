@@ -13,9 +13,19 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.util.List;
+
+import hr.foi.watchme.WebServiceApi.GetDataCallback;
+import hr.foi.watchme.WebServiceApi.POJO.Movie;
+import hr.foi.watchme.WebServiceApi.WatchMeWebServiceCaller;
+
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawer;
+    private List<Movie> movieList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
+        final ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
@@ -40,6 +50,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     new MovieFragment()).commit();
             navigationView.setCheckedItem(R.id.nav_popular);
         }
+
+        WatchMeWebServiceCaller webServiceCaller = new WatchMeWebServiceCaller();
+        webServiceCaller.getMovies(new GetDataCallback() {
+            @Override
+            public void onGetData(String dataResponse) {
+                Gson gson = new Gson();
+                TypeToken<List<Movie>> token = new TypeToken<List<Movie>>(){};
+                movieList=gson.fromJson(dataResponse,token.getType());
+            }
+        });
     }
 
     @Override
