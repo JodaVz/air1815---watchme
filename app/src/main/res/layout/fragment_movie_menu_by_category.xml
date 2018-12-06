@@ -4,7 +4,7 @@
     android:layout_height="fill_parent">
 
     <TextView
-        android:id="@+id/output_movie_menu_by_category"
+        android:id="@+id/output_movie_menu_by_category_name"
         android:layout_width="match_parent"
         android:layout_height="25dp"
         android:text="Most popular"
@@ -16,8 +16,8 @@
         android:id="@+id/hsv"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_below="@id/output_movie_menu_by_category"
-        android:layout_alignStart="@+id/output_movie_menu_by_category"
+        android:layout_below="@id/output_movie_menu_by_category_name"
+        android:layout_alignStart="@+id/output_movie_menu_by_category_name"
         android:layout_marginStart="0dp"
         android:layout_marginTop="0dp"
         android:fillViewport="true"
