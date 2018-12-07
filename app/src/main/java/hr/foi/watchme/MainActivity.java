@@ -1,6 +1,5 @@
 package hr.foi.watchme;
 
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -8,10 +7,11 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -22,10 +22,11 @@ import hr.foi.watchme.WebServiceApi.GetDataCallback;
 import hr.foi.watchme.WebServiceApi.POJO.Movie;
 import hr.foi.watchme.WebServiceApi.WatchMeWebServiceCaller;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     private DrawerLayout drawer;
-    private List<Movie> movieList;
+    public List<Movie> movieList;
+    LinearLayout ParentLayout = (LinearLayout) findViewById(R.id.innerLayout);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,8 +57,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onGetData(String dataResponse) {
                 Gson gson = new Gson();
-                TypeToken<List<Movie>> token = new TypeToken<List<Movie>>(){};
-                movieList=gson.fromJson(dataResponse,token.getType());
+                TypeToken<List<Movie>> token = new TypeToken<List<Movie>>() {
+                };
+                movieList = gson.fromJson(dataResponse, token.getType());
             }
         });
     }
@@ -92,3 +94,4 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 }
+

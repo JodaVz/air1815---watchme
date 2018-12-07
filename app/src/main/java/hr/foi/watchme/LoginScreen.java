@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.player.PlayerActivity;
+
 import hr.foi.watchme.WebServiceApi.GetStatusCallback;
 import hr.foi.watchme.WebServiceApi.POJO.User;
 import hr.foi.watchme.WebServiceApi.WatchMeWebServiceCaller;
@@ -37,32 +38,33 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
         buttonRegistration.setOnClickListener(this);
 
 
+
     }
 
     @Override
     public void onClick(View viewLogin) {
-        switch (viewLogin.getId()){
+
+        switch (viewLogin.getId()) {
             case R.id.confirm_login:
-                textEmail= textEmailId.getText().toString();
+                textEmail = textEmailId.getText().toString();
                 textPassword = textPasswordId.getText().toString();
                 final Intent intentLogin = new Intent(this, MainActivity.class);
                 final WatchMeWebServiceCaller webServiceCaller = new WatchMeWebServiceCaller();
 
 
-
-                webServiceCaller.email=textEmail;
-                webServiceCaller.password=textPassword;
+                webServiceCaller.email = textEmail;
+                webServiceCaller.password = textPassword;
                 webServiceCaller.postUserLogin();
 
                 Handler handler = new Handler();
-                Runnable r=new Runnable() {
+                Runnable r = new Runnable() {
                     public void run() {
                         webServiceCaller.getUserLogin(new GetStatusCallback() {
                             @Override
                             public void onGetCode(int statusCode) {
-                                if (statusCode == 200){
+                                if (statusCode == 200) {
                                     startActivity(intentLogin);
-                                }else {
+                                } else {
                                     Context context = getApplicationContext();
                                     CharSequence text = "Krivi login podaci!";
                                     int duration = Toast.LENGTH_SHORT;
