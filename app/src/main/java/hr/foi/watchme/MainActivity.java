@@ -7,11 +7,8 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -26,7 +23,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private DrawerLayout drawer;
     public List<Movie> movieList;
-    LinearLayout ParentLayout = (LinearLayout) findViewById(R.id.innerLayout);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +65,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         switch (item.getItemId()) {
             case R.id.nav_movie:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new MovieFragment()).commit();
+                        new ViewPagerMovies()).commit();
                 break;
             case R.id.nav_tv_series:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
