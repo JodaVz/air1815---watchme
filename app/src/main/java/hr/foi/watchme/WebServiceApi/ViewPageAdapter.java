@@ -9,6 +9,10 @@ import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.List;
+
+import hr.foi.watchme.WebServiceApi.POJO.Movie;
+
 public class ViewPageAdapter extends PagerAdapter {
 
     private Context context;
@@ -19,10 +23,6 @@ public class ViewPageAdapter extends PagerAdapter {
         this.imageUrls = imageUrls;
     }
 
-    @Override
-    public int getCount() {
-        return imageUrls.length;
-    }
 
     @Override
     public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
@@ -46,5 +46,10 @@ public class ViewPageAdapter extends PagerAdapter {
     @Override
     public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
         container.removeView((View) object);
+    }
+
+    @Override
+    public int getCount() {
+        return imageUrls.length;
     }
 }

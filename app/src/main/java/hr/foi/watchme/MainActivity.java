@@ -22,7 +22,7 @@ import hr.foi.watchme.WebServiceApi.WatchMeWebServiceCaller;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     private DrawerLayout drawer;
-    public List<Movie> movieList;
+    public static List<Movie> movieList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
