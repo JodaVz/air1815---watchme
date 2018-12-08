@@ -2,15 +2,27 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark">
+    android:theme="@style/Theme.AppCompat.Light.DarkActionBar" >
+
+    <LinearLayout
+        android:id="@+id/innerLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="200dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:fillViewport="true"
+        android:gravity="center_vertical"
+        android:measureAllChildren="false"
+        android:orientation="horizontal">
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </android.support.v4.view.ViewPager>
 
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="Movie fragment"
-        android:textSize="30dp" />
-
+    </LinearLayout>
 
 </RelativeLayout>
