@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:theme="@style/Theme.AppCompat.Light.DarkActionBar" >
+    android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
 
     <LinearLayout
-        android:id="@+id/innerLayout"
+        android:id="@+id/top_recommendations_layout"
         android:layout_width="fill_parent"
         android:layout_height="200dp"
         android:layout_marginStart="0dp"
@@ -21,8 +22,21 @@
             android:layout_height="match_parent">
 
         </android.support.v4.view.ViewPager>
-
-
     </LinearLayout>
 
+    <HorizontalScrollView
+        android:id="@+id/layout_categories"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/top_recommendations_layout"
+        android:layout_alignStart="@id/top_recommendations_layout">
+
+        <LinearLayout
+            android:id="@+id/layout_categories_gallery"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+        </LinearLayout>
+    </HorizontalScrollView>
 </RelativeLayout>

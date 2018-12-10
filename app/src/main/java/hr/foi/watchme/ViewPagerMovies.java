@@ -1,5 +1,7 @@
 package hr.foi.watchme;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,10 +13,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.squareup.picasso.Picasso;
 
+import org.w3c.dom.Text;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,25 +57,25 @@ public class ViewPagerMovies extends AppCompatActivity {
 }
 */
 public class ViewPagerMovies extends Fragment {
-    
+
     private String[] movieUrls;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_movies, container, false);
         FillWithUrls();
-        return view;
+        View viewMain = inflater.inflate(R.layout.fragment_movies, container, false);
+        return viewMain;
     }
 
 
     @Override
     public void onResume() {
         super.onResume();
+        FillWithCategories();
         ViewPager viewPager = getView().findViewById(R.id.view_pager);
         ViewPageAdapter adapter = new ViewPageAdapter(getActivity(), movieUrls);
         viewPager.setAdapter(adapter);
-
     }
 
     public void FillWithUrls() {
@@ -78,5 +89,26 @@ public class ViewPagerMovies extends Fragment {
             Log.d("ELEMENT " + i + " : ", movieUrls[i]);
         }
     }
-}
 
+
+    public void FillWithCategories(){
+        LinearLayout gallery = getView().findViewById(R.id.layout_categories_gallery);
+        LayoutInflater inflater = LayoutInflater.from(getContext());
+
+        for(Movie movie : MainActivity.movieList){
+            View view = inflater.inflate(R.layout.fragment_movie_menu_by_category, gallery, false);
+
+            TextView textView = view.findViewById(R.id.output_movie_menu_by_category_name);
+            textView.setText(movie.getName());
+
+            ImageView imageView = view.findViewById(R.id.output_movie_menu_by_category_cover);
+            Picasso.get()
+                    .load(movie.getCoverPhoto())
+                    .resize(100, 150)
+                    .into(imageView);
+
+            gallery.addView(view);
+        }
+    }
+
+}

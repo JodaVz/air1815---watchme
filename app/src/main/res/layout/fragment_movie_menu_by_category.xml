@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:id="@+id/fragment_container">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/fragment_container"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
 
     <TextView
@@ -13,69 +14,13 @@
         android:text="Most popular"
         android:textSize="20dp" />
 
-    <HorizontalScrollView
-        android:id="@+id/hsv"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_below="@id/output_movie_menu_by_category_name"
-        android:layout_alignStart="@+id/output_movie_menu_by_category_name"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="0dp"
-        android:fillViewport="true"
-        android:measureAllChildren="false"
-        android:scrollbars="none">
 
-        <LinearLayout
-            android:id="@+id/innerLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+    <ImageView
+        android:id="@+id/output_movie_menu_by_category_cover"
+        android:layout_width="100dp"
+        android:layout_height="150dp"
+        android:foregroundGravity="center"
+        android:padding="5dp"
+        android:src="@drawable/movie_details_front" />
 
-/*
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:foregroundGravity="center"
-                android:padding="5dp"
-                android:src="@drawable/movie_details_front" />
-
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:foregroundGravity="center"
-                android:padding="5dp"
-                android:src="@drawable/movie_details_front" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:foregroundGravity="center"
-                android:padding="5dp"
-                android:src="@drawable/movie_details_front" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:foregroundGravity="center"
-                android:padding="5dp"
-                android:src="@drawable/movie_details_front" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:foregroundGravity="center"
-                android:padding="5dp"
-                android:src="@drawable/movie_details_front" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:foregroundGravity="center"
-                android:padding="5dp"
-                android:src="@drawable/movie_details_front" />
-            */
-        </LinearLayout>
-    </HorizontalScrollView>
-</RelativeLayout>
+</LinearLayout>

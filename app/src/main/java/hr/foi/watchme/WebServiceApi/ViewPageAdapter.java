@@ -23,7 +23,6 @@ public class ViewPageAdapter extends PagerAdapter {
         this.imageUrls = imageUrls;
     }
 
-
     @Override
     public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
         return view == object;
