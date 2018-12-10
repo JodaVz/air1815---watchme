@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         switch (item.getItemId()) {
             case R.id.nav_movie:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new ViewPagerMovies()).commit();
+                        new MovieViewPager()).commit();
                 break;
             case R.id.nav_tv_series:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,

@@ -1,13 +1,9 @@
 package hr.foi.watchme;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,27 +12,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.squareup.picasso.Picasso;
 
-import org.w3c.dom.Text;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-
-import hr.foi.watchme.WebServiceApi.GetDataCallback;
 import hr.foi.watchme.WebServiceApi.POJO.Movie;
 import hr.foi.watchme.WebServiceApi.ViewPageAdapter;
-import hr.foi.watchme.WebServiceApi.WatchMeWebServiceCaller;
 
 /*
 
-public class ViewPagerMovies extends AppCompatActivity {
+public class MovieViewPager extends AppCompatActivity {
     private String[] imageUrls = new String[]{
             "https://cdn.pixabay.com/photo/2016/11/11/23/34/cat-1817970_960_720.jpg",
             "https://cdn.pixabay.com/photo/2017/12/21/12/26/glowworm-3031704_960_720.jpg",
@@ -56,7 +39,7 @@ public class ViewPagerMovies extends AppCompatActivity {
     }
 }
 */
-public class ViewPagerMovies extends Fragment {
+public class MovieViewPager extends Fragment {
 
     private String[] movieUrls;
 
@@ -91,17 +74,19 @@ public class ViewPagerMovies extends Fragment {
     }
 
 
-    public void FillWithCategories(){
-        LinearLayout gallery = getView().findViewById(R.id.layout_categories_gallery);
+    public void FillWithCategories() {
+        LinearLayout category = getView().findViewById(R.id.layout_categories);
+        LinearLayout gallery = getView().findViewById(R.id.layout_movies_categories_gallery);
         LayoutInflater inflater = LayoutInflater.from(getContext());
 
-        for(Movie movie : MainActivity.movieList){
-            View view = inflater.inflate(R.layout.fragment_movie_menu_by_category, gallery, false);
 
-            TextView textView = view.findViewById(R.id.output_movie_menu_by_category_name);
+        for (Movie movie : MainActivity.movieList) {
+            View view = inflater.inflate(R.layout.fragment_movie_menu_in_category, gallery, false);
+
+            TextView textView = view.findViewById(R.id.output_movie_menu_by_category_movie_name);
             textView.setText(movie.getName());
 
-            ImageView imageView = view.findViewById(R.id.output_movie_menu_by_category_cover);
+            ImageView imageView = view.findViewById(R.id.output_movie_menu_by_category_movie_cover);
             Picasso.get()
                     .load(movie.getCoverPhoto())
                     .resize(100, 150)
@@ -110,5 +95,4 @@ public class ViewPagerMovies extends Fragment {
             gallery.addView(view);
         }
     }
-
 }
