@@ -9,16 +9,12 @@ import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
 
-import java.util.List;
-
-import hr.foi.watchme.WebServiceApi.POJO.Movie;
-
 public class ViewPageAdapter extends PagerAdapter {
 
     private Context context;
     private String[] imageUrls;
 
-    public ViewPageAdapter(Context context, String[] imageUrls){
+    public ViewPageAdapter(Context context, String[] imageUrls) {
         this.context = context;
         this.imageUrls = imageUrls;
     }
@@ -49,6 +45,8 @@ public class ViewPageAdapter extends PagerAdapter {
 
     @Override
     public int getCount() {
+
         return imageUrls.length;
     }
 }
+

@@ -1,9 +1,11 @@
 package hr.foi.watchme;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +15,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
+
+import java.util.List;
 
 import hr.foi.watchme.WebServiceApi.POJO.Movie;
 import hr.foi.watchme.WebServiceApi.ViewPageAdapter;
@@ -42,6 +46,7 @@ public class MovieViewPager extends AppCompatActivity {
 public class MovieViewPager extends Fragment {
 
     private String[] movieUrls;
+    private MoviesInterface mListenerActivity;
 
     @Nullable
     @Override
@@ -51,21 +56,21 @@ public class MovieViewPager extends Fragment {
         return viewMain;
     }
 
-
     @Override
     public void onResume() {
+        FillWithUrls();
         super.onResume();
-        FillWithCategories();
         ViewPager viewPager = getView().findViewById(R.id.view_pager);
         ViewPageAdapter adapter = new ViewPageAdapter(getActivity(), movieUrls);
         viewPager.setAdapter(adapter);
     }
 
     public void FillWithUrls() {
-        movieUrls = new String[MainActivity.movieList.size()];
+        List<Movie> movies = mListenerActivity.getMovieList();
+        movieUrls = new String[movies.size()];
 
-        for (int i = 0; i < MainActivity.movieList.size(); i++) {
-            movieUrls[i] = MainActivity.movieList.get(i).getCoverPhoto();
+        for (int i = 0; i < movies.size(); i++) {
+            movieUrls[i] = movies.get(i).getCoverPhoto();
         }
         Log.d("POLJE URLA::", Integer.toString(movieUrls.length));
         for (int i = 0; i < movieUrls.length; i++) {
@@ -73,26 +78,14 @@ public class MovieViewPager extends Fragment {
         }
     }
 
-
-    public void FillWithCategories() {
-        LinearLayout category = getView().findViewById(R.id.layout_categories);
-        LinearLayout gallery = getView().findViewById(R.id.layout_movies_categories_gallery);
-        LayoutInflater inflater = LayoutInflater.from(getContext());
-
-
-        for (Movie movie : MainActivity.movieList) {
-            View view = inflater.inflate(R.layout.fragment_movie_menu_in_category, gallery, false);
-
-            TextView textView = view.findViewById(R.id.output_movie_menu_by_category_movie_name);
-            textView.setText(movie.getName());
-
-            ImageView imageView = view.findViewById(R.id.output_movie_menu_by_category_movie_cover);
-            Picasso.get()
-                    .load(movie.getCoverPhoto())
-                    .resize(100, 150)
-                    .into(imageView);
-
-            gallery.addView(view);
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        //TODO put this line inside try-catch block (donekle)RIJEŠENO!
+        try {
+            mListenerActivity = (MoviesInterface) getActivity();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 }

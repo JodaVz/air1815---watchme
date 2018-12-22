@@ -24,34 +24,13 @@
         </android.support.v4.view.ViewPager>
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/layout_categories"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/output_category_movie_gallery"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/top_recommendations_layout"
         android:layout_alignStart="@id/top_recommendations_layout"
-        android:orientation="vertical">
+        android:scrollbars="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:id="@+id/output_movie_menu_by_category_name"
-            android:text="Kategorija"/>
-
-        <HorizontalScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-
-            <LinearLayout
-                android:id="@+id/layout_movies_categories_gallery"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-            </LinearLayout>
-
-        </HorizontalScrollView>
-    </LinearLayout>
+    </android.support.v7.widget.RecyclerView>
 </RelativeLayout>

@@ -19,7 +19,7 @@ import hr.foi.watchme.WebServiceApi.GetDataCallback;
 import hr.foi.watchme.WebServiceApi.POJO.Movie;
 import hr.foi.watchme.WebServiceApi.WatchMeWebServiceCaller;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, MoviesInterface{
 
     private DrawerLayout drawer;
     public static List<Movie> movieList;
@@ -88,6 +88,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else {
             super.onBackPressed();
         }
+    }
+
+    @Override
+    public List<Movie> getMovieList() {
+        return movieList;
     }
 }
 
