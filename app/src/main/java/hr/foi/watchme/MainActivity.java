@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private DrawerLayout drawer;
     public static List<Movie> movieList;
+    public static List<List<Movie>> categoryList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +57,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 TypeToken<List<Movie>> token = new TypeToken<List<Movie>>() {
                 };
                 movieList = gson.fromJson(dataResponse, token.getType());
+            }
+        });
+
+        webServiceCaller.getCategories(new GetDataCallback() {
+            @Override
+            public void onGetData(String dataResponse) {
+                Gson gson = new Gson();
+                TypeToken<List<List<Movie>>> token = new TypeToken<List<List<Movie>>>() {
+                };
+                categoryList = gson.fromJson(dataResponse, token.getType());
             }
         });
     }

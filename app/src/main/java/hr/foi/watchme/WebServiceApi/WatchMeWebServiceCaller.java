@@ -76,6 +76,27 @@ public class WatchMeWebServiceCaller {
         });
     }
 
+    public void getCategories (final GetDataCallback getDataCallback){
+        WatchMeWebService serviceCaller = retrofit.create(WatchMeWebService.class);
+        Call<String> call = serviceCaller.getCategories();
+
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                if (response.isSuccessful()){
+                    getDataCallback.onGetData(response.body());
+                }else{
+                    Log.d(TAG,"Nisu došle kategorije: " + response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                Log.d(TAG,"Nije moguće povezivanje s bazom ");
+            }
+        });
+    }
+
     public void getUserLogin(final GetStatusCallback getStatusCallback){
         WatchMeWebService serviceCaller = retrofit.create(WatchMeWebService.class);
         Call<Void> call = serviceCaller.getUserLogin();

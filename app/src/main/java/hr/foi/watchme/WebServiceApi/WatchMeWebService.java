@@ -18,6 +18,9 @@ public interface WatchMeWebService {
     @GET("api/sadrzaj/sadrzaj/")
     Call<String> getMovies();
 
+    @GET("api/sadrzaj/sadrzaj/dohvati_prema_kategoriji")
+    Call<String> getCategories();
+
     @Headers("Content-Type: application/json")
     @POST("api/korisnici/users/provjeri/")
     Call<ResponseBody> postUserLogin(@Body String body);
