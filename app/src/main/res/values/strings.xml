@@ -12,4 +12,6 @@
     <string name="movies">Movies</string>
     <string name="tv_series">TV series</string>
     <string name="settings">Settings</string>
+    <string name="night_mode">Night mode</string>
+    <string name="language">Language</string>
 </resources>
