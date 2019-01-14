@@ -4,17 +4,14 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
-
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -46,27 +43,46 @@ public class MovieViewPager extends AppCompatActivity {
 public class MovieViewPager extends Fragment {
 
     private String[] movieUrls;
+    private List<MovieCategory> moviesByCategories;
     private MoviesInterface mListenerActivity;
+    LinearLayout catContainer;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         FillWithUrls();
         View viewMain = inflater.inflate(R.layout.fragment_movies, container, false);
+        catContainer = viewMain.findViewById(R.id.categoryFragsContainer);
         return viewMain;
     }
 
     @Override
     public void onResume() {
-        FillWithUrls();
+        //FillWithUrls();
         super.onResume();
         ViewPager viewPager = getView().findViewById(R.id.view_pager);
         ViewPageAdapter adapter = new ViewPageAdapter(getActivity(), movieUrls);
         viewPager.setAdapter(adapter);
+
+        fillCategories();
+    }
+
+    private void fillCategories() {
+
+        for(MovieCategory cat : moviesByCategories){
+            MovieCategoryFragment frag = MovieCategoryFragment.newInstance(cat.getName(), cat.getMovies());
+            FragmentManager fragMan = getChildFragmentManager();
+            FragmentTransaction fragTransaction = fragMan.beginTransaction();
+
+            fragTransaction.add(R.id.categoryFragsContainer, frag , "" + cat.getName());
+            fragTransaction.commit();
+        }
     }
 
     public void FillWithUrls() {
+        moviesByCategories = mListenerActivity.getAllMoviesByCategories();
         List<Movie> movies = mListenerActivity.getMovieList();
+        //TODO dio koda ispod prebaciti u aktivnost da vrati čiste URLove, a ne viška podatke o filmove
         movieUrls = new String[movies.size()];
 
         for (int i = 0; i < movies.size(); i++) {
