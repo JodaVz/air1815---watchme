@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import hr.foi.watchme.WebServiceApi.GetDataCallback;
@@ -23,7 +24,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private DrawerLayout drawer;
     public static List<Movie> movieList;
-    public static List<List<Movie>> categoryList;
+    public static List<MovieCategory> categoryList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +67,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Gson gson = new Gson();
                 TypeToken<List<List<Movie>>> token = new TypeToken<List<List<Movie>>>() {
                 };
+                //TODO prilagoditi JSON da jedna stavka polja izgleda kao uređeni par (ime kategorije, polje filmova)
                 categoryList = gson.fromJson(dataResponse, token.getType());
             }
         });
@@ -104,6 +106,35 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public List<Movie> getMovieList() {
         return movieList;
+    }
+
+    @Override
+    public List<MovieCategory> getAllMoviesByCategories() {
+        List<MovieCategory> mockLista = new ArrayList<>();
+        List<Movie> movies = new ArrayList<>();
+        movies.add(new Movie("https://cdn.pixabay.com/photo/2016/11/11/23/34/cat-1817970_960_720.jpg"));
+        movies.add(new Movie("https://cdn.pixabay.com/photo/2016/11/11/23/34/cat-1817970_960_720.jpg"));
+        movies.add(new Movie("https://cdn.pixabay.com/photo/2016/11/11/23/34/cat-1817970_960_720.jpg"));
+        movies.add(new Movie("https://cdn.pixabay.com/photo/2016/11/11/23/34/cat-1817970_960_720.jpg"));
+        movies.add(new Movie("https://cdn.pixabay.com/photo/2016/11/11/23/34/cat-1817970_960_720.jpg"));
+        movies.add(new Movie("https://cdn.pixabay.com/photo/2016/11/11/23/34/cat-1817970_960_720.jpg"));
+        movies.add(new Movie("https://cdn.pixabay.com/photo/2016/11/11/23/34/cat-1817970_960_720.jpg"));
+        movies.add(new Movie("https://cdn.pixabay.com/photo/2016/11/11/23/34/cat-1817970_960_720.jpg"));
+
+        List<Movie> movies1 = new ArrayList<>();
+        movies1.add(new Movie("https://cdn.pixabay.com/photo/2017/12/24/09/09/road-3036620_960_720.jpg"));
+        movies1.add(new Movie("https://cdn.pixabay.com/photo/2016/11/11/23/34/cat-1817970_960_720.jpg"));
+        movies1.add(new Movie("https://cdn.pixabay.com/photo/2017/12/24/09/09/road-3036620_960_720.jpg"));
+        movies1.add(new Movie("https://cdn.pixabay.com/photo/2017/12/24/09/09/road-3036620_960_720.jpg"));
+        movies1.add(new Movie("https://cdn.pixabay.com/photo/2017/12/24/09/09/road-3036620_960_720.jpg"));
+        movies1.add(new Movie("https://cdn.pixabay.com/photo/2017/12/24/09/09/road-3036620_960_720.jpg"));
+        movies1.add(new Movie("https://cdn.pixabay.com/photo/2017/12/24/09/09/road-3036620_960_720.jpg"));
+        movies1.add(new Movie("https://cdn.pixabay.com/photo/2017/12/24/09/09/road-3036620_960_720.jpg"));
+        movies1.add(new Movie("https://cdn.pixabay.com/photo/2016/11/11/23/34/cat-1817970_960_720.jpg"));
+        mockLista.add(new MovieCategory("Drama", movies));
+        mockLista.add(new MovieCategory("Vestern", movies1));
+        mockLista.add(new MovieCategory("asdkjasndjkahsd", movies));
+        return mockLista;
     }
 }
 
