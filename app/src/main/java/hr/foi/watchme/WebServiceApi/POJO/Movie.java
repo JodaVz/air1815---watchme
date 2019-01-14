@@ -1,9 +1,17 @@
 package hr.foi.watchme.WebServiceApi.POJO;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Movie {
+public class Movie implements Parcelable {
+    //TODO dodati sve atribute, ne samo url
+    public Movie(String url){
+        this.coverPhoto = url;
+    }
+
     @SerializedName("ID")
     @Expose
     private Integer id;
@@ -91,5 +99,16 @@ public class Movie {
 
     public void setCoverPhoto(String coverPhoto) {
         this.coverPhoto = coverPhoto;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        //TODO dodati sve ostale atribute
+        dest.writeString(coverPhoto);
     }
 }
