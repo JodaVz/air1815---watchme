@@ -8,7 +8,8 @@ import com.google.gson.annotations.SerializedName;
 
 public class Movie implements Parcelable {
     //TODO dodati sve atribute, ne samo url
-    public Movie(String url){
+    public Movie(String url, Integer id){
+        this.id = id;
         this.coverPhoto = url;
     }
 
@@ -109,6 +110,7 @@ public class Movie implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         //TODO dodati sve ostale atribute
+        dest.writeInt(id);
         dest.writeString(coverPhoto);
     }
 }

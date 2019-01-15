@@ -1,7 +1,6 @@
 package hr.foi.watchme;
 
 import android.support.annotation.NonNull;
-import android.support.v7.view.menu.MenuView;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
@@ -11,14 +10,14 @@ import com.squareup.picasso.Picasso;
 
 import hr.foi.watchme.WebServiceApi.POJO.Movie;
 
-public class CatMovieItemViewHolder extends RecyclerView.ViewHolder {
+public class CatMovieItemViewHolder extends RecyclerView.ViewHolder{
 
     ImageView movieImage;
     TextView movieTitle;
 
     public CatMovieItemViewHolder(@NonNull View itemView) {
         super(itemView);
-        //TODO holder će primiti INFLATAN! xml jedne stavke filma (category_movie_item.xml)
+        //TODO holder će primiti INFLATAN! xml jedne stavke filma (category_movie_item.xml) RIJEŠENO!
 
         //TODO koristiti findViewById da se iz itemViewa nađe imageView i textview RIJEŠENO!
         movieImage = itemView.findViewById(R.id.output_movie_menu_by_category_movie_cover);
