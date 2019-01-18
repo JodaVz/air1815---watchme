@@ -8,9 +8,16 @@ import com.google.gson.annotations.SerializedName;
 
 public class Movie implements Parcelable {
     //TODO dodati sve atribute, ne samo url
-    public Movie(String url, Integer id){
+    public Movie(Integer id, String name, String releaseDate, Integer season,
+                 Integer episode, Double duration, Integer feedback, String coverPhoto ){
         this.id = id;
-        this.coverPhoto = url;
+        this.name = name;
+        this.releaseDate = releaseDate;
+        this.season = season;
+        this.episode = episode;
+        this.duration = duration;
+        this.feedback = feedback;
+        this.coverPhoto = coverPhoto;
     }
 
     @SerializedName("ID")

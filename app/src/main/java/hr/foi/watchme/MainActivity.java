@@ -112,25 +112,26 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public List<MovieCategory> getAllMoviesByCategories() {
         List<MovieCategory> mockLista = new ArrayList<>();
         List<Movie> movies = new ArrayList<>();
-        movies.add(new Movie("https://cdn.pixabay.com/photo/2016/11/11/23/34/cat-1817970_960_720.jpg", 1));
-        movies.add(new Movie("https://cdn.pixabay.com/photo/2016/11/11/23/34/cat-1817970_960_720.jpg", 2));
-        movies.add(new Movie("https://cdn.pixabay.com/photo/2016/11/11/23/34/cat-1817970_960_720.jpg",3));
-        movies.add(new Movie("https://cdn.pixabay.com/photo/2016/11/11/23/34/cat-1817970_960_720.jpg",4));
-        movies.add(new Movie("https://cdn.pixabay.com/photo/2016/11/11/23/34/cat-1817970_960_720.jpg",5));
-        movies.add(new Movie("https://cdn.pixabay.com/photo/2016/11/11/23/34/cat-1817970_960_720.jpg", 6));
-        movies.add(new Movie("https://cdn.pixabay.com/photo/2016/11/11/23/34/cat-1817970_960_720.jpg",7));
-        movies.add(new Movie("https://cdn.pixabay.com/photo/2016/11/11/23/34/cat-1817970_960_720.jpg", 8));
+        movies.add(new Movie(1, "Kutija Pringlesa", "2002-01-01T00:00:00", 0, 1, 7200.0,1,"https://cdn.pixabay.com/photo/2016/11/11/23/34/cat-1817970_960_720.jpg"));
+        movies.add(new Movie(2, "Vino u čaši", "2002-01-01T00:00:00", 0, 1, 7200.0,1,"https://cdn.pixabay.com/photo/2016/11/11/23/34/cat-1817970_960_720.jpg"));
+        movies.add(new Movie(3, "Potrgana bilježnica", "2002-01-01T00:00:00", 0, 1, 7200.0,1,"https://cdn.pixabay.com/photo/2016/11/11/23/34/cat-1817970_960_720.jpg"));
+        movies.add(new Movie(4, "Prijateljica s Thailanda", "2002-01-01T00:00:00", 0, 1, 7200.0,1,"https://cdn.pixabay.com/photo/2016/11/11/23/34/cat-1817970_960_720.jpg"));
+        movies.add(new Movie(5, "Sunčanje kornjača", "2002-01-01T00:00:00", 0, 1, 7200.0,1,"https://cdn.pixabay.com/photo/2016/11/11/23/34/cat-1817970_960_720.jpg"));
+        movies.add(new Movie(6, "Otvorena vrata", "2002-01-01T00:00:00", 0, 1, 7200.0,1,"https://cdn.pixabay.com/photo/2016/11/11/23/34/cat-1817970_960_720.jpg"));
+        movies.add(new Movie(7, "Klima", "2002-01-01T00:00:00", 0, 1, 7200.0,1,"https://cdn.pixabay.com/photo/2016/11/11/23/34/cat-1817970_960_720.jpg"));
+        movies.add(new Movie(8, "Smeđi parket", "2002-01-01T00:00:00", 0, 1, 7200.0,1,"https://cdn.pixabay.com/photo/2016/11/11/23/34/cat-1817970_960_720.jpg"));
+
 
         List<Movie> movies1 = new ArrayList<>();
-        movies1.add(new Movie("https://cdn.pixabay.com/photo/2017/12/24/09/09/road-3036620_960_720.jpg",0 ));
-        movies1.add(new Movie("https://cdn.pixabay.com/photo/2016/11/11/23/34/cat-1817970_960_720.jpg", 1));
-        movies1.add(new Movie("https://cdn.pixabay.com/photo/2017/12/24/09/09/road-3036620_960_720.jpg", 2));
-        movies1.add(new Movie("https://cdn.pixabay.com/photo/2017/12/24/09/09/road-3036620_960_720.jpg", 3));
-        movies1.add(new Movie("https://cdn.pixabay.com/photo/2017/12/24/09/09/road-3036620_960_720.jpg", 4));
-        movies1.add(new Movie("https://cdn.pixabay.com/photo/2017/12/24/09/09/road-3036620_960_720.jpg", 5));
-        movies1.add(new Movie("https://cdn.pixabay.com/photo/2017/12/24/09/09/road-3036620_960_720.jpg", 6));
-        movies1.add(new Movie("https://cdn.pixabay.com/photo/2017/12/24/09/09/road-3036620_960_720.jpg", 7));
-        movies1.add(new Movie("https://cdn.pixabay.com/photo/2016/11/11/23/34/cat-1817970_960_720.jpg", 8));
+        movies1.add(new Movie(1, "Kutija Pringlesa", "2002-01-01T00:00:00", 0, 1, 7200.0,1,"https://cdn.pixabay.com/photo/2017/10/10/15/28/butterfly-2837589_960_720.jpg"));
+        movies1.add(new Movie(2, "Vino u čaši", "2002-01-01T00:00:00", 0, 1, 7200.0,1,"https://cdn.pixabay.com/photo/2017/10/10/15/28/butterfly-2837589_960_720.jpg"));
+        movies1.add(new Movie(3, "Potrgana bilježnica", "2002-01-01T00:00:00", 0, 1, 7200.0,1,"https://cdn.pixabay.com/photo/2017/10/10/15/28/butterfly-2837589_960_720.jpg"));
+        movies1.add(new Movie(4, "Prijateljica s Thailanda", "2002-01-01T00:00:00", 0, 1, 7200.0,1, "https://cdn.pixabay.com/photo/2017/12/24/09/09/road-3036620_960_720.jpg"));
+        movies1.add(new Movie(5, "Sunčanje kornjača", "2002-01-01T00:00:00", 0, 1, 7200.0,1,"https://cdn.pixabay.com/photo/2017/10/10/15/28/butterfly-2837589_960_720.jpg"));
+        movies1.add(new Movie(6, "Otvorena vrata", "2002-01-01T00:00:00", 0, 1, 7200.0,1,"https://cdn.pixabay.com/photo/2016/11/11/23/34/cat-1817970_960_720.jpg"));
+        movies1.add(new Movie(7, "Klima", "2002-01-01T00:00:00", 0, 1, 7200.0,1, "https://cdn.pixabay.com/photo/2017/12/24/09/09/road-3036620_960_720.jpg"));
+        movies1.add(new Movie(8, "Smeđi parket", "2002-01-01T00:00:00", 0, 1, 7200.0,1, "https://cdn.pixabay.com/photo/2017/12/24/09/09/road-3036620_960_720.jpg"));
+
         mockLista.add(new MovieCategory("Drama", movies));
         mockLista.add(new MovieCategory("Vestern", movies1));
         mockLista.add(new MovieCategory("asdkjasndjkahsd", movies));
