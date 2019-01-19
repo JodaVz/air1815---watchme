@@ -17,16 +17,13 @@ public class CatMovieItemViewHolder extends RecyclerView.ViewHolder{
 
     public CatMovieItemViewHolder(@NonNull View itemView) {
         super(itemView);
-        //TODO holder će primiti INFLATAN! xml jedne stavke filma (category_movie_item.xml) RIJEŠENO!
 
-        //TODO koristiti findViewById da se iz itemViewa nađe imageView i textview RIJEŠENO!
         movieImage = itemView.findViewById(R.id.output_movie_menu_by_category_movie_cover);
         movieTitle = itemView.findViewById(R.id.output_movie_menu_by_category_movie_name);
 
     }
 
     public void bind(Movie m){
-        //TODO koristiti Piccaso movieImage.set RIJEŠENO!
         movieTitle.setText(m.getName());
         Picasso.get()
                 .load(m.getCoverPhoto())

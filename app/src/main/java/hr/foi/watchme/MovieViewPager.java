@@ -97,7 +97,7 @@ public class MovieViewPager extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        //TODO put this line inside try-catch block (donekle)RIJEŠENO!
+
         try {
             mListenerActivity = (MoviesInterface) getActivity();
         } catch (Exception e) {
