@@ -137,5 +137,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mockLista.add(new MovieCategory("asdkjasndjkahsd", movies));
         return mockLista;
     }
+
+    @Override
+    //TODO poslati ID odabranog filma iz RecyclerView-a
+    public Movie getMovieById(Integer id) {
+        return null;
+    }
 }
 
