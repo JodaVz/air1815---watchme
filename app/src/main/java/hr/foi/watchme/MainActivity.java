@@ -16,11 +16,16 @@ import com.google.gson.reflect.TypeToken;
 import java.util.ArrayList;
 import java.util.List;
 
-import hr.foi.watchme.WebServiceApi.GetDataCallback;
-import hr.foi.watchme.WebServiceApi.POJO.Movie;
+import hr.foi.watchme.FragmentAssets.MovieViewPager;
+import hr.foi.watchme.Fragments.MovieFragment;
+import hr.foi.watchme.Fragments.TvSeriesFragment;
+import hr.foi.watchme.Interfaces.MoviesInterface;
+import hr.foi.watchme.POJO.MovieCategory;
+import hr.foi.watchme.WebServiceApi.WebServiceInterfaces.GetDataCallback;
+import hr.foi.watchme.POJO.Movie;
 import hr.foi.watchme.WebServiceApi.WatchMeWebServiceCaller;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, MoviesInterface{
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, MoviesInterface {
 
     private DrawerLayout drawer;
     public static List<Movie> movieList;

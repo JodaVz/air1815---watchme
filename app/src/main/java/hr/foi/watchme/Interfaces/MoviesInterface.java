@@ -1,8 +1,9 @@
-package hr.foi.watchme;
+package hr.foi.watchme.Interfaces;
 
 import java.util.List;
 
-import hr.foi.watchme.WebServiceApi.POJO.Movie;
+import hr.foi.watchme.POJO.MovieCategory;
+import hr.foi.watchme.POJO.Movie;
 
 public interface MoviesInterface {
     public List<Movie> getMovieList();

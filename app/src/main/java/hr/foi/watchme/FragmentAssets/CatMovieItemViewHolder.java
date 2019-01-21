@@ -1,4 +1,4 @@
-package hr.foi.watchme;
+package hr.foi.watchme.FragmentAssets;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -8,7 +8,8 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-import hr.foi.watchme.WebServiceApi.POJO.Movie;
+import hr.foi.watchme.POJO.Movie;
+import hr.foi.watchme.R;
 
 public class CatMovieItemViewHolder extends RecyclerView.ViewHolder{
 

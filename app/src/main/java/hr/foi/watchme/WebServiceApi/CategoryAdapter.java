@@ -6,13 +6,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import java.util.List;
 
-import hr.foi.watchme.CatMovieItemViewHolder;
+import hr.foi.watchme.FragmentAssets.CatMovieItemViewHolder;
 import hr.foi.watchme.R;
-import hr.foi.watchme.WebServiceApi.POJO.Movie;
+import hr.foi.watchme.POJO.Movie;
 
 
 public class CategoryAdapter extends RecyclerView.Adapter<CatMovieItemViewHolder> {

@@ -1,4 +1,4 @@
-package hr.foi.watchme;
+package hr.foi.watchme.Fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,8 +13,9 @@ import android.widget.TextView;
 import java.io.Serializable;
 import java.util.List;
 
+import hr.foi.watchme.R;
 import hr.foi.watchme.WebServiceApi.CategoryAdapter;
-import hr.foi.watchme.WebServiceApi.POJO.Movie;
+import hr.foi.watchme.POJO.Movie;
 
 public class MovieCategoryFragment extends Fragment {
 

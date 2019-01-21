@@ -1,4 +1,4 @@
-package hr.foi.watchme.WebServiceApi;
+package hr.foi.watchme.WebServiceApi.WebServiceInterfaces;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;

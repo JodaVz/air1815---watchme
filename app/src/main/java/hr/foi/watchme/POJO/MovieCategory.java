@@ -1,8 +1,8 @@
-package hr.foi.watchme;
+package hr.foi.watchme.POJO;
 
 import java.util.List;
 
-import hr.foi.watchme.WebServiceApi.POJO.Movie;
+import hr.foi.watchme.POJO.Movie;
 
 //TODO refaktorirati ovu klasu tako da se stavi u pravi paket
 public class MovieCategory{

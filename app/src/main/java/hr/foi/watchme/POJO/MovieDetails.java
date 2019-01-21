@@ -1,4 +1,4 @@
-package hr.foi.watchme;
+package hr.foi.watchme.POJO;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,7 +14,8 @@ import android.widget.TextView;
 import com.example.player.PlayerActivity;
 import com.squareup.picasso.Picasso;
 
-import hr.foi.watchme.WebServiceApi.POJO.Movie;
+import hr.foi.watchme.Interfaces.MoviesInterface;
+import hr.foi.watchme.R;
 
 public class MovieDetails extends Fragment implements View.OnClickListener {
 

@@ -1,4 +1,4 @@
-package hr.foi.watchme;
+package hr.foi.watchme.FragmentAssets;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -15,7 +15,11 @@ import android.widget.LinearLayout;
 
 import java.util.List;
 
-import hr.foi.watchme.WebServiceApi.POJO.Movie;
+import hr.foi.watchme.Fragments.MovieCategoryFragment;
+import hr.foi.watchme.Interfaces.MoviesInterface;
+import hr.foi.watchme.POJO.Movie;
+import hr.foi.watchme.POJO.MovieCategory;
+import hr.foi.watchme.R;
 import hr.foi.watchme.WebServiceApi.ViewPageAdapter;
 
 /*

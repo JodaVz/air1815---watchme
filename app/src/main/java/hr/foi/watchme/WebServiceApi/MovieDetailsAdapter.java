@@ -5,8 +5,8 @@ import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
 import android.view.View;
 
-import hr.foi.watchme.MovieDetails;
-import hr.foi.watchme.WebServiceApi.POJO.Movie;
+import hr.foi.watchme.POJO.MovieDetails;
+import hr.foi.watchme.POJO.Movie;
 
 public class MovieDetailsAdapter extends PagerAdapter {
 
