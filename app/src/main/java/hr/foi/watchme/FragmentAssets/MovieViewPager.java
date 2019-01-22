@@ -46,6 +46,7 @@ public class MovieViewPager extends AppCompatActivity {
 */
 public class MovieViewPager extends Fragment {
 
+    private List<Movie> movies;
     private String[] movieUrls;
     private List<MovieCategory> moviesByCategories;
     private MoviesInterface mListenerActivity;
@@ -62,7 +63,6 @@ public class MovieViewPager extends Fragment {
 
     @Override
     public void onResume() {
-        //FillWithUrls();
         super.onResume();
         ViewPager viewPager = getView().findViewById(R.id.view_pager);
         ViewPageAdapter adapter = new ViewPageAdapter(getActivity(), movieUrls);
@@ -83,9 +83,10 @@ public class MovieViewPager extends Fragment {
         }
     }
 
+
     public void FillWithUrls() {
         moviesByCategories = mListenerActivity.getAllMoviesByCategories();
-        List<Movie> movies = mListenerActivity.getMovieList();
+        movies = mListenerActivity.getMovieList();
         //TODO dio koda ispod prebaciti u aktivnost da vrati čiste URLove, a ne viška podatke o filmove
         movieUrls = new String[movies.size()];
 
