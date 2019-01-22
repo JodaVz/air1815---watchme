@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private DrawerLayout drawer;
     public static List<Movie> movieList;
     public static List<MovieCategory> categoryList;
+    public static  Movie movieById;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +77,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 categoryList = gson.fromJson(dataResponse, token.getType());
             }
         });
+
+        webServiceCaller.getMoviesByID(new GetDataCallback() {
+            @Override
+            public void onGetData(String dataResponse) {
+                Gson gson = new Gson();
+                TypeToken<Movie> token = new TypeToken<Movie>(){};
+                movieById = gson.fromJson(dataResponse, token.getType());
+            }
+        }, 1);
     }
 
     @Override
@@ -141,12 +151,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mockLista.add(new MovieCategory("Vestern", movies1));
         mockLista.add(new MovieCategory("asdkjasndjkahsd", movies));
         return mockLista;
-    }
-
-    @Override
-    //TODO poslati ID odabranog filma iz RecyclerView-a
-    public Movie getMovieById(Integer id) {
-        return null;
     }
 }
 
