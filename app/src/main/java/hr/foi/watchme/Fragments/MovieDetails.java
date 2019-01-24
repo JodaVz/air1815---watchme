@@ -1,5 +1,6 @@
 package hr.foi.watchme.POJO;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -14,12 +15,13 @@ import android.widget.TextView;
 import com.example.player.PlayerActivity;
 import com.squareup.picasso.Picasso;
 
-import hr.foi.watchme.Interfaces.MoviesInterface;
+import hr.foi.watchme.Interfaces.MovieDetailsInterface;
 import hr.foi.watchme.R;
 
 public class MovieDetails extends Fragment implements View.OnClickListener {
 
-    private MoviesInterface mListenerActivity;
+    private Movie movie;
+    private MovieDetailsInterface mListenerActivity;
     LinearLayout catContainer;
 
     ImageView moviePosterBack;
@@ -28,10 +30,12 @@ public class MovieDetails extends Fragment implements View.OnClickListener {
     TextView movieYear;
     TextView movieRating;
     TextView movieAbout;
-    
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        FetchMovie();
+
         View viewMain = inflater.inflate(R.layout.activity_movie_details, container, false);
         catContainer = viewMain.findViewById(R.id.fragment_container);
 
@@ -40,18 +44,14 @@ public class MovieDetails extends Fragment implements View.OnClickListener {
 
         return viewMain;
     }
-/*
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_movie_details);
 
-        ImageView moviePosterFront = findViewById(R.id.iv_movie_poster_front);
-        moviePosterFront.setOnClickListener(this);
+    public void FetchMovie() {
+        movie = mListenerActivity.getMovieById();
+
+        bind(movie);
     }
-*/
 
-    public void bind(Movie m){
+    public void bind(Movie m) {
         movieTitle.setText(m.getName());
         movieYear.setText(m.getReleaseDate());
         movieAbout.setText(m.getEpisode());
@@ -64,15 +64,27 @@ public class MovieDetails extends Fragment implements View.OnClickListener {
                 .load(m.getCoverPhoto())
                 .into(moviePosterBack);
     }
+
     @Override
     public void onClick(View viewMovieDetails) {
-        switch (viewMovieDetails.getId()){
+        switch (viewMovieDetails.getId()) {
             case R.id.iv_movie_poster_front:
                 Intent intentPlayerMovieDetails = new Intent(getActivity(), PlayerActivity.class);
                 startActivity(intentPlayerMovieDetails);
                 break;
             default:
                 break;
+        }
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        try {
+            mListenerActivity = (MovieDetailsInterface) getActivity();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 
