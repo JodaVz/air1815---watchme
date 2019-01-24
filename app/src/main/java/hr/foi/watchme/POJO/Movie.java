@@ -44,6 +44,9 @@ public class Movie implements Parcelable {
     @SerializedName("CoverPhoto")
     @Expose
     private String coverPhoto;
+    @SerializedName("Category")
+    @Expose
+    private String category;
 
     public Integer getID() {
         return id;
@@ -109,6 +112,13 @@ public class Movie implements Parcelable {
         this.coverPhoto = coverPhoto;
     }
 
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
     @Override
     public int describeContents() {
         return 0;
