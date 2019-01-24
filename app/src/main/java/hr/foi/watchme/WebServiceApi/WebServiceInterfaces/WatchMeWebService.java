@@ -2,7 +2,6 @@ package hr.foi.watchme.WebServiceApi.WebServiceInterfaces;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
-import retrofit2.Callback;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
@@ -23,7 +22,7 @@ public interface WatchMeWebService {
     @GET("api/sadrzaj/sadrzaj/{id}")
     Call<String> getMoviesByID(@Path("id") int id);
 
-    @GET("api/sadrzaj/sadrzaj/dohvati_prema_kategoriji")
+    @GET("api/sadrzaj/sadrzaj/dohvati_kategorije_filmova")
     Call<String> getCategories();
 
     @Headers("Content-Type: application/json")
