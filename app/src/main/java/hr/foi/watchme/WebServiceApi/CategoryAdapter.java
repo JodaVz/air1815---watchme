@@ -2,6 +2,8 @@ package hr.foi.watchme.WebServiceApi;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,16 +12,19 @@ import android.view.ViewGroup;
 import java.util.List;
 
 import hr.foi.watchme.FragmentAssets.CatMovieItemViewHolder;
-import hr.foi.watchme.R;
+import hr.foi.watchme.Interfaces.MovieDetailsInterface;
 import hr.foi.watchme.POJO.Movie;
+import hr.foi.watchme.R;
 
 
 public class CategoryAdapter extends RecyclerView.Adapter<CatMovieItemViewHolder> {
     List<Movie> movieList;
     Context ctx;
+    private static MovieDetailsInterface itemListener;
+    public FragmentManager fManager;
 
     //TODO napraviti konstruktor koji prima listu filmova po kategoriji RIJEŠENO!
-    public CategoryAdapter(List<Movie> movies, Context context){
+    public CategoryAdapter(List<Movie> movies, FragmentActivity context){
         this.movieList = movies;
         this.ctx = context;
     }
@@ -28,7 +33,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CatMovieItemViewHolder
     @Override
     public CatMovieItemViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View inflatedCatMovie = LayoutInflater.from(ctx).inflate(R.layout.category_movie_item, viewGroup, false);
-        return new CatMovieItemViewHolder(inflatedCatMovie);
+        return new CatMovieItemViewHolder(inflatedCatMovie,ctx);
     }
 
     @Override
@@ -41,4 +46,5 @@ public class CategoryAdapter extends RecyclerView.Adapter<CatMovieItemViewHolder
     public int getItemCount() {
         return movieList.size();
     }
+
 }
