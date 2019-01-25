@@ -1,5 +1,6 @@
 package hr.foi.watchme.Fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import java.io.Serializable;
 import java.util.List;
 
+import hr.foi.watchme.Interfaces.MovieDetailsInterface;
 import hr.foi.watchme.R;
 import hr.foi.watchme.Adapters.CategoryAdapter;
 import hr.foi.watchme.POJO.Movie;
@@ -21,6 +23,7 @@ public class MovieCategoryFragment extends Fragment {
 
     private String catName;
     private List<Movie> filmovi;
+    MovieDetailsInterface listenerActivity;
 
     @Nullable
     @Override
@@ -57,7 +60,15 @@ public class MovieCategoryFragment extends Fragment {
         RecyclerView myList = getView().findViewById(R.id.categoryRecycler);
         myList.setLayoutManager(layoutManager);
 
-        CategoryAdapter adapter = new CategoryAdapter(filmovi, getActivity());
+        CategoryAdapter adapter = new CategoryAdapter(filmovi, getActivity(), listenerActivity);
         myList.setAdapter(adapter);
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof MovieDetailsInterface) {
+            listenerActivity = (MovieDetailsInterface) context;
+        }
     }
 }

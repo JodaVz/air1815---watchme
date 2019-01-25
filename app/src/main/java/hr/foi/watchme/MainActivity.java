@@ -13,26 +13,24 @@ import android.view.MenuItem;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import hr.foi.watchme.FragmentAssets.MovieViewPager;
 import hr.foi.watchme.Fragments.MovieDetails;
 import hr.foi.watchme.Fragments.MovieFragment;
 import hr.foi.watchme.Interfaces.MovieDetailsInterface;
-import hr.foi.watchme.Interfaces.MovieIdInterface;
 import hr.foi.watchme.Interfaces.MoviesInterface;
 import hr.foi.watchme.POJO.Movie;
 import hr.foi.watchme.POJO.MovieCategory;
 import hr.foi.watchme.WebServiceApi.WatchMeWebServiceCaller;
 import hr.foi.watchme.WebServiceApi.WebServiceInterfaces.GetDataCallback;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, MoviesInterface, MovieDetailsInterface, MovieIdInterface {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, MoviesInterface, MovieDetailsInterface {
 
     private DrawerLayout drawer;
     public static List<Movie> movieList;
     public static List<MovieCategory> categoryList;
+    public static List<MovieCategory> filteredCategoryList;
     public static Movie movieById;
 
     public int movieId;
@@ -81,6 +79,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 };
                 //TODO prilagoditi JSON da jedna stavka polja izgleda kao uređeni par (ime kategorije, polje filmova)
                 categoryList = gson.fromJson(dataResponse, token.getType());
+                /*
+                for(MovieCategory m: categoryList){
+                    if(m.getMovies() != null){
+                        filteredCategoryList.add(m);
+                    }
+                }*/
             }
         });
 
@@ -132,58 +136,29 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public List<MovieCategory> getAllMoviesByCategories() {
-
-        List<MovieCategory> mockLista = new ArrayList<>();
-        List<Movie> movies = new ArrayList<>();
-        movies.add(new Movie(1, "Kutija Pringlesa", "2002-01-01T00:00:00", 0, 1, 7200.0, 1, "https://cdn.pixabay.com/photo/2016/11/11/23/34/cat-1817970_960_720.jpg"));
-        movies.add(new Movie(2, "Vino u čaši", "2002-01-01T00:00:00", 0, 1, 7200.0, 1, "https://cdn.pixabay.com/photo/2016/11/11/23/34/cat-1817970_960_720.jpg"));
-        movies.add(new Movie(3, "Potrgana bilježnica", "2002-01-01T00:00:00", 0, 1, 7200.0, 1, "https://cdn.pixabay.com/photo/2016/11/11/23/34/cat-1817970_960_720.jpg"));
-        movies.add(new Movie(4, "Prijateljica s Thailanda", "2002-01-01T00:00:00", 0, 1, 7200.0, 1, "https://cdn.pixabay.com/photo/2016/11/11/23/34/cat-1817970_960_720.jpg"));
-        movies.add(new Movie(5, "Sunčanje kornjača", "2002-01-01T00:00:00", 0, 1, 7200.0, 1, "https://cdn.pixabay.com/photo/2016/11/11/23/34/cat-1817970_960_720.jpg"));
-        movies.add(new Movie(6, "Otvorena vrata", "2002-01-01T00:00:00", 0, 1, 7200.0, 1, "https://cdn.pixabay.com/photo/2016/11/11/23/34/cat-1817970_960_720.jpg"));
-        movies.add(new Movie(7, "Klima", "2002-01-01T00:00:00", 0, 1, 7200.0, 1, "https://cdn.pixabay.com/photo/2016/11/11/23/34/cat-1817970_960_720.jpg"));
-        movies.add(new Movie(8, "Smeđi parket", "2002-01-01T00:00:00", 0, 1, 7200.0, 1, "https://cdn.pixabay.com/photo/2016/11/11/23/34/cat-1817970_960_720.jpg"));
-
-
-        List<Movie> movies1 = new ArrayList<>();
-        movies1.add(new Movie(145, "Kutija Pringlesa", "2002-01-01T00:00:00", 0, 1, 7200.0, 1, "https://cdn.pixabay.com/photo/2017/10/10/15/28/butterfly-2837589_960_720.jpg"));
-        movies1.add(new Movie(2, "Vino u čaši", "2002-01-01T00:00:00", 0, 1, 7200.0, 1, "https://cdn.pixabay.com/photo/2017/10/10/15/28/butterfly-2837589_960_720.jpg"));
-        movies1.add(new Movie(3, "Potrgana bilježnica", "2002-01-01T00:00:00", 0, 1, 7200.0, 1, "https://cdn.pixabay.com/photo/2017/10/10/15/28/butterfly-2837589_960_720.jpg"));
-        movies1.add(new Movie(4223, "Prijateljica s Thailanda", "2002-01-01T00:00:00", 0, 1, 7200.0, 1, "https://cdn.pixabay.com/photo/2017/12/24/09/09/road-3036620_960_720.jpg"));
-        movies1.add(new Movie(5, "Sunčanje kornjača", "2002-01-01T00:00:00", 0, 1, 7200.0, 1, "https://cdn.pixabay.com/photo/2017/10/10/15/28/butterfly-2837589_960_720.jpg"));
-        movies1.add(new Movie(6, "Otvorena vrata", "2002-01-01T00:00:00", 0, 1, 7200.0, 1, "https://cdn.pixabay.com/photo/2016/11/11/23/34/cat-1817970_960_720.jpg"));
-        movies1.add(new Movie(7, "Klima", "2002-01-01T00:00:00", 0, 1, 7200.0, 1, "https://cdn.pixabay.com/photo/2017/12/24/09/09/road-3036620_960_720.jpg"));
-        movies1.add(new Movie(866, "Smeđi parket", "2002-01-01T00:00:00", 0, 1, 7200.0, 1, "https://cdn.pixabay.com/photo/2017/12/24/09/09/road-3036620_960_720.jpg"));
-
-        mockLista.add(new MovieCategory("Drama", movies));
-        mockLista.add(new MovieCategory("Vestern", movies1));
-        mockLista.add(new MovieCategory("asdkjasndjkahsd", movies));
-
-
-        return mockLista;
+        return categoryList;
     }
 
 
     @Override
     public Movie getMovieById() {
-        // Movie movie = new Movie(866, "Smeđi parket", "2002-01-01T00:00:00", 0, 1, 7200.0, 1, "https://cdn.pixabay.com/photo/2017/12/24/09/09/road-3036620_960_720.jpg");
-
-
         for (Movie m : movieList) {
             if (m.getID() == movieId) {
                 movie = m;
                 break;
             } else movie = null;
         }
-
         return movie;
     }
 
-
     @Override
-    public int getMovieId() {
-        movieId = 2;
-        return movieId;
+    public void movieClicked(Movie m) {
+        MovieDetails movieDetails = new MovieDetails();
+        Bundle arguments = new Bundle();
+        arguments.putParcelable( "movie" , m);
+        movieDetails.setArguments(arguments);
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                movieDetails).commit();
     }
 }
 

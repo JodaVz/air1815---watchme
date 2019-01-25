@@ -11,28 +11,25 @@ import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
-import java.util.List;
-
-import hr.foi.watchme.Interfaces.MoviesInterface;
 import hr.foi.watchme.POJO.Movie;
 import hr.foi.watchme.R;
 
 public class CatMovieItemViewHolder extends RecyclerView.ViewHolder {
 
-    List<Movie> movies;
-    private MoviesInterface mListenerActivity;
     ImageView movieImage;
     TextView movieTitle;
     TextView movieId;
     Integer id = 0;
     Movie movie;
     Context c;
+    public View itemView;
 
     public CatMovieItemViewHolder(@NonNull View itemView, final Context c) {
         super(itemView);
         movieId = itemView.findViewById(R.id.output_movie_menu_by_category_movie_id);
         movieImage = itemView.findViewById(R.id.output_movie_menu_by_category_movie_cover);
         movieTitle = itemView.findViewById(R.id.output_movie_menu_by_category_movie_name);
+        this.itemView = itemView;
         this.c = c;
 
 

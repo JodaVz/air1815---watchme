@@ -24,9 +24,10 @@ public class CategoryAdapter extends RecyclerView.Adapter<CatMovieItemViewHolder
     public FragmentManager fManager;
 
     //TODO napraviti konstruktor koji prima listu filmova po kategoriji RIJEŠENO!
-    public CategoryAdapter(List<Movie> movies, FragmentActivity context){
+    public CategoryAdapter(List<Movie> movies, FragmentActivity context, MovieDetailsInterface listner){
         this.movieList = movies;
         this.ctx = context;
+        this.itemListener = listner;
     }
 
     @NonNull
@@ -37,9 +38,16 @@ public class CategoryAdapter extends RecyclerView.Adapter<CatMovieItemViewHolder
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CatMovieItemViewHolder movieVH, int i) {
+    public void onBindViewHolder(@NonNull final CatMovieItemViewHolder movieVH, int i) {
         //TODO uzeti element iz liste filmova prema kategoriji i poslat ga metodi bind iz movieVH.bind(); RIJEŠENO!
-        movieVH.bind(movieList.get(i));
+        final Movie m = movieList.get(i);
+        movieVH.bind(m);
+        movieVH.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                itemListener.movieClicked(m);
+            }
+        });
     }
 
     @Override
