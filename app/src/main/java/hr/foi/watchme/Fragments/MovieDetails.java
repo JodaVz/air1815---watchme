@@ -9,9 +9,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.player.PlayerActivity;
 import com.squareup.picasso.Picasso;
@@ -28,6 +30,7 @@ public class MovieDetails extends Fragment implements View.OnClickListener {
     private MovieDetailsInterface mListenerActivity;
     private MovieIdInterface miListenerActivity;
     LinearLayout catContainer;
+    Context context;
 
     ImageView moviePosterBack;
     ImageView moviePosterFront;
@@ -35,7 +38,12 @@ public class MovieDetails extends Fragment implements View.OnClickListener {
     TextView movieYear;
     TextView movieRating;
     TextView movieAbout;
-    Button button;
+
+    Button viewMorebutton;
+    ImageButton likeButton;
+    ImageButton dislikeButton;
+    boolean likeIsClicked = false;
+    boolean dislikeIsClicked = false;
 
 
     @Nullable
@@ -44,12 +52,8 @@ public class MovieDetails extends Fragment implements View.OnClickListener {
         View viewMain = inflater.inflate(R.layout.activity_movie_details, container, false);
         catContainer = viewMain.findViewById(R.id.fragment_container);
 
+        movie = this.getArguments().getParcelable("movie");
 
-/*
-        ImageView moviePosterFront = getView().findViewById(R.id.iv_movie_poster_front);
-        moviePosterFront.setOnClickListener(this);
-
-*/
         return viewMain;
     }
 
@@ -62,17 +66,14 @@ public class MovieDetails extends Fragment implements View.OnClickListener {
         movieAbout = getView().findViewById(R.id.output_movie_details_about);
         movieRating = getView().findViewById(R.id.output_movie_details_rating);
         movieYear = getView().findViewById(R.id.output_movie_details_year);
-        FetchMovie();
+        likeButton = getView().findViewById(R.id.input_movie_details_like);
+        dislikeButton = getView().findViewById(R.id.input_movie_details_dislike);
+        bind(movie);
 
         SetViewMoreButtonListener();
+        SetLikeButtonListener();
+        SetDislikeButtonListener();
 
-    }
-
-    public void FetchMovie() {
-        movieId = miListenerActivity.getMovieId();
-        movie = mListenerActivity.getMovieById();
-
-        bind(movie);
     }
 
     public void bind(Movie m) {
@@ -112,6 +113,7 @@ public class MovieDetails extends Fragment implements View.OnClickListener {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        this.context = context;
 
         try {
             miListenerActivity = (MovieIdInterface) getActivity();
@@ -121,21 +123,58 @@ public class MovieDetails extends Fragment implements View.OnClickListener {
         }
     }
 
-    public void SetViewMoreButtonListener(){
-        button = getView().findViewById(R.id.action_movie_details_show_more);
-        button.setOnClickListener(new View.OnClickListener() {
+    public void SetViewMoreButtonListener() {
+        viewMorebutton = getView().findViewById(R.id.action_movie_details_show_more);
+        viewMorebutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if (button.getBackground().getConstantState()==getResources().getDrawable(R.drawable.ic_show_more).getConstantState()) {
+                if (viewMorebutton.getBackground().getConstantState() == getResources().getDrawable(R.drawable.ic_show_more).getConstantState()) {
                     movieAbout.setMaxLines(Integer.MAX_VALUE);
-                    button.setBackground(getResources().getDrawable(R.drawable.ic_show_less));
+                    viewMorebutton.setBackground(getResources().getDrawable(R.drawable.ic_show_less));
                 } else {
                     movieAbout.setMaxLines(2);//your TextView
-                    button.setBackground(getResources().getDrawable(R.drawable.ic_show_more));
+                    viewMorebutton.setBackground(getResources().getDrawable(R.drawable.ic_show_more));
                 }
             }
         });
+    }
 
+    public void SetLikeButtonListener() {
+        likeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                likeIsClicked = true;
+
+                if (likeIsClicked) {
+                    likeButton.setClickable(false);
+                    dislikeButton.setVisibility(View.GONE);
+                    Toast.makeText(context, "You like " + movieTitle.getText(), Toast.LENGTH_SHORT).show();
+
+                }
+                else {
+                    likeButton.setClickable(true);
+                }
+            }
+        });
+    }
+
+    public void SetDislikeButtonListener() {
+        dislikeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dislikeIsClicked = true;
+
+                if (dislikeIsClicked) {
+                    dislikeButton.setClickable(false);
+                    likeButton.setVisibility(View.GONE);
+                    Toast.makeText(context, "You dislike " + movieTitle.getText(), Toast.LENGTH_SHORT).show();
+
+                }
+                else {
+                    dislikeButton.setClickable(true);
+                }
+            }
+        });
     }
 }
