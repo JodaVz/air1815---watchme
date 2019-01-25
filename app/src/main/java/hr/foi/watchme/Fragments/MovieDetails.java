@@ -64,20 +64,8 @@ public class MovieDetails extends Fragment implements View.OnClickListener {
         movieYear = getView().findViewById(R.id.output_movie_details_year);
         FetchMovie();
 
-        button = getView().findViewById(R.id.action_movie_details_show_more);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        SetViewMoreButtonListener();
 
-                if (button.getBackground().getConstantState()==getResources().getDrawable(R.drawable.ic_show_more).getConstantState()) {
-                    movieAbout.setMaxLines(Integer.MAX_VALUE);
-                    button.setBackground(getResources().getDrawable(R.drawable.ic_show_less));
-                } else {
-                    movieAbout.setMaxLines(2);//your TextView
-                    button.setBackground(getResources().getDrawable(R.drawable.ic_show_more));
-                }
-            }
-        });
     }
 
     public void FetchMovie() {
@@ -104,6 +92,8 @@ public class MovieDetails extends Fragment implements View.OnClickListener {
                 .into(moviePosterFront);
         Picasso.get()
                 .load(m.getCoverPhoto())
+                .resize(600, 300)
+                .centerCrop()
                 .into(moviePosterBack);
     }
 
@@ -129,5 +119,23 @@ public class MovieDetails extends Fragment implements View.OnClickListener {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void SetViewMoreButtonListener(){
+        button = getView().findViewById(R.id.action_movie_details_show_more);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (button.getBackground().getConstantState()==getResources().getDrawable(R.drawable.ic_show_more).getConstantState()) {
+                    movieAbout.setMaxLines(Integer.MAX_VALUE);
+                    button.setBackground(getResources().getDrawable(R.drawable.ic_show_less));
+                } else {
+                    movieAbout.setMaxLines(2);//your TextView
+                    button.setBackground(getResources().getDrawable(R.drawable.ic_show_more));
+                }
+            }
+        });
+
     }
 }
