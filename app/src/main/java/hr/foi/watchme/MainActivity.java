@@ -33,7 +33,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public static List<MovieCategory> categoryList;
     public static List<MovieCategory> filteredCategoryList;
     public static Movie movieById;
-    public static Integer userId;
     public String userEmail;
 
     public int movieId;
@@ -105,23 +104,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 movieById = gson.fromJson(dataResponse, token.getType());
             }
         }, 1);
-
-        webServiceCaller.getAllUsers(new GetDataCallback() {
-            @Override
-            public void onGetData(String dataResponse) {
-                Gson gson = new Gson();
-                TypeToken<List<User>> token = new TypeToken<List<User>>() {
-                };
-                List<User> users = gson.fromJson(dataResponse, token.getType());
-                for(User user : users){
-                    if (user.email.equals(userEmail)){
-                        userId = user.getId();
-                        break;
-                    }
-                }
-            }
-        });
-
     }
 
     @Override
