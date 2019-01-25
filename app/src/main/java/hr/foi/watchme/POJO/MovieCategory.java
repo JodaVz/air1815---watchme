@@ -1,12 +1,20 @@
 package hr.foi.watchme.POJO;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 import hr.foi.watchme.POJO.Movie;
 
 //TODO refaktorirati ovu klasu tako da se stavi u pravi paket
 public class MovieCategory{
+
+    @SerializedName("Name")
+    @Expose
     private String name;
+    @SerializedName("MovieList")
+    @Expose
     private List<Movie> movies;
 
     public MovieCategory(String catName, List<Movie> movies){
