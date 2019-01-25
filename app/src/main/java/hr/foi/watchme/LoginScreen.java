@@ -82,8 +82,8 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
 
 
             case R.id.confirm_registration:
-                Intent intentTestPlayer = new Intent(this, PlayerActivity.class);
-                startActivity(intentTestPlayer);
+                Intent intentRegistration = new Intent(this, RegisterScreen.class);
+                startActivity(intentRegistration);
                 break;
             default:
                 break;

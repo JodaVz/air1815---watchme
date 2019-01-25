@@ -23,6 +23,8 @@ public class WatchMeWebServiceCaller {
 
     public String email;
     public String password;
+    public String name;
+    public String surname;
 
     Retrofit retrofit;
     private final String baseUrl = "https://watchmeservices20181120093721.azurewebsites.net/";
@@ -142,6 +144,24 @@ public class WatchMeWebServiceCaller {
         });
     }
 
+    public void getRegistrationSuccess(final GetStatusCallback getStatusCallback){
+        WatchMeWebService serviceCaller = retrofit.create(WatchMeWebService.class);
+        Call<Void> call = serviceCaller.getUserRegistration();
+
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                getStatusCallback.onGetCode(response.code());
+                Log.d(TAG,"Kod: "+response.code());
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+    }
+
     public void postUserLogin(){
         WatchMeWebService serviceCaller = retrofit.create(WatchMeWebService.class);
         String jsonString = "{\"email\":\""+email+"\",\"Password\":\""+password+"\"}";
@@ -158,7 +178,24 @@ public class WatchMeWebServiceCaller {
                 Log.d(TAG,"Can't make post");
             }
         });
+    }
 
+    public void postUserRegistration(){
+        WatchMeWebService serviceCaller = retrofit.create(WatchMeWebService.class);
+        String jsonString = "{\"Name\":\""+name+"\",\"Surname\":\""+surname+"\",\"Email\":\""+email+"\",\"Password\":\""+password+"\"}";
+
+        Call<ResponseBody> call = serviceCaller.postUserRegistration(jsonString);
+
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.d(TAG,"Can't make post");
+            }
+        });
     }
 
 }
