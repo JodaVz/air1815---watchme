@@ -20,7 +20,7 @@ import hr.foi.watchme.Interfaces.MoviesInterface;
 import hr.foi.watchme.POJO.Movie;
 import hr.foi.watchme.POJO.MovieCategory;
 import hr.foi.watchme.R;
-import hr.foi.watchme.WebServiceApi.ViewPageAdapter;
+import hr.foi.watchme.Adapters.ViewPageAdapter;
 
 /*
 

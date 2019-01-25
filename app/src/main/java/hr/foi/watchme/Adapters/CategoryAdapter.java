@@ -1,4 +1,4 @@
-package hr.foi.watchme.WebServiceApi;
+package hr.foi.watchme.Adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;

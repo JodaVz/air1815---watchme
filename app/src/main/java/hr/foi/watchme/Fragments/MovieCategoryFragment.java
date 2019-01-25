@@ -14,7 +14,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import hr.foi.watchme.R;
-import hr.foi.watchme.WebServiceApi.CategoryAdapter;
+import hr.foi.watchme.Adapters.CategoryAdapter;
 import hr.foi.watchme.POJO.Movie;
 
 public class MovieCategoryFragment extends Fragment {
