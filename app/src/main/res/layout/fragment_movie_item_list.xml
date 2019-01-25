@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/fragment_container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/movie_in_category_list_cover"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:foregroundGravity="center"
+            android:src="@drawable/movie_details_front" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp">
+
+            <TextView
+                android:id="@+id/movie_in_category_list_movie_name"
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:text="Movie name"
+                android:textSize="20dp"
+                android:gravity="start"
+                android:textAppearance="bold"/>
+
+            <TextView
+                android:id="@+id/movie_in_category_list_movie_rating"
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:gravity="start"
+                android:text="Movie rating"
+                android:textSize="16dp" />
+            <TextView
+                android:id="@+id/movie_in_category_list_movie_year"
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:gravity="end"
+                android:text="Movie year"
+                android:textSize="14dp" />
+
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
