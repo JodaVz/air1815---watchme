@@ -49,6 +49,7 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
                 textEmail = textEmailId.getText().toString();
                 textPassword = textPasswordId.getText().toString();
                 final Intent intentLogin = new Intent(this, MainActivity.class);
+                intentLogin.putExtra("userEmail",textEmail);
                 final WatchMeWebServiceCaller webServiceCaller = new WatchMeWebServiceCaller();
 
 

@@ -31,7 +31,7 @@
                 android:text="Movie name"
                 android:textSize="20dp"
                 android:gravity="start"
-                android:textAppearance="bold"/>
+                />
 
             <TextView
                 android:id="@+id/movie_in_category_list_movie_rating"

@@ -22,6 +22,7 @@ import hr.foi.watchme.Interfaces.MovieDetailsInterface;
 import hr.foi.watchme.Interfaces.MoviesInterface;
 import hr.foi.watchme.POJO.Movie;
 import hr.foi.watchme.POJO.MovieCategory;
+import hr.foi.watchme.POJO.User;
 import hr.foi.watchme.WebServiceApi.WatchMeWebServiceCaller;
 import hr.foi.watchme.WebServiceApi.WebServiceInterfaces.GetDataCallback;
 
@@ -32,6 +33,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public static List<MovieCategory> categoryList;
     public static List<MovieCategory> filteredCategoryList;
     public static Movie movieById;
+    public static Integer userId;
+    public String userEmail;
 
     public int movieId;
     public Movie movie;
@@ -40,6 +43,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null){
+            userEmail = extras.getString("userEmail");
+        }
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -77,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Gson gson = new Gson();
                 TypeToken<List<MovieCategory>> token = new TypeToken<List<MovieCategory>>() {
                 };
-                //TODO prilagoditi JSON da jedna stavka polja izgleda kao uređeni par (ime kategorije, polje filmova)
+                //TODO prilagoditi JSON da jedna stavka polja izgleda kao uređeni par (ime kategorije, polje filmova) RIJEŠENO!
                 categoryList = gson.fromJson(dataResponse, token.getType());
                 /*
                 for(MovieCategory m: categoryList){
@@ -97,6 +105,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 movieById = gson.fromJson(dataResponse, token.getType());
             }
         }, 1);
+
+        webServiceCaller.getAllUsers(new GetDataCallback() {
+            @Override
+            public void onGetData(String dataResponse) {
+                Gson gson = new Gson();
+                TypeToken<List<User>> token = new TypeToken<List<User>>() {
+                };
+                List<User> users = gson.fromJson(dataResponse, token.getType());
+                for(User user : users){
+                    if (user.email.equals(userEmail)){
+                        userId = user.getId();
+                        break;
+                    }
+                }
+            }
+        });
+
     }
 
     @Override

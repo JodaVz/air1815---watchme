@@ -10,7 +10,7 @@ import retrofit2.http.Path;
 
 public interface WatchMeWebService {
 
-    @GET("api/korisnici/users/1")
+    @GET("api/korisnici/users/")
     Call<String> getUsers();
 
     @GET("api/korisnici/users/provjeri/")
