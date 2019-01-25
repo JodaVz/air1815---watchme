@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login_background"
+    android:orientation="vertical"
+    android:paddingStart="25dp"
+    android:paddingTop="25dp"
+    android:paddingEnd="25dp"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark">
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="start"
+        android:text="@string/name"
+        android:textColor="#ffffff"
+        android:textSize="23dp" />
+
+    <EditText
+        android:id="@+id/input_register_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:drawableStart="@drawable/ic_person"
+        android:ems="10"
+        android:gravity="start"
+        android:inputType="textPersonName"
+        android:paddingStart="5dp"
+        android:textSize="20dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="start"
+        android:text="@string/surname"
+        android:textColor="#ffffff"
+        android:textSize="23dp" />
+
+    <EditText
+        android:id="@+id/input_register_surname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:drawableStart="@drawable/ic_person"
+        android:ems="10"
+        android:gravity="start"
+        android:inputType="textPersonName"
+        android:paddingStart="5dp"
+        android:textSize="20dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="start"
+        android:text="@string/email_adress"
+        android:textColor="#ffffff"
+        android:textSize="23dp" />
+
+    <EditText
+        android:id="@+id/input_register_email_adress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:drawableStart="@drawable/ic_email"
+        android:ems="10"
+        android:gravity="start"
+        android:inputType="textEmailAddress"
+        android:paddingStart="5dp"
+        android:textSize="20dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="start"
+        android:text="@string/password"
+        android:textColor="#ffffff"
+        android:textSize="23dp" />
+
+    <EditText
+        android:id="@+id/input_register_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:drawableStart="@drawable/ic_password"
+        android:ems="10"
+        android:gravity="start"
+        android:inputType="textPassword"
+        android:paddingStart="5dp"
+        android:textSize="20dp" />
+
+    <Button
+        android:id="@+id/register"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/button_shape_rounded"
+        android:text="@string/register" />
+
+</LinearLayout>

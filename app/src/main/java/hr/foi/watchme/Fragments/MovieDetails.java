@@ -18,8 +18,6 @@ import android.widget.Toast;
 import com.example.player.PlayerActivity;
 import com.squareup.picasso.Picasso;
 
-import hr.foi.watchme.Interfaces.MovieDetailsInterface;
-import hr.foi.watchme.Interfaces.MovieIdInterface;
 import hr.foi.watchme.POJO.Movie;
 import hr.foi.watchme.R;
 
@@ -27,8 +25,6 @@ public class MovieDetails extends Fragment implements View.OnClickListener {
 
     private Movie movie;
     private int movieId;
-    private MovieDetailsInterface mListenerActivity;
-    private MovieIdInterface miListenerActivity;
     LinearLayout catContainer;
     Context context;
 
@@ -39,7 +35,7 @@ public class MovieDetails extends Fragment implements View.OnClickListener {
     TextView movieRating;
     TextView movieAbout;
 
-    Button viewMorebutton;
+    Button viewMoreButton;
     ImageButton likeButton;
     ImageButton dislikeButton;
     boolean likeIsClicked = false;
@@ -110,31 +106,18 @@ public class MovieDetails extends Fragment implements View.OnClickListener {
         }
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        this.context = context;
-
-        try {
-            miListenerActivity = (MovieIdInterface) getActivity();
-            mListenerActivity = (MovieDetailsInterface) getActivity();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     public void SetViewMoreButtonListener() {
-        viewMorebutton = getView().findViewById(R.id.action_movie_details_show_more);
-        viewMorebutton.setOnClickListener(new View.OnClickListener() {
+        viewMoreButton = getView().findViewById(R.id.action_movie_details_show_more);
+        viewMoreButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if (viewMorebutton.getBackground().getConstantState() == getResources().getDrawable(R.drawable.ic_show_more).getConstantState()) {
+                if (viewMoreButton.getBackground().getConstantState() == getResources().getDrawable(R.drawable.ic_show_more).getConstantState()) {
                     movieAbout.setMaxLines(Integer.MAX_VALUE);
-                    viewMorebutton.setBackground(getResources().getDrawable(R.drawable.ic_show_less));
+                    viewMoreButton.setBackground(getResources().getDrawable(R.drawable.ic_show_less));
                 } else {
                     movieAbout.setMaxLines(2);//your TextView
-                    viewMorebutton.setBackground(getResources().getDrawable(R.drawable.ic_show_more));
+                    viewMoreButton.setBackground(getResources().getDrawable(R.drawable.ic_show_more));
                 }
             }
         });

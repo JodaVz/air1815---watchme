@@ -3,7 +3,6 @@ package hr.foi.watchme.FragmentAssets;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -20,7 +19,6 @@ public class CatMovieItemViewHolder extends RecyclerView.ViewHolder {
     TextView movieTitle;
     TextView movieId;
     Integer id = 0;
-    Movie movie;
     Context c;
     public View itemView;
 
@@ -38,9 +36,6 @@ public class CatMovieItemViewHolder extends RecyclerView.ViewHolder {
             public void onClick(View v) {
                 id = Integer.parseInt(movieId.getText().toString());
                 Toast.makeText(v.getContext(), id + " " + movieTitle.getText(), Toast.LENGTH_SHORT).show();
-
-                LayoutInflater inflater = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                // View layout = inflater.inflate(R.layout.activity_movie_details,(ViewGroup)R.layout.fragment_movies, false)
 
             }
         });

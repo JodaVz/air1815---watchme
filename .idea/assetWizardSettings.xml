@@ -29,6 +29,28 @@
                                           </PersistentState>
                                         </value>
                                       </entry>
+                                      <entry key="foregroundClipArt">
+                                        <value>
+                                          <PersistentState>
+                                            <option name="values">
+                                              <map>
+                                                <entry key="trimmed" value="true" />
+                                              </map>
+                                            </option>
+                                          </PersistentState>
+                                        </value>
+                                      </entry>
+                                      <entry key="foregroundClipartAsset">
+                                        <value>
+                                          <PersistentState>
+                                            <option name="values">
+                                              <map>
+                                                <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/social/ic_person_black_24dp.xml" />
+                                              </map>
+                                            </option>
+                                          </PersistentState>
+                                        </value>
+                                      </entry>
                                       <entry key="foregroundImage">
                                         <value>
                                           <PersistentState>
@@ -47,7 +69,9 @@
                                     <map>
                                       <entry key="backgroundAssetType" value="COLOR" />
                                       <entry key="backgroundColor" value="af0000" />
+                                      <entry key="foregroundAssetType" value="CLIP_ART" />
                                       <entry key="foregroundImage" value="C:\Users\Donic\Desktop\app_logo.png" />
+                                      <entry key="foregroundLayerName" value="ic_person" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -78,7 +102,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/navigation/ic_expand_less_black_24dp.xml" />
+                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/social/ic_person_black_24dp.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -88,7 +112,7 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="ic_show_less" />
+                            <entry key="outputName" value="ic_person" />
                             <entry key="sourceFile" value="C:\Users\Donic" />
                           </map>
                         </option>
