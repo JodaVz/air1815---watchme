@@ -22,7 +22,6 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
     private String textPassword;
     private EditText textEmailId;
     private EditText textPasswordId;
-    public User user;
 
 
     @Override
