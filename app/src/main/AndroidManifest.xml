@@ -27,9 +27,13 @@
             android:name=".RegisterScreen"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
-        <activity
-            android:name=".Settings"
-            android:theme="@style/AppTheme.NoActionBar">
+        <activity android:name=".Settings"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:label="Settings"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity"/>
         </activity>
     </application>
 

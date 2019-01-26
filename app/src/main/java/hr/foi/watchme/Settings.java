@@ -11,9 +11,12 @@ import android.widget.Switch;
 
 import java.util.Locale;
 
+import hr.foi.watchme.Fragments.SettingsFragment;
+
 public class Settings extends AppCompatActivity implements CompoundButton.OnCheckedChangeListener {
 
-    Switch aSwitch;
+     public Switch aSwitch;
+     public static final String KEY_PREF_EXAMPLE_SWITCH = "example_switch";
 
     public void setLanguage(Context context) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
@@ -26,10 +29,11 @@ public class Settings extends AppCompatActivity implements CompoundButton.OnChec
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.settings);
 
-        aSwitch = findViewById(R.id.settings_view_switch);
-        aSwitch.setOnCheckedChangeListener(this);
+        getSupportFragmentManager().beginTransaction()
+                .replace(android.R.id.content, new SettingsFragment())
+                .commit();
+
     }
 
     @Override
