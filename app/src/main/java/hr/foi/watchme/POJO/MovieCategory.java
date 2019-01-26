@@ -1,5 +1,8 @@
 package hr.foi.watchme.POJO;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -8,7 +11,7 @@ import java.util.List;
 import hr.foi.watchme.POJO.Movie;
 
 //TODO refaktorirati ovu klasu tako da se stavi u pravi paket
-public class MovieCategory{
+public class MovieCategory implements Parcelable {
 
     @SerializedName("Name")
     @Expose
@@ -38,5 +41,15 @@ public class MovieCategory{
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+
     }
 }
