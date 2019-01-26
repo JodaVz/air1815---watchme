@@ -10,20 +10,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.Serializable;
 import java.util.List;
 
-import hr.foi.watchme.Interfaces.MovieDetailsInterface;
-import hr.foi.watchme.R;
 import hr.foi.watchme.Adapters.CategoryAdapter;
+import hr.foi.watchme.Interfaces.MovieDetailsInterface;
 import hr.foi.watchme.POJO.Movie;
+import hr.foi.watchme.R;
 
 public class MovieCategoryFragment extends Fragment {
 
     private String catName;
     private List<Movie> filmovi;
     MovieDetailsInterface listenerActivity;
+    public TextView itemView;
 
     @Nullable
     @Override
@@ -35,7 +37,14 @@ public class MovieCategoryFragment extends Fragment {
         tvCatName.setText(catName);
 
         filmovi = (List<Movie>) getArguments().getSerializable("MOVIES");
+        this.itemView = tvCatName;
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(v.getContext(), catName, Toast.LENGTH_SHORT).show();
 
+            }
+        });
         return viewMain;
     }
 
