@@ -1,5 +1,6 @@
 package hr.foi.watchme;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -117,8 +118,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         new MovieDetails()).commit();
                 break;
             case R.id.nav_settings:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new MovieFragment()).commit();
+                Intent intent = new Intent(this, Settings.class );
+                startActivity(intent);
                 break;
         }
 
