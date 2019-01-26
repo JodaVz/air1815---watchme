@@ -23,6 +23,7 @@ import hr.foi.watchme.Interfaces.MovieDetailsInterface;
 import hr.foi.watchme.Interfaces.MoviesInterface;
 import hr.foi.watchme.POJO.Movie;
 import hr.foi.watchme.POJO.MovieCategory;
+import hr.foi.watchme.POJO.User;
 import hr.foi.watchme.WebServiceApi.WatchMeWebServiceCaller;
 import hr.foi.watchme.WebServiceApi.WebServiceInterfaces.GetDataCallback;
 
@@ -32,7 +33,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public static List<Movie> movieList;
     public static List<MovieCategory> categoryList;
     public static List<MovieCategory> filteredCategoryList;
-    public static Movie movieById;
+    public static Integer userId;
     public String userEmail;
 
     public int movieId;
@@ -95,15 +96,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
 
-        webServiceCaller.getMoviesByID(new GetDataCallback() {
+        webServiceCaller.getAllUsers(new GetDataCallback() {
             @Override
             public void onGetData(String dataResponse) {
                 Gson gson = new Gson();
-                TypeToken<Movie> token = new TypeToken<Movie>() {
+                TypeToken<List<User>> token = new TypeToken<List<User>>() {
                 };
-                movieById = gson.fromJson(dataResponse, token.getType());
+                List<User> users = gson.fromJson(dataResponse, token.getType());
+                for(User user : users){
+                    if (user.email.equals(userEmail)){
+                        userId = user.getId();
+                        break;
+                    }
+                }
             }
-        }, 1);
+        });
     }
 
     @Override
