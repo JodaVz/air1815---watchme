@@ -19,6 +19,12 @@ public interface WatchMeWebService {
     @GET("api/korisnici/users/unesi_novog_korisnika/")
     Call<Void> getUserRegistration();
 
+    @GET("api/feedback/feedback/spremi_ocjenu")
+    Call<Void> getUserRating();
+
+    @GET("api/feedback/feedback/provjeri_ocjenu")
+    Call<Void> checkUserRating();
+
     @GET("api/sadrzaj/sadrzaj/")
     Call<String> getMovies();
 
@@ -35,4 +41,8 @@ public interface WatchMeWebService {
     @Headers("Content-Type: application/json")
     @POST("api/korisnici/users/unesi_novog_korisnika/")
     Call<ResponseBody> postUserRegistration(@Body String body);
+
+    @Headers("Content-Type: application/json")
+    @POST("api/feedback/feedback/spremi_ocjenu")
+    Call<ResponseBody> postUserRating(@Body String body);
 }

@@ -3,6 +3,7 @@ package hr.foi.watchme.Fragments;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -13,19 +14,21 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.player.PlayerActivity;
 import com.squareup.picasso.Picasso;
 
+import hr.foi.watchme.MainActivity;
 import hr.foi.watchme.POJO.Movie;
 import hr.foi.watchme.R;
+import hr.foi.watchme.WebServiceApi.WatchMeWebServiceCaller;
+import hr.foi.watchme.WebServiceApi.WebServiceInterfaces.GetStatusCallback;
 
 public class MovieDetails extends Fragment {
 
     private Movie movie;
-    private int movieId;
     LinearLayout catContainer;
-    Context context;
 
     ImageView moviePosterBack;
     ImageView moviePosterFront;
@@ -67,11 +70,19 @@ public class MovieDetails extends Fragment {
 
         bind(movie);
 
+
         SetViewMoreButtonListener();
         SetLikeButtonListener();
         SetDislikeButtonListener();
         SetPlayerListener();
-
+        AzureSender();
+        Handler handler = new Handler();
+        Runnable r = new Runnable() {
+            public void run() {
+                AzureListener();
+            }
+        };
+        handler.postDelayed(r,1000);
     }
 
     public void bind(Movie m) {
@@ -107,25 +118,12 @@ public class MovieDetails extends Fragment {
         });
     }
 
-    /*
-        public void onClick(View viewMovieDetails) {
-            switch (viewMovieDetails.getId()) {
-                case R.id.iv_movie_poster_front:
-                    Intent intentPlayerMovieDetails = new Intent(getActivity(), PlayerActivity.class);
-                    startActivity(intentPlayerMovieDetails);
-                    break;
-
-                default:
-                break;
-            }
-        }
-    */
     public void SetViewMoreButtonListener() {
         viewMoreButton = getView().findViewById(R.id.action_movie_details_show_more);
+
         viewMoreButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 if (viewMoreButton.getBackground().getConstantState() == getResources().getDrawable(R.drawable.ic_show_more).getConstantState()) {
                     movieAbout.setMaxLines(Integer.MAX_VALUE);
                     viewMoreButton.setBackground(getResources().getDrawable(R.drawable.ic_show_less));
@@ -149,6 +147,38 @@ public class MovieDetails extends Fragment {
                 } else {
                     likeButton.setClickable(true);
                 }
+                final WatchMeWebServiceCaller webServiceCaller = new WatchMeWebServiceCaller();
+                webServiceCaller.movieId = movie.getID();
+                webServiceCaller.userId = MainActivity.userId;
+                webServiceCaller.rating = 1;
+                webServiceCaller.postUserRating();
+
+                Handler handler = new Handler();
+                Runnable r = new Runnable() {
+                    public void run() {
+                        webServiceCaller.getUserRating(new GetStatusCallback() {
+                            @Override
+                            public void onGetCode(int statusCode) {
+                                if (statusCode == 200) {
+                                    Context context = getContext();
+                                    CharSequence text = "Uspješno rejtano!";
+                                    int duration = Toast.LENGTH_SHORT;
+
+                                    Toast toast = Toast.makeText(context, text, duration);
+                                    toast.show();
+                                } else {
+                                    Context context = getContext();
+                                    CharSequence text = "Pogreška kod rejtanja!";
+                                    int duration = Toast.LENGTH_SHORT;
+
+                                    Toast toast = Toast.makeText(context, text, duration);
+                                    toast.show();
+                                }
+                            }
+                        });
+                    }
+                };
+                handler.postDelayed(r, 200);
             }
         });
     }
@@ -165,7 +195,67 @@ public class MovieDetails extends Fragment {
                 } else {
                     dislikeButton.setClickable(true);
                 }
+                final WatchMeWebServiceCaller webServiceCaller = new WatchMeWebServiceCaller();
+                webServiceCaller.movieId = movie.getID();
+                webServiceCaller.userId = MainActivity.userId;
+                webServiceCaller.rating = 2;
+                webServiceCaller.postUserRating();
+
+                Handler handler = new Handler();
+                Runnable r = new Runnable() {
+                    public void run() {
+                        webServiceCaller.getUserRating(new GetStatusCallback() {
+                            @Override
+                            public void onGetCode(int statusCode) {
+                                if (statusCode == 200) {
+                                    Context context = getContext();
+                                    CharSequence text = "Uspješno rejtano!";
+                                    int duration = Toast.LENGTH_SHORT;
+
+                                    Toast toast = Toast.makeText(context, text, duration);
+                                    toast.show();
+                                } else {
+                                    Context context = getContext();
+                                    CharSequence text = "Pogreška kod rejtanja!";
+                                    int duration = Toast.LENGTH_SHORT;
+
+                                    Toast toast = Toast.makeText(context, text, duration);
+                                    toast.show();
+                                }
+                            }
+                        });
+                    }
+                };
+                handler.postDelayed(r, 200);
             }
         });
     }
+
+    public void AzureSender(){
+        final WatchMeWebServiceCaller webServiceCaller = new WatchMeWebServiceCaller();
+
+        webServiceCaller.userId = MainActivity.userId;
+        webServiceCaller.movieId = movie.getID();
+        webServiceCaller.postUserMovie();
+    }
+
+    public void AzureListener(){
+        final WatchMeWebServiceCaller webServiceCaller = new WatchMeWebServiceCaller();
+        webServiceCaller.checkUserRating(new GetStatusCallback() {
+            @Override
+            public void onGetCode(int statusCode) {
+                if(statusCode == 200){
+                    likeButton.setClickable(false);
+                    dislikeButton.setVisibility(View.GONE);
+                }
+                else if (statusCode == 500){
+                    dislikeButton.setClickable(false);
+                    likeButton.setVisibility(View.GONE);
+                }
+                else if(statusCode == 401){
+                }
+            }
+        });
+    }
+
 }
