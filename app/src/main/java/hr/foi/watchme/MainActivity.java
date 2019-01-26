@@ -22,7 +22,6 @@ import hr.foi.watchme.Interfaces.MovieDetailsInterface;
 import hr.foi.watchme.Interfaces.MoviesInterface;
 import hr.foi.watchme.POJO.Movie;
 import hr.foi.watchme.POJO.MovieCategory;
-import hr.foi.watchme.POJO.User;
 import hr.foi.watchme.WebServiceApi.WatchMeWebServiceCaller;
 import hr.foi.watchme.WebServiceApi.WebServiceInterfaces.GetDataCallback;
 
@@ -165,7 +164,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         arguments.putParcelable( "movie" , m);
         movieDetails.setArguments(arguments);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                movieDetails).commit();
+                movieDetails).addToBackStack("movieDetails").commit();
     }
 }
 
