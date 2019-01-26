@@ -13,7 +13,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.player.PlayerActivity;
 import com.squareup.picasso.Picasso;
@@ -21,7 +20,7 @@ import com.squareup.picasso.Picasso;
 import hr.foi.watchme.POJO.Movie;
 import hr.foi.watchme.R;
 
-public class MovieDetails extends Fragment implements View.OnClickListener {
+public class MovieDetails extends Fragment {
 
     private Movie movie;
     private int movieId;
@@ -45,10 +44,10 @@ public class MovieDetails extends Fragment implements View.OnClickListener {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        movie = this.getArguments().getParcelable("movie");
+
         View viewMain = inflater.inflate(R.layout.activity_movie_details, container, false);
         catContainer = viewMain.findViewById(R.id.fragment_container);
-
-        movie = this.getArguments().getParcelable("movie");
 
         return viewMain;
     }
@@ -56,6 +55,7 @@ public class MovieDetails extends Fragment implements View.OnClickListener {
     @Override
     public void onResume() {
         super.onResume();
+
         movieTitle = getView().findViewById(R.id.output_movie_details_title);
         moviePosterFront = getView().findViewById(R.id.iv_movie_poster_front);
         moviePosterBack = getView().findViewById(R.id.iv_movie_poster_back);
@@ -64,11 +64,13 @@ public class MovieDetails extends Fragment implements View.OnClickListener {
         movieYear = getView().findViewById(R.id.output_movie_details_year);
         likeButton = getView().findViewById(R.id.input_movie_details_like);
         dislikeButton = getView().findViewById(R.id.input_movie_details_dislike);
+
         bind(movie);
 
         SetViewMoreButtonListener();
         SetLikeButtonListener();
         SetDislikeButtonListener();
+        SetPlayerListener();
 
     }
 
@@ -94,18 +96,30 @@ public class MovieDetails extends Fragment implements View.OnClickListener {
                 .into(moviePosterBack);
     }
 
-    @Override
-    public void onClick(View viewMovieDetails) {
-        switch (viewMovieDetails.getId()) {
-            case R.id.iv_movie_poster_front:
+    public void SetPlayerListener() {
+        moviePosterFront.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View viewMovieDetails) {
                 Intent intentPlayerMovieDetails = new Intent(getActivity(), PlayerActivity.class);
                 startActivity(intentPlayerMovieDetails);
-                break;
-            default:
-                break;
-        }
+
+            }
+        });
     }
 
+    /*
+        public void onClick(View viewMovieDetails) {
+            switch (viewMovieDetails.getId()) {
+                case R.id.iv_movie_poster_front:
+                    Intent intentPlayerMovieDetails = new Intent(getActivity(), PlayerActivity.class);
+                    startActivity(intentPlayerMovieDetails);
+                    break;
+
+                default:
+                break;
+            }
+        }
+    */
     public void SetViewMoreButtonListener() {
         viewMoreButton = getView().findViewById(R.id.action_movie_details_show_more);
         viewMoreButton.setOnClickListener(new View.OnClickListener() {
@@ -116,7 +130,7 @@ public class MovieDetails extends Fragment implements View.OnClickListener {
                     movieAbout.setMaxLines(Integer.MAX_VALUE);
                     viewMoreButton.setBackground(getResources().getDrawable(R.drawable.ic_show_less));
                 } else {
-                    movieAbout.setMaxLines(2);//your TextView
+                    movieAbout.setMaxLines(2);
                     viewMoreButton.setBackground(getResources().getDrawable(R.drawable.ic_show_more));
                 }
             }
@@ -132,10 +146,7 @@ public class MovieDetails extends Fragment implements View.OnClickListener {
                 if (likeIsClicked) {
                     likeButton.setClickable(false);
                     dislikeButton.setVisibility(View.GONE);
-                    Toast.makeText(context, "You like " + movieTitle.getText(), Toast.LENGTH_SHORT).show();
-
-                }
-                else {
+                } else {
                     likeButton.setClickable(true);
                 }
             }
@@ -151,10 +162,7 @@ public class MovieDetails extends Fragment implements View.OnClickListener {
                 if (dislikeIsClicked) {
                     dislikeButton.setClickable(false);
                     likeButton.setVisibility(View.GONE);
-                    Toast.makeText(context, "You dislike " + movieTitle.getText(), Toast.LENGTH_SHORT).show();
-
-                }
-                else {
+                } else {
                     dislikeButton.setClickable(true);
                 }
             }

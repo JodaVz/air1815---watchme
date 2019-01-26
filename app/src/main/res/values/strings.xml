@@ -16,4 +16,5 @@
     <string name="language">Language</string>
     <string name="name">Name</string>
     <string name="surname">Surname</string>
+    <string name="comment">Comment</string>
 </resources>

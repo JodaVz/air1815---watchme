@@ -1,157 +1,191 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
     <LinearLayout
-        android:id="@+id/llMain"
         android:layout_width="match_parent"
-        android:layout_height="230dp">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <FrameLayout
+        <LinearLayout
+            android:id="@+id/llMain"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#FFFFFF">
+            android:layout_height="230dp">
 
-            <ImageView
-                android:id="@+id/iv_movie_poster_back"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:contentDescription="@string/app_name"
-                android:scaleType="fitXY"
-                android:src="@drawable/movie_details_back" />
-
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:layout_marginLeft="15dp"
-                android:gravity="center_horizontal">
+                android:layout_height="match_parent"
+                android:background="#FFFFFF">
 
                 <ImageView
-                    android:id="@+id/iv_movie_poster_front"
-                    android:layout_width="120dp"
-                    android:layout_height="160dp"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginBottom="32dp"
+                    android:id="@+id/iv_movie_poster_back"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
                     android:contentDescription="@string/app_name"
                     android:scaleType="fitXY"
-                    android:src="@drawable/movie_details_front" />
+                    android:src="@drawable/movie_details_back" />
 
-            </RelativeLayout>
 
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:layout_marginLeft="150dp"
-                android:layout_marginTop="80dp"
-                android:gravity="center_horizontal"
-                android:paddingTop="0dp">
-
-                <TextView
-                    android:id="@+id/output_movie_details_title"
-                    android:layout_width="match_parent"
+                <RelativeLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="45dp"
-                    android:gravity="left"
-                    android:text="Spider-Man: Homecoming"
-                    android:textColor="#FFFFFF"
-                    android:textSize="21dp" />
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="15dp"
+                    android:gravity="center_horizontal">
 
-                <TextView
-                    android:id="@+id/output_movie_details_year"
+                    <ImageView
+                        android:id="@+id/iv_movie_poster_front"
+                        android:layout_width="120dp"
+                        android:layout_height="160dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="32dp"
+                        android:contentDescription="@string/app_name"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/movie_details_front" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
                     android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="150dp"
+                    android:layout_marginTop="80dp"
+                    android:gravity="center_horizontal"
+                    android:paddingTop="0dp">
+
+                    <TextView
+                        android:id="@+id/output_movie_details_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="45dp"
+                        android:gravity="left"
+                        android:text="Spider-Man: Homecoming"
+                        android:textColor="#FFFFFF"
+                        android:textSize="21dp" />
+
+                    <TextView
+                        android:id="@+id/output_movie_details_year"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_below="@+id/output_movie_details_title"
+                        android:layout_marginTop="10dp"
+                        android:gravity="left"
+                        android:text="2017"
+                        android:textColor="#FFFFFF"
+                        android:textSize="21dp" />
+
+                    <TextView
+                        android:id="@+id/divider_year_rating"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_below="@id/output_movie_details_title"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_toEndOf="@+id/output_movie_details_year"
+                        android:gravity="left"
+                        android:text="|"
+                        android:textColor="#FFFFFF"
+                        android:textSize="21dp" />
+
+                    <TextView
+                        android:id="@+id/output_movie_details_rating"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_below="@+id/output_movie_details_title"
+                        android:layout_marginTop="10dp"
+                        android:layout_toEndOf="@id/divider_year_rating"
+                        android:gravity="left"
+                        android:text="7.5"
+                        android:textColor="#FFFFFF"
+                        android:textSize="21dp" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
                     android:layout_height="30dp"
-                    android:layout_below="@+id/output_movie_details_title"
-                    android:layout_marginTop="10dp"
-                    android:gravity="left"
-                    android:text="2017"
-                    android:textColor="#FFFFFF"
-                    android:textSize="21dp" />
+                    android:layout_marginLeft="135dp"
+                    android:layout_marginTop="200dp">
 
-                <TextView
-                    android:id="@+id/divider_year_rating"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_below="@id/output_movie_details_title"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_toEndOf="@+id/output_movie_details_year"
-                    android:gravity="left"
-                    android:text="|"
-                    android:textColor="#FFFFFF"
-                    android:textSize="21dp" />
+                    <ImageButton
+                        android:id="@+id/input_movie_details_like"
+                        android:layout_width="30dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="15dp"
+                        android:background="@drawable/ic_like" />
 
-                <TextView
-                    android:id="@+id/output_movie_details_rating"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_below="@+id/output_movie_details_title"
-                    android:layout_marginTop="10dp"
-                    android:layout_toEndOf="@id/divider_year_rating"
-                    android:gravity="left"
-                    android:text="7.5"
-                    android:textColor="#FFFFFF"
-                    android:textSize="21dp" />
+                    <ImageButton
+                        android:id="@+id/input_movie_details_dislike"
+                        android:layout_width="30dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="15dp"
+                        android:layout_toRightOf="@id/input_movie_details_like"
+                        android:background="@drawable/ic_dislike" />
 
-            </RelativeLayout>
 
-            <RelativeLayout
+                </RelativeLayout>
+
+
+            </FrameLayout>
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/output_movie_details_about"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_marginLeft="135dp"
-                android:layout_marginTop="200dp">
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="0dp"
+                android:maxLines="2"
+                android:text="Peter Parker balances his life as an ordinary high school student in Queens with his superhero alter-ego Spider-Man, and finds himself on the trail of a new menace prowling the skies of New York City." />
 
-                <ImageButton
-                    android:id="@+id/input_movie_details_like"
-                    android:layout_width="30dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="15dp"
-                    android:background="@drawable/ic_like" />
+            <Button
+                android:id="@+id/action_movie_details_show_more"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_marginLeft="-20dp"
+                android:layout_toEndOf="@id/output_movie_details_about"
+                android:background="@drawable/ic_show_more" />
+        </RelativeLayout>
 
-                <ImageButton
-                    android:id="@+id/input_movie_details_dislike"
-                    android:layout_width="30dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="15dp"
-                    android:layout_toRightOf="@id/input_movie_details_like"
-                    android:background="@drawable/ic_dislike" />
-
-
-            </RelativeLayout>
-
-
-        </FrameLayout>
-
-    </LinearLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/output_movie_details_about"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="0dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="0dp"
-            android:maxLines="2"
-            android:text="Peter Parker balances his life as an ordinary high school student in Queens with his superhero alter-ego Spider-Man, and finds himself on the trail of a new menace prowling the skies of New York City." />
+            android:orientation="vertical"
+            android:padding="5dp">
 
-        <Button
-            android:id="@+id/action_movie_details_show_more"
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:layout_marginLeft="-20dp"
-            android:layout_toEndOf="@id/output_movie_details_about"
-            android:background="@drawable/ic_show_more" />
-    </RelativeLayout>
-</LinearLayout>
+            <EditText
+                android:id="@+id/input_movie_details_comment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLength="250" />
+
+            <Button
+                android:id="@+id/action_movie_details_comment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:background="@drawable/button_shape_rounded"
+                android:text="@string/comment"
+                android:textColor="#ffffff" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/movie_details_comment_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"></LinearLayout>
+    </LinearLayout>
+</ScrollView>
