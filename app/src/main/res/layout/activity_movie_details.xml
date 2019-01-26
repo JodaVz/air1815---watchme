@@ -160,6 +160,13 @@
                 android:background="@drawable/ic_show_more" />
         </RelativeLayout>
 
+        <ListView
+            android:id="@+id/movie_details_comment_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:ignore="NestedScrolling">
+
+        </ListView>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -182,13 +189,5 @@
                 android:textColor="#ffffff" />
 
         </LinearLayout>
-
-        <ListView
-            android:id="@+id/movie_details_comment_container"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:ignore="NestedScrolling">
-
-        </ListView>
     </LinearLayout>
 </ScrollView>
