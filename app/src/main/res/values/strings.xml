@@ -17,4 +17,7 @@
     <string name="name">Name</string>
     <string name="surname">Surname</string>
     <string name="comment">Comment</string>
+    <string name="list_view">List</string>
+    <string name="grid_view">Grid</string>
+    <string name="catalog">Catalog</string>
 </resources>
