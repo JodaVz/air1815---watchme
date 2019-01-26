@@ -1,6 +1,7 @@
 package hr.foi.watchme;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -8,17 +9,22 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.preference.PreferenceManager;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.util.List;
 
+import hr.foi.watchme.FragmentAssets.GridView;
 import hr.foi.watchme.FragmentAssets.MovieViewPager;
 import hr.foi.watchme.Fragments.MovieDetails;
 import hr.foi.watchme.Fragments.MovieFragment;
+import hr.foi.watchme.Fragments.SettingsFragment;
+import hr.foi.watchme.Interfaces.CatalogInterface;
 import hr.foi.watchme.Interfaces.MovieDetailsInterface;
 import hr.foi.watchme.Interfaces.MoviesInterface;
 import hr.foi.watchme.POJO.Movie;
@@ -27,7 +33,7 @@ import hr.foi.watchme.POJO.User;
 import hr.foi.watchme.WebServiceApi.WatchMeWebServiceCaller;
 import hr.foi.watchme.WebServiceApi.WebServiceInterfaces.GetDataCallback;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, MoviesInterface, MovieDetailsInterface {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, MoviesInterface, MovieDetailsInterface, CatalogInterface {
 
     private DrawerLayout drawer;
     public static List<Movie> movieList;
@@ -38,6 +44,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     public int movieId;
     public Movie movie;
+
+    boolean listView;
+
+    public Boolean switchPref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,6 +121,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }
             }
         });
+
+        //
+        // preferences
+        //
+
+        PreferenceManager.setDefaultValues(this, R.xml.settings, false);
+        SharedPreferences sharedPref =
+                PreferenceManager.getDefaultSharedPreferences(this);
+        switchPref = sharedPref.getBoolean
+                (Settings.KEY_PREF_EXAMPLE_SWITCH, false);
+        Toast.makeText(this, switchPref.toString(), Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -125,8 +146,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         new MovieDetails()).commit();
                 break;
             case R.id.nav_settings:
-                Intent intent = new Intent(this, Settings.class );
-                startActivity(intent);
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new SettingsFragment()).commit();
                 break;
         }
 
@@ -173,6 +194,55 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         movieDetails.setArguments(arguments);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                 movieDetails).addToBackStack("movieDetails").commit();
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.nav_settings) {
+            Intent intent = new Intent(this, Settings.class);
+            startActivity(intent);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void CategoryPreview(Boolean b, String name) {
+        List<Movie> moviesInCategory = null;
+        if(b){
+            GridView gridView = new GridView();
+            for(MovieCategory movieCategory: categoryList){
+                if(movieCategory.getName()== name){
+                    moviesInCategory = movieCategory.getMovies();
+                }
+            }
+            MovieCategory movies = new MovieCategory(name, moviesInCategory);
+            Bundle arguments = new Bundle();
+            arguments.putParcelable("movies", movies);
+            gridView.setArguments(arguments);
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                    gridView).addToBackStack("gridLayout").commit();
+        }
+
+    }
+
+    @Override
+    public void CategoryClicked(String name, List<Movie> movies) {
+        List<Movie> moviesInCategory = null;
+        GridView gridView = new GridView();
+        for(MovieCategory movieCategory: categoryList){
+            if(movieCategory.getName()== name){
+                moviesInCategory = movieCategory.getMovies();
+            }
+        }
+        MovieCategory movies1 = new MovieCategory(name, moviesInCategory);
+        Bundle arguments = new Bundle();
+        arguments.putParcelable("movies", movies1);
+        gridView.setArguments(arguments);
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                gridView).addToBackStack("gridLayout").commit();
     }
 }
 
