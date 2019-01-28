@@ -10,12 +10,19 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.List;
+
+import hr.foi.watchme.Interfaces.CatalogInterface;
+import hr.foi.watchme.POJO.Movie;
 import hr.foi.watchme.R;
 
-public class ListView extends Fragment {
+public class ListView extends Fragment implements CatalogInterface {
     LinearLayout catContainer;
     TextView categoryName;
     LinearLayout moviesContainer;
+
+    String categoryNameString;
+    List<Movie> filmovi;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -29,5 +36,15 @@ public class ListView extends Fragment {
         super.onResume();
         categoryName = getView().findViewById(R.id.categoryName);
         moviesContainer = getView().findViewById(R.id.MovieByCategoryContainer);
+    }
+
+    @Override
+    public void CategoryClicked(String name, List<Movie> movies, String fragment) {
+        if (fragment == "FL"){
+            categoryNameString = name;
+            filmovi = movies;
+        }else{
+
+        }
     }
 }

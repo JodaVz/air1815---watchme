@@ -12,11 +12,15 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import hr.foi.watchme.Interfaces.CatalogInterface;
 import hr.foi.watchme.POJO.Movie;
 import hr.foi.watchme.R;
 
-public class GridView extends Fragment {
+public class GridView extends Fragment implements CatalogInterface{
     LinearLayout catContainer;
+
+    String categoryNameString;
+    List<Movie> filmovi;
 
     TextView categoryName;
     public View itemView;
@@ -40,5 +44,15 @@ public class GridView extends Fragment {
 
           categoryName.setText(name);
 
+    }
+
+    @Override
+    public void CategoryClicked(String name, List<Movie> movies, String fragment) {
+            if (fragment == "FG"){
+                categoryNameString = name;
+                filmovi = movies;
+            }else{
+
+            }
     }
 }

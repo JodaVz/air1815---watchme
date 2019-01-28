@@ -45,8 +45,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public int movieId;
     public Movie movie;
 
-    boolean listView;
-
     public Boolean switchPref;
 
     @Override
@@ -196,40 +194,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 movieDetails).addToBackStack("movieDetails").commit();
     }
 
-
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.nav_settings) {
-            Intent intent = new Intent(this, Settings.class);
-            startActivity(intent);
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void CategoryPreview(Boolean b, String name) {
-        List<Movie> moviesInCategory = null;
-        if(b){
-            GridView gridView = new GridView();
-            for(MovieCategory movieCategory: categoryList){
-                if(movieCategory.getName()== name){
-                    moviesInCategory = movieCategory.getMovies();
-                }
-            }
-            MovieCategory movies = new MovieCategory(name, moviesInCategory);
-            Bundle arguments = new Bundle();
-            arguments.putParcelable("movies", movies);
-            gridView.setArguments(arguments);
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                    gridView).addToBackStack("gridLayout").commit();
-        }
-
-    }
-
-    @Override
-    public void CategoryClicked(String name, List<Movie> movies) {
+    public void CategoryClicked(String name, List<Movie> movies, String fragment) {
         List<Movie> moviesInCategory = null;
         GridView gridView = new GridView();
         for(MovieCategory movieCategory: categoryList){
@@ -244,6 +210,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                 gridView).addToBackStack("gridLayout").commit();
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.nav_settings) {
+            Intent intent = new Intent(this, Settings.class);
+            startActivity(intent);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+
 }
 
 

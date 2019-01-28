@@ -14,13 +14,15 @@ public class CategoryCatalogAdapter{
 
     private String name;
     private List<Movie> movie;
+    private String fragment;
     private Context context;
     private static CatalogInterface catalogListener;
 
-    public CategoryCatalogAdapter(Context context, List<Movie> movie, String name) {
+    public CategoryCatalogAdapter(Context context, List<Movie> movie, String name, CatalogInterface listener) {
         this.context = context;
         this.movie = movie;
         this.name = name;
+        this.catalogListener = listener;
     }
 
     public void onBindViewHolder(@NonNull GridView V) {
@@ -28,7 +30,7 @@ public class CategoryCatalogAdapter{
         V.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                catalogListener.CategoryClicked(name, movie);
+                catalogListener.CategoryClicked(name, movie, fragment);
             }
         });
     }
