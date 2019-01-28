@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -17,14 +18,16 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import hr.foi.watchme.FragmentAssets.GridView;
+import hr.foi.watchme.FragmentAssets.GridViewFragment;
+import hr.foi.watchme.FragmentAssets.ListView;
 import hr.foi.watchme.FragmentAssets.MovieViewPager;
 import hr.foi.watchme.Fragments.MovieDetails;
 import hr.foi.watchme.Fragments.MovieFragment;
 import hr.foi.watchme.Fragments.SettingsFragment;
-import hr.foi.watchme.Interfaces.CatalogInterface;
+import hr.foi.watchme.Interfaces.CategoryDetailsInterface;
 import hr.foi.watchme.Interfaces.MovieDetailsInterface;
 import hr.foi.watchme.Interfaces.MoviesInterface;
 import hr.foi.watchme.POJO.Movie;
@@ -33,7 +36,7 @@ import hr.foi.watchme.POJO.User;
 import hr.foi.watchme.WebServiceApi.WatchMeWebServiceCaller;
 import hr.foi.watchme.WebServiceApi.WebServiceInterfaces.GetDataCallback;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, MoviesInterface, MovieDetailsInterface, CatalogInterface {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, MoviesInterface, MovieDetailsInterface {
 
     private DrawerLayout drawer;
     public static List<Movie> movieList;
@@ -119,7 +122,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }
             }
         });
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
         //
         // preferences
         //
@@ -172,18 +179,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return categoryList;
     }
 
-
-    @Override
-    public Movie getMovieById() {
-        for (Movie m : movieList) {
-            if (m.getID() == movieId) {
-                movie = m;
-                break;
-            } else movie = null;
-        }
-        return movie;
-    }
-
     @Override
     public void movieClicked(Movie m) {
         MovieDetails movieDetails = new MovieDetails();
@@ -195,20 +190,30 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @Override
-    public void CategoryClicked(String name, List<Movie> movies, String fragment) {
-        List<Movie> moviesInCategory = null;
-        GridView gridView = new GridView();
-        for(MovieCategory movieCategory: categoryList){
-            if(movieCategory.getName()== name){
-                moviesInCategory = movieCategory.getMovies();
-            }
+    public void categoryClicked(String name, ArrayList<Movie> movies) {
+
+        //
+        // preferences
+        //
+
+        PreferenceManager.setDefaultValues(this, R.xml.settings, false);
+        SharedPreferences sharedPref =
+                PreferenceManager.getDefaultSharedPreferences(this);
+        switchPref = sharedPref.getBoolean
+                (Settings.KEY_PREF_EXAMPLE_SWITCH, false);
+        Toast.makeText(this, switchPref.toString(), Toast.LENGTH_SHORT).show();
+        CategoryDetailsInterface frag;
+        if(switchPref){
+            frag = GridViewFragment.newInstance(name, movies);
         }
-        MovieCategory movies1 = new MovieCategory(name, moviesInCategory);
-        Bundle arguments = new Bundle();
-        arguments.putParcelable("movies", movies1);
-        gridView.setArguments(arguments);
+        else {
+            frag = new ListView();
+        }
+
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                gridView).addToBackStack("gridLayout").commit();
+                (Fragment) frag).addToBackStack("gridLayout").commit();
+        frag.showList();
+
     }
 
     @Override

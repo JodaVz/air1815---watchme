@@ -10,10 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.io.Serializable;
-import java.util.List;
+import java.util.ArrayList;
 
 import hr.foi.watchme.Adapters.CategoryAdapter;
 import hr.foi.watchme.Interfaces.MovieDetailsInterface;
@@ -23,7 +21,7 @@ import hr.foi.watchme.R;
 public class MovieCategoryFragment extends Fragment {
 
     private String catName;
-    private List<Movie> filmovi;
+    private ArrayList<Movie> movieList;
     MovieDetailsInterface listenerActivity;
     public TextView itemView;
 
@@ -35,24 +33,23 @@ public class MovieCategoryFragment extends Fragment {
         catName = getArguments().getString("NAME");
         TextView tvCatName = viewMain.findViewById(R.id.output_category_name);
         tvCatName.setText(catName);
-
-        filmovi = (List<Movie>) getArguments().getSerializable("MOVIES");
-        this.itemView = tvCatName;
-        itemView.setOnClickListener(new View.OnClickListener() {
+        tvCatName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(v.getContext(), catName, Toast.LENGTH_SHORT).show();
-
+                listenerActivity.categoryClicked(catName, movieList);
             }
         });
+
+        movieList =  getArguments().getParcelableArrayList("MOVIES");
+
         return viewMain;
     }
 
-    public static MovieCategoryFragment newInstance(String categoryName, List<Movie> movies) {
+    public static MovieCategoryFragment newInstance(String categoryName, ArrayList<Movie> movies) {
         MovieCategoryFragment fragment = new MovieCategoryFragment();
         Bundle bundle = new Bundle();
         bundle.putString("NAME", categoryName);
-        bundle.putSerializable("MOVIES", (Serializable) movies);
+        bundle.putParcelableArrayList("MOVIES", movies);
         fragment.setArguments(bundle);
 
         return fragment;
@@ -69,7 +66,7 @@ public class MovieCategoryFragment extends Fragment {
         RecyclerView myList = getView().findViewById(R.id.categoryRecycler);
         myList.setLayoutManager(layoutManager);
 
-        CategoryAdapter adapter = new CategoryAdapter(filmovi, getActivity(), listenerActivity);
+        CategoryAdapter adapter = new CategoryAdapter(movieList, getActivity(), listenerActivity);
         myList.setAdapter(adapter);
     }
 

@@ -6,9 +6,8 @@ import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
 import java.util.List;
-
-import hr.foi.watchme.POJO.Movie;
 
 //TODO refaktorirati ovu klasu tako da se stavi u pravi paket
 public class MovieCategory implements Parcelable {
@@ -18,20 +17,36 @@ public class MovieCategory implements Parcelable {
     private String name;
     @SerializedName("MovieList")
     @Expose
-    private List<Movie> movies;
+    private ArrayList<Movie> movies;
 
-    public MovieCategory(String catName, List<Movie> movies){
+    public MovieCategory(String catName, ArrayList<Movie> movies){
         this.name = catName;
         this.movies = movies;
     }
 
 
+    protected MovieCategory(Parcel in) {
+        name = in.readString();
+        movies = in.createTypedArrayList(Movie.CREATOR);
+    }
 
-    public List<Movie> getMovies() {
+    public static final Creator<MovieCategory> CREATOR = new Creator<MovieCategory>() {
+        @Override
+        public MovieCategory createFromParcel(Parcel in) {
+            return new MovieCategory(in);
+        }
+
+        @Override
+        public MovieCategory[] newArray(int size) {
+            return new MovieCategory[size];
+        }
+    };
+
+    public ArrayList<Movie> getMovies() {
         return movies;
     }
 
-    public void setMovies(List<Movie> movies) {
+    public void setMovies(ArrayList<Movie> movies) {
         this.movies = movies;
     }
 
@@ -50,6 +65,7 @@ public class MovieCategory implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-
+        dest.writeString(name);
+        dest.writeTypedList(movies);
     }
 }

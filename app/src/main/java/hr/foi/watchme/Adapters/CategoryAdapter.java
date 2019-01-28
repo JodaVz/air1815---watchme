@@ -9,7 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import hr.foi.watchme.FragmentAssets.CatMovieItemViewHolder;
 import hr.foi.watchme.Interfaces.MovieDetailsInterface;
@@ -18,13 +18,13 @@ import hr.foi.watchme.R;
 
 
 public class CategoryAdapter extends RecyclerView.Adapter<CatMovieItemViewHolder> {
-    List<Movie> movieList;
+    ArrayList<Movie> movieList;
     Context ctx;
     private static MovieDetailsInterface itemListener;
     public FragmentManager fManager;
 
     //TODO napraviti konstruktor koji prima listu filmova po kategoriji RIJEŠENO!
-    public CategoryAdapter(List<Movie> movies, FragmentActivity context, MovieDetailsInterface listner){
+    public CategoryAdapter(ArrayList<Movie> movies, FragmentActivity context, MovieDetailsInterface listner){
         this.movieList = movies;
         this.ctx = context;
         this.itemListener = listner;

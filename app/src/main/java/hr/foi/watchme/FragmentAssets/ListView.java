@@ -12,11 +12,11 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import hr.foi.watchme.Interfaces.CatalogInterface;
+import hr.foi.watchme.Interfaces.CategoryDetailsInterface;
 import hr.foi.watchme.POJO.Movie;
 import hr.foi.watchme.R;
 
-public class ListView extends Fragment implements CatalogInterface {
+public class ListView extends Fragment implements CategoryDetailsInterface {
     LinearLayout catContainer;
     TextView categoryName;
     LinearLayout moviesContainer;
@@ -39,12 +39,7 @@ public class ListView extends Fragment implements CatalogInterface {
     }
 
     @Override
-    public void CategoryClicked(String name, List<Movie> movies, String fragment) {
-        if (fragment == "FL"){
-            categoryNameString = name;
-            filmovi = movies;
-        }else{
+    public void showList() {
 
-        }
     }
 }

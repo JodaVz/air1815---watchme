@@ -10,13 +10,14 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import hr.foi.watchme.Interfaces.CatalogInterface;
+import hr.foi.watchme.Interfaces.CategoryDetailsInterface;
 import hr.foi.watchme.POJO.Movie;
 import hr.foi.watchme.R;
 
-public class GridView extends Fragment implements CatalogInterface{
+public class GridViewFragment extends Fragment implements CategoryDetailsInterface {
     LinearLayout catContainer;
 
     String categoryNameString;
@@ -24,6 +25,24 @@ public class GridView extends Fragment implements CatalogInterface{
 
     TextView categoryName;
     public View itemView;
+
+    public static GridViewFragment newInstance(String catName, ArrayList<Movie> movies) {
+        GridViewFragment myFragment = new GridViewFragment();
+
+        Bundle args = new Bundle();
+        args.putString("category", catName);
+        args.putParcelableArrayList("movies", movies);
+        myFragment.setArguments(args);
+
+        return myFragment;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        categoryNameString = getArguments().getString("category");
+        filmovi = getArguments().getParcelableArrayList("movies");
+    }
 
     @Nullable
     @Override
@@ -40,19 +59,9 @@ public class GridView extends Fragment implements CatalogInterface{
         categoryName = getActivity().findViewById(R.id.categoryName);
     }
 
-    public void bind(List<Movie> m, String name){
-
-          categoryName.setText(name);
-
-    }
 
     @Override
-    public void CategoryClicked(String name, List<Movie> movies, String fragment) {
-            if (fragment == "FG"){
-                categoryNameString = name;
-                filmovi = movies;
-            }else{
+    public void showList() {
 
-            }
     }
 }

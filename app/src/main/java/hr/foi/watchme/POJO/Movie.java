@@ -48,6 +48,50 @@ public class Movie implements Parcelable {
     @Expose
     private String category;
 
+    protected Movie(Parcel in) {
+        if (in.readByte() == 0) {
+            id = null;
+        } else {
+            id = in.readInt();
+        }
+        name = in.readString();
+        releaseDate = in.readString();
+        if (in.readByte() == 0) {
+            season = null;
+        } else {
+            season = in.readInt();
+        }
+        if (in.readByte() == 0) {
+            episode = null;
+        } else {
+            episode = in.readInt();
+        }
+        if (in.readByte() == 0) {
+            duration = null;
+        } else {
+            duration = in.readDouble();
+        }
+        if (in.readByte() == 0) {
+            feedback = null;
+        } else {
+            feedback = in.readInt();
+        }
+        coverPhoto = in.readString();
+        category = in.readString();
+    }
+
+    public static final Creator<Movie> CREATOR = new Creator<Movie>() {
+        @Override
+        public Movie createFromParcel(Parcel in) {
+            return new Movie(in);
+        }
+
+        @Override
+        public Movie[] newArray(int size) {
+            return new Movie[size];
+        }
+    };
+
     public Integer getID() {
         return id;
     }
