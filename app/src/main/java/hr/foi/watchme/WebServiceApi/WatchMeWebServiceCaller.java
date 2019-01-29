@@ -241,6 +241,27 @@ public class WatchMeWebServiceCaller {
         });
     }
 
+    public void getMovieRating (final GetDataCallback getDataCallback){
+        WatchMeWebService serviceCaller = retrofit.create(WatchMeWebService.class);
+        Call<String> call = serviceCaller.getMovieRating();
+
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                if (response.isSuccessful()){
+                    getDataCallback.onGetData(response.body());
+                }else{
+                    Log.d(TAG,"Nije došel rating: " + response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                Log.d(TAG,"Nije moguće povezivanje s bazom ");
+            }
+        });
+    }
+
     public void postUserLogin(){
         WatchMeWebService serviceCaller = retrofit.create(WatchMeWebService.class);
         String jsonString = "{\"email\":\""+email+"\",\"Password\":\""+password+"\"}";

@@ -31,6 +31,9 @@ public interface WatchMeWebService {
     @GET("api/feedback/feedback/dohvati_komentare")
     Call<String> getAllComments();
 
+    @GET("api/feedback/feedback/dohvati_rating")
+    Call<String> getMovieRating();
+
     @GET("api/sadrzaj/sadrzaj/")
     Call<String> getMovies();
 

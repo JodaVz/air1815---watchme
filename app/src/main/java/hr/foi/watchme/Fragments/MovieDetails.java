@@ -41,6 +41,7 @@ public class MovieDetails extends Fragment {
     private String commentText;
     private List<String> comments;
     private ListView list;
+    public Integer movieRatingGrade;
     LinearLayout catContainer;
 
     ImageView moviePosterBack;
@@ -113,8 +114,15 @@ public class MovieDetails extends Fragment {
                 getAllComments();
             }
         };
+        Runnable rGrade = new Runnable() {
+            @Override
+            public void run() {
+                getMovieRatingGrade();
+            }
+        };
         handler.postDelayed(r,200);
         handler.postDelayed(rComment, 200);
+        handler.postDelayed(rGrade, 200);
     }
 
     public void bind(Movie m) {
@@ -326,6 +334,19 @@ public class MovieDetails extends Fragment {
                     arrayList.add(comment);
                 }
                 adapter.notifyDataSetChanged();
+            }
+        });
+    }
+
+    public void getMovieRatingGrade(){
+        final WatchMeWebServiceCaller webServiceCaller = new WatchMeWebServiceCaller();
+        webServiceCaller.getMovieRating(new GetDataCallback() {
+            @Override
+            public void onGetData(String dataResponse) {
+                Gson gson = new Gson();
+                TypeToken<Integer> token = new TypeToken<Integer>() {
+                };
+                movieRatingGrade = gson.fromJson(dataResponse, token.getType());
             }
         });
     }
