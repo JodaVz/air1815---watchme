@@ -324,8 +324,8 @@ public class MovieDetails extends Fragment {
 
                 for (String comment : comments){
                     arrayList.add(comment);
-                    adapter.notifyDataSetChanged();
                 }
+                adapter.notifyDataSetChanged();
             }
         });
     }

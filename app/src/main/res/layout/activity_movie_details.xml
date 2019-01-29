@@ -163,7 +163,7 @@
         <ListView
             android:id="@+id/movie_details_comment_container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="131dp"
             tools:ignore="NestedScrolling">
 
 
