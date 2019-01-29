@@ -5,9 +5,9 @@
 
         <SwitchPreference
             android:defaultValue="true"
-            android:title="Settings option"
+            android:title="List/Grid"
             android:key="example_switch"
-            android:summary="Turn this option on or off" />
+            android:summary="Odaberite željeni prikaz kataloga filmova" />
 
 
 </PreferenceScreen>

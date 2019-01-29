@@ -200,7 +200,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 PreferenceManager.getDefaultSharedPreferences(this);
         switchPref = sharedPref.getBoolean
                 (Settings.KEY_PREF_EXAMPLE_SWITCH, false);
-        Toast.makeText(this, switchPref.toString(), Toast.LENGTH_SHORT).show();
         CategoryDetailsInterface frag;
         if(switchPref){
             frag = GridViewFragment.newInstance(name, movies);
