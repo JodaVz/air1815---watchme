@@ -47,6 +47,9 @@ public class Movie implements Parcelable {
     @SerializedName("Category")
     @Expose
     private String category;
+    @SerializedName("Rating")
+    @Expose
+    private Integer rating;
 
     protected Movie(Parcel in) {
         if (in.readByte() == 0) {
@@ -75,6 +78,11 @@ public class Movie implements Parcelable {
             feedback = null;
         } else {
             feedback = in.readInt();
+        }
+        if (in.readByte() == 0) {
+            rating = null;
+        } else {
+            rating = in.readInt();
         }
         coverPhoto = in.readString();
         category = in.readString();
@@ -163,6 +171,12 @@ public class Movie implements Parcelable {
     public void setCategory(String category) {
         this.category = category;
     }
+
+    public Integer getRating(){ return rating;}
+
+    public void setRating(Integer rating){this.rating = rating;}
+
+
     @Override
     public int describeContents() {
         return 0;

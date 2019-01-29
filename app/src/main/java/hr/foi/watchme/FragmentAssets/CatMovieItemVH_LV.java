@@ -55,20 +55,6 @@ public class CatMovieItemVH_LV extends RecyclerView.ViewHolder {
                 .load(m.getCoverPhoto())
                 .resize(100, 150)
                 .into(movieImage);
-        getMovieRatingGrade();
-    }
-
-    public void getMovieRatingGrade(){
-        final WatchMeWebServiceCaller webServiceCaller = new WatchMeWebServiceCaller();
-        webServiceCaller.getMovieRating(new GetDataCallback() {
-            @Override
-            public void onGetData(String dataResponse) {
-                Gson gson = new Gson();
-                TypeToken<Integer> token = new TypeToken<Integer>() {
-                };
-                movieRatingGrade = gson.fromJson(dataResponse, token.getType());
-                rating.setText("" + movieRatingGrade);
-            }
-        });
+        rating.setText(""+m.getRating());
     }
 }
