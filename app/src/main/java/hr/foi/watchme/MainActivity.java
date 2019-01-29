@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hr.foi.watchme.FragmentAssets.GridViewFragment;
-import hr.foi.watchme.FragmentAssets.ListView;
+import hr.foi.watchme.FragmentAssets.ListViewFragment;
 import hr.foi.watchme.FragmentAssets.MovieViewPager;
 import hr.foi.watchme.Fragments.MovieDetails;
 import hr.foi.watchme.Fragments.MovieFragment;
@@ -136,7 +136,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 PreferenceManager.getDefaultSharedPreferences(this);
         switchPref = sharedPref.getBoolean
                 (Settings.KEY_PREF_EXAMPLE_SWITCH, false);
-        Toast.makeText(this, switchPref.toString(), Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -207,12 +206,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             frag = GridViewFragment.newInstance(name, movies);
         }
         else {
-            frag = new ListView();
+            frag = ListViewFragment.newInstance(name, movies);
         }
 
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                 (Fragment) frag).addToBackStack("gridLayout").commit();
-        frag.showList();
 
     }
 

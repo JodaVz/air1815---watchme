@@ -28,7 +28,6 @@
                 android:id="@+id/movie_in_category_list_movie_name"
                 android:layout_width="match_parent"
                 android:layout_height="25dp"
-                android:text="Movie name"
                 android:textSize="20dp"
                 android:gravity="start"
                 />
@@ -47,6 +46,14 @@
                 android:gravity="end"
                 android:text="Movie year"
                 android:textSize="14dp" />
+
+            <TextView
+                android:id="@+id/movie_in_category_list_movie_id"
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:paddingLeft="5dp"
+                android:text="Most popular"
+                android:visibility="gone"/>
 
         </LinearLayout>
     </LinearLayout>

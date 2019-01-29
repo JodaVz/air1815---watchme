@@ -77,4 +77,5 @@ public class MovieCategoryFragment extends Fragment {
             listenerActivity = (MovieDetailsInterface) context;
         }
     }
+
 }

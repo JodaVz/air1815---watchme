@@ -11,20 +11,18 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
-import hr.foi.watchme.FragmentAssets.CatMovieItemViewHolder;
+import hr.foi.watchme.FragmentAssets.CatMovieItemVH_LV;
 import hr.foi.watchme.Interfaces.MovieDetailsInterface;
 import hr.foi.watchme.POJO.Movie;
 import hr.foi.watchme.R;
 
-
-public class CategoryAdapter extends RecyclerView.Adapter<CatMovieItemViewHolder> {
+public class LinearAdapter extends RecyclerView.Adapter<CatMovieItemVH_LV> {
     ArrayList<Movie> movieList;
     Context ctx;
     private static MovieDetailsInterface itemListener;
     public FragmentManager fManager;
 
-    //TODO napraviti konstruktor koji prima listu filmova po kategoriji RIJEŠENO!
-    public CategoryAdapter(ArrayList<Movie> movies, FragmentActivity context, MovieDetailsInterface listener){
+    public LinearAdapter(ArrayList<Movie> movies, FragmentActivity context, MovieDetailsInterface listener){
         this.movieList = movies;
         this.ctx = context;
         this.itemListener = listener;
@@ -32,14 +30,14 @@ public class CategoryAdapter extends RecyclerView.Adapter<CatMovieItemViewHolder
 
     @NonNull
     @Override
-    public CatMovieItemViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View inflatedCatMovie = LayoutInflater.from(ctx).inflate(R.layout.category_movie_item, viewGroup, false);
-        return new CatMovieItemViewHolder(inflatedCatMovie,ctx);
+    public CatMovieItemVH_LV onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        View inflatedCatMovie = LayoutInflater.from(ctx).inflate(R.layout.fragment_movie_item_list, viewGroup, false);
+        return new CatMovieItemVH_LV(inflatedCatMovie,ctx);
     }
 
+
     @Override
-    public void onBindViewHolder(@NonNull final CatMovieItemViewHolder movieVH, int i) {
-        //TODO uzeti element iz liste filmova prema kategoriji i poslat ga metodi bind iz movieVH.bind(); RIJEŠENO!
+    public void onBindViewHolder(@NonNull CatMovieItemVH_LV movieVH, int i) {
         final Movie m = movieList.get(i);
         movieVH.bind(m);
         movieVH.itemView.setOnClickListener(new View.OnClickListener() {
@@ -54,5 +52,4 @@ public class CategoryAdapter extends RecyclerView.Adapter<CatMovieItemViewHolder
     public int getItemCount() {
         return movieList.size();
     }
-
 }

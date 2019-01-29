@@ -19,7 +19,6 @@ import hr.foi.watchme.R;
 
 public class GridViewFragment extends Fragment implements CategoryDetailsInterface {
     LinearLayout catContainer;
-
     String categoryNameString;
     List<Movie> filmovi;
 
@@ -55,13 +54,7 @@ public class GridViewFragment extends Fragment implements CategoryDetailsInterfa
     @Override
     public void onResume() {
         super.onResume();
-
         categoryName = getActivity().findViewById(R.id.categoryName);
     }
 
-
-    @Override
-    public void showList() {
-
-    }
 }
