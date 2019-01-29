@@ -38,13 +38,7 @@ public class Settings extends AppCompatActivity implements CompoundButton.OnChec
 
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-        if(isChecked){
-            aSwitch.setText("List view");
-            //TODO uključi modul za prikaz kataloga u listi
-        }
-        else{
-            aSwitch.setText("Grid view");
-            //TODO uključi modul za prikaz kataloga u gridu
-        }
+
     }
 }
+

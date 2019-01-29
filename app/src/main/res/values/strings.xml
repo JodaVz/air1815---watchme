@@ -20,4 +20,5 @@
     <string name="list_view">List</string>
     <string name="grid_view">Grid</string>
     <string name="catalog">Catalog</string>
+    <string name="comments">Comments:</string>
 </resources>

@@ -6,6 +6,7 @@
 
     <TextView
         android:id="@+id/output_category_name"
+        android:textColor="@color/textColorPrimary"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="25dp" />
@@ -15,7 +16,8 @@
         android:id="@+id/categoryRecycler"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:textColor="@color/textColorPrimary">
 
     </android.support.v7.widget.RecyclerView>
 

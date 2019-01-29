@@ -3,7 +3,10 @@
     android:id="@+id/fragment_container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="5dp"
+    android:layout_marginBottom="5dp"
+    android:background="@color/colorAccent">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -30,6 +33,7 @@
                 android:layout_height="25dp"
                 android:textSize="20dp"
                 android:gravity="start"
+                android:textColor="@color/textColorPrimary"
                 />
 
             <TextView
@@ -38,14 +42,16 @@
                 android:layout_height="25dp"
                 android:gravity="start"
                 android:text="Movie rating"
-                android:textSize="16dp" />
+                android:textSize="16dp"
+                android:textColor="@color/textColorPrimary"/>
             <TextView
                 android:id="@+id/movie_in_category_list_movie_year"
                 android:layout_width="match_parent"
                 android:layout_height="25dp"
                 android:gravity="end"
                 android:text="Movie year"
-                android:textSize="14dp" />
+                android:textSize="14dp"
+                android:textColor="@color/textColorPrimary"/>
 
             <TextView
                 android:id="@+id/movie_in_category_list_movie_id"

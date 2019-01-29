@@ -8,16 +8,21 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.squareup.picasso.Picasso;
 
 import hr.foi.watchme.POJO.Movie;
 import hr.foi.watchme.R;
+import hr.foi.watchme.WebServiceApi.WatchMeWebServiceCaller;
+import hr.foi.watchme.WebServiceApi.WebServiceInterfaces.GetDataCallback;
 
 public class CatMovieItemVH_LV extends RecyclerView.ViewHolder {
     ImageView movieImage;
     TextView movieId;
     TextView movieTitle;
     TextView rating;
+    Integer movieRatingGrade;
     TextView year;
     Integer id = 0;
     Context c;
@@ -45,9 +50,25 @@ public class CatMovieItemVH_LV extends RecyclerView.ViewHolder {
     public void bind(Movie m) {
         movieId.setText("" + m.getID());
         movieTitle.setText(m.getName());
+        year.setText(""+m.getReleaseDate());
         Picasso.get()
                 .load(m.getCoverPhoto())
                 .resize(100, 150)
                 .into(movieImage);
+        getMovieRatingGrade();
+    }
+
+    public void getMovieRatingGrade(){
+        final WatchMeWebServiceCaller webServiceCaller = new WatchMeWebServiceCaller();
+        webServiceCaller.getMovieRating(new GetDataCallback() {
+            @Override
+            public void onGetData(String dataResponse) {
+                Gson gson = new Gson();
+                TypeToken<Integer> token = new TypeToken<Integer>() {
+                };
+                movieRatingGrade = gson.fromJson(dataResponse, token.getType());
+                rating.setText("" + movieRatingGrade);
+            }
+        });
     }
 }

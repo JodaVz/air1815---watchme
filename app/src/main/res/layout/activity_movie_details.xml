@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/colorPrimary">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,12 +14,13 @@
         <LinearLayout
             android:id="@+id/llMain"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimary">
 
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#FFFFFF">
+                android:background="@color/colorPrimary">
 
                 <ImageView
                     android:id="@+id/iv_movie_poster_back"
@@ -111,7 +113,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
                     android:layout_marginLeft="135dp"
-                    android:layout_marginTop="200dp">
+                    android:layout_marginTop="200dp"
+                    android:background="@color/colorPrimary">
 
                     <ImageButton
                         android:id="@+id/input_movie_details_like"
@@ -149,6 +152,7 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="0dp"
                 android:maxLines="2"
+                android:textColor="@color/textColorPrimary"
                 android:text="Peter Parker balances his life as an ordinary high school student in Queens with his superhero alter-ego Spider-Man, and finds himself on the trail of a new menace prowling the skies of New York City." />
 
             <Button
@@ -163,8 +167,8 @@
         <ListView
             android:id="@+id/movie_details_comment_container"
             android:layout_width="match_parent"
-            android:layout_height="131dp"
-            tools:ignore="NestedScrolling">
+            android:layout_height="150dp"
+            android:clickable="false">
 
 
         </ListView>
@@ -178,7 +182,8 @@
                 android:id="@+id/input_movie_details_comment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:maxLength="250" />
+                android:maxLength="250"
+                android:textColor="@color/textColorPrimary"/>
 
             <Button
                 android:id="@+id/action_movie_details_comment"

@@ -10,15 +10,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.ListAdapter;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import hr.foi.watchme.Adapters.CategoryAdapter;
 import hr.foi.watchme.Adapters.LinearAdapter;
 import hr.foi.watchme.Interfaces.CategoryDetailsInterface;
 import hr.foi.watchme.Interfaces.MovieDetailsInterface;
@@ -58,6 +53,8 @@ public class ListViewFragment extends Fragment implements CategoryDetailsInterfa
         viewMain = inflater.inflate(R.layout.list_layout, container, false);
         categoryName = viewMain.findViewById(R.id.categoryName);
         categoryName.setText(categoryNameString);
+
+
         return viewMain;
     }
 
@@ -81,4 +78,5 @@ public class ListViewFragment extends Fragment implements CategoryDetailsInterfa
             listenerActivity = (MovieDetailsInterface) context;
         }
     }
+
 }

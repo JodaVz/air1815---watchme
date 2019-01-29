@@ -93,8 +93,6 @@ public class MovieDetails extends Fragment {
         adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, arrayList);
 
         list.setAdapter(adapter);
-        bind(movie);
-
 
         SetViewMoreButtonListener();
         SetLikeButtonListener();
@@ -123,6 +121,9 @@ public class MovieDetails extends Fragment {
         handler.postDelayed(r,200);
         handler.postDelayed(rComment, 200);
         handler.postDelayed(rGrade, 200);
+        getMovieRatingGrade();
+
+        bind(movie);
     }
 
     public void bind(Movie m) {
@@ -134,8 +135,6 @@ public class MovieDetails extends Fragment {
                 "It has survived not only five centuries, but also the leap into electronic typesetting, " +
                 "remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages," +
                 " and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.");
-        movieRating.setText("" + m.getFeedback());
-
         Picasso.get()
                 .load(m.getCoverPhoto())
                 .resize(120, 160)
@@ -347,6 +346,7 @@ public class MovieDetails extends Fragment {
                 TypeToken<Integer> token = new TypeToken<Integer>() {
                 };
                 movieRatingGrade = gson.fromJson(dataResponse, token.getType());
+                movieRating.setText("" + movieRatingGrade);
             }
         });
     }
