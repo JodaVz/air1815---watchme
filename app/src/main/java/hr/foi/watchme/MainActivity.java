@@ -18,8 +18,14 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import hr.foi.watchme.FragmentAssets.GridViewFragment;
 import hr.foi.watchme.FragmentAssets.ListViewFragment;
@@ -98,6 +104,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 };
                 //TODO prilagoditi JSON da jedna stavka polja izgleda kao uređeni par (ime kategorije, polje filmova) RIJEŠENO!
                 categoryList = gson.fromJson(dataResponse, token.getType());
+                for (MovieCategory category : categoryList){
+                    for (Movie movie : category.getMovies()){
+                        parseDate(movie);
+                    }
+                }
                 /*
                 for(MovieCategory m: categoryList){
                     if(m.getMovies() != null){
@@ -224,7 +235,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return super.onOptionsItemSelected(item);
     }
 
-
+    public void parseDate(Movie m){
+        DateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd");
+        DateFormat outputFormat = new SimpleDateFormat("yyyy");
+        String startDateStr = m.getReleaseDate();
+        Date date;
+        try {
+            date = inputFormat.parse(startDateStr);
+            String startDateStrNewFormat = outputFormat.format(date);
+            m.setReleaseDate(startDateStrNewFormat);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
 }
 
 
