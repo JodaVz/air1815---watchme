@@ -4,7 +4,7 @@
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccent">#212121</color>
     <color name="textColorPrimary">#ffffff</color>
-    <color name="color">#ffffff</color>
+    <color name="color">#b2b2b2</color>
     <color name="windowBackground">#212121</color>
     <color name="actionBarSytle">#212121</color>
 </resources>

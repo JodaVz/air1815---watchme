@@ -13,12 +13,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.preference.PreferenceManager;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import hr.foi.watchme.FragmentAssets.GridViewFragment;
@@ -44,8 +48,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public static List<MovieCategory> filteredCategoryList;
     public static Integer userId;
     public String userEmail;
-
-    public int movieId;
+    public String userName;
+    public TextView username;
+    public TextView email;
     public Movie movie;
 
     public Boolean switchPref;
@@ -56,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
 
         Bundle extras = getIntent().getExtras();
-        if (extras != null){
+        if (extras != null) {
             userEmail = extras.getString("userEmail");
         }
 
@@ -98,12 +103,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 };
                 //TODO prilagoditi JSON da jedna stavka polja izgleda kao uređeni par (ime kategorije, polje filmova) RIJEŠENO!
                 categoryList = gson.fromJson(dataResponse, token.getType());
-                /*
-                for(MovieCategory m: categoryList){
-                    if(m.getMovies() != null){
+                for (MovieCategory category : categoryList) {
+                    for (Movie movie : category.getMovies()) {
+                        parseDate(movie);
+                    }
+                }
+                filteredCategoryList = new ArrayList<>();
+                for (MovieCategory m : categoryList) {
+                    if (!m.getMovies().isEmpty()) {
                         filteredCategoryList.add(m);
                     }
-                }*/
+                }
             }
         });
 
@@ -114,9 +124,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 TypeToken<List<User>> token = new TypeToken<List<User>>() {
                 };
                 List<User> users = gson.fromJson(dataResponse, token.getType());
-                for(User user : users){
-                    if (user.email.equals(userEmail)){
+                for (User user : users) {
+                    if (user.email.equals(userEmail)) {
+                        userName = user.getName() + " " + user.getSurname();
                         userId = user.getId();
+                        
+                        username = findViewById(R.id.username);
+                        username.setText(userName);
+
+                        email = findViewById(R.id.emailAdress);
+                        email.setText(userEmail);
                         break;
                     }
                 }
@@ -127,9 +144,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onResume() {
         super.onResume();
-        //
-        // preferences
-        //
 
         PreferenceManager.setDefaultValues(this, R.xml.settings, false);
         SharedPreferences sharedPref =
@@ -175,14 +189,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public List<MovieCategory> getAllMoviesByCategories() {
-        return categoryList;
+        return filteredCategoryList;
     }
 
     @Override
     public void movieClicked(Movie m) {
         MovieDetails movieDetails = new MovieDetails();
         Bundle arguments = new Bundle();
-        arguments.putParcelable( "movie" , m);
+        arguments.putParcelable("movie", m);
         movieDetails.setArguments(arguments);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                 movieDetails).addToBackStack("movieDetails").commit();
@@ -201,10 +215,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         switchPref = sharedPref.getBoolean
                 (Settings.KEY_PREF_EXAMPLE_SWITCH, false);
         CategoryDetailsInterface frag;
-        if(switchPref){
+        if (switchPref) {
             frag = GridViewFragment.newInstance(name, movies);
-        }
-        else {
+        } else {
             frag = ListViewFragment.newInstance(name, movies);
         }
 
@@ -224,7 +237,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return super.onOptionsItemSelected(item);
     }
 
-
+    public void parseDate(Movie m) {
+        DateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd");
+        DateFormat outputFormat = new SimpleDateFormat("yyyy");
+        String startDateStr = m.getReleaseDate();
+        Date date;
+        try {
+            date = inputFormat.parse(startDateStr);
+            String startDateStrNewFormat = outputFormat.format(date);
+            m.setReleaseDate(startDateStrNewFormat);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
 }
+
 
 
