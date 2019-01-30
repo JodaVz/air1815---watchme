@@ -9,6 +9,7 @@ import retrofit2.http.POST;
 
 public interface WatchMeWebService {
 
+    //Methods that are used to supply relative paths to needed webservice addresses and accompanying return types to WatchMeWebServiceCaller class
     @GET("api/korisnici/users/")
     Call<String> getUsers();
 

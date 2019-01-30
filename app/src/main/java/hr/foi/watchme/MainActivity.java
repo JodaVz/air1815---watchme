@@ -60,6 +60,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //Getting user email from login
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             userEmail = extras.getString("userEmail");
@@ -83,6 +84,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             navigationView.setCheckedItem(R.id.nav_popular);
         }
 
+        //Getting movie, category and user data from Azure webservices
         WatchMeWebServiceCaller webServiceCaller = new WatchMeWebServiceCaller();
 
         getMovies(webServiceCaller);
@@ -186,6 +188,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return super.onOptionsItemSelected(item);
     }
 
+    //Parsing date from webservice to a more readable format
     public void parseDate(Movie m){
         DateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd");
         DateFormat outputFormat = new SimpleDateFormat("yyyy");
@@ -200,10 +203,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
+    //Getting movie objects in a list from webservice
     public void getMovies(WatchMeWebServiceCaller webServiceCaller){
         webServiceCaller.getMovies(new GetDataCallback() {
             @Override
             public void onGetData(String dataResponse) {
+                //Parsing JSON response
                 Gson gson = new Gson();
                 TypeToken<List<Movie>> token = new TypeToken<List<Movie>>() {
                 };
@@ -212,21 +217,25 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
     }
 
+    //Getting a list of categories, category contains a list of movies from that category, from webservice
     public void getCategories(WatchMeWebServiceCaller webServiceCaller){
         webServiceCaller.getCategories(new GetDataCallback() {
             @Override
             public void onGetData(String dataResponse) {
+                //Parsing JSON response
                 Gson gson = new Gson();
                 TypeToken<List<MovieCategory>> token = new TypeToken<List<MovieCategory>>() {
                 };
-                //TODO prilagoditi JSON da jedna stavka polja izgleda kao uređeni par (ime kategorije, polje filmova) RIJEŠENO!
                 categoryList = gson.fromJson(dataResponse, token.getType());
+
+                //Parsing date to a readable value
                 for (MovieCategory category : categoryList) {
                     for (Movie movie : category.getMovies()) {
                         parseDate(movie);
                     }
                 }
 
+                //Removing empty categories from the list
                 filteredCategoryList = new ArrayList<>();
 
                 for(MovieCategory m: categoryList){
@@ -238,16 +247,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
     }
 
+    //Getting user data from webservice
     public void getUsers(WatchMeWebServiceCaller webServiceCaller){
         webServiceCaller.getAllUsers(new GetDataCallback() {
             @Override
             public void onGetData(String dataResponse) {
+                //Parsing JSON response
                 Gson gson = new Gson();
                 TypeToken<List<User>> token = new TypeToken<List<User>>() {
                 };
                 List<User> users = gson.fromJson(dataResponse, token.getType());
                 for (User user : users) {
                     if (user.email.equals(userEmail)) {
+                        //Setting user name, surname and email in navigation header
                         userName = user.getName() + " " + user.getSurname();
                         userId = user.getId();
 

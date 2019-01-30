@@ -46,7 +46,7 @@ public class RegisterScreen extends AppCompatActivity implements View.OnClickLis
                 textName = textNameId.getText().toString();
                 textSurname = textSurnameId.getText().toString();
 
-
+                //Sending user input to webservice with POST
                 final WatchMeWebServiceCaller webServiceCaller = new WatchMeWebServiceCaller();
                 webServiceCaller.email = textEmail;
                 webServiceCaller.password = textPassword;
@@ -54,6 +54,7 @@ public class RegisterScreen extends AppCompatActivity implements View.OnClickLis
                 webServiceCaller.surname = textSurname;
                 webServiceCaller.postUserRegistration();
 
+                //Delaying GET from webservice; giving webservice time to handle POST
                 Handler handler = new Handler();
                 Runnable r = new Runnable() {
                 public void run() { registerUser(webServiceCaller); }};
@@ -64,9 +65,11 @@ public class RegisterScreen extends AppCompatActivity implements View.OnClickLis
         }
     }
 
+    //Getting response code from webservice to user registration POST and handling further operations
     public void registerUser(WatchMeWebServiceCaller webServiceCaller){
         final Intent intentRegister = new Intent(this, LoginScreen.class);
 
+        //Manage webservice response; 200 registered successfully, anything else and user didn't register successfully
         webServiceCaller.getRegistrationSuccess(new GetStatusCallback() {
             @Override
             public void onGetCode(int statusCode) {

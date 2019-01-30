@@ -41,8 +41,16 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
                 textEmail = textEmailId.getText().toString();
                 textPassword = textPasswordId.getText().toString();
 
+                final WatchMeWebServiceCaller webServiceCaller = new WatchMeWebServiceCaller();
+
+                //Sending user input to webservice with POST
+                webServiceCaller.email = textEmail;
+                webServiceCaller.password = textPassword;
+                webServiceCaller.postUserLogin();
+
+                //Delaying GET from webservice; giving webservice time to handle POST
                 Handler handler = new Handler();
-                Runnable r = new Runnable() {public void run() { userLogin(); }};
+                Runnable r = new Runnable() {public void run() { userLogin(webServiceCaller); }};
                 handler.postDelayed(r, 200);
                 break;
             case R.id.confirm_registration:
@@ -54,15 +62,12 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
         }
     }
 
-    public void userLogin(){
+    //Getting response code from webservice to user login POST and handling further operations
+    public void userLogin(WatchMeWebServiceCaller webServiceCaller){
         final Intent intentLogin = new Intent(this, MainActivity.class);
         intentLogin.putExtra("userEmail",textEmail);
-        final WatchMeWebServiceCaller webServiceCaller = new WatchMeWebServiceCaller();
 
-        webServiceCaller.email = textEmail;
-        webServiceCaller.password = textPassword;
-        webServiceCaller.postUserLogin();
-
+        //Manage webservice response; 200 user can enter, anything else and user cannot enter
         webServiceCaller.getUserLogin(new GetStatusCallback() {
             @Override
             public void onGetCode(int statusCode) {

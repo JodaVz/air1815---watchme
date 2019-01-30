@@ -8,9 +8,9 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 
-//TODO refaktorirati ovu klasu tako da se stavi u pravi paket RIJEŠENO!
 public class MovieCategory implements Parcelable {
 
+    //Serializing server output
     @SerializedName("Name")
     @Expose
     private String name;
@@ -18,12 +18,7 @@ public class MovieCategory implements Parcelable {
     @Expose
     private ArrayList<Movie> movies;
 
-    public MovieCategory(String catName, ArrayList<Movie> movies){
-        this.name = catName;
-        this.movies = movies;
-    }
-
-
+    //Parcel work
     protected MovieCategory(Parcel in) {
         name = in.readString();
         movies = in.createTypedArrayList(Movie.CREATOR);
@@ -41,6 +36,7 @@ public class MovieCategory implements Parcelable {
         }
     };
 
+    //Getters and setters for class MovieCategory
     public ArrayList<Movie> getMovies() {
         return movies;
     }
@@ -62,6 +58,7 @@ public class MovieCategory implements Parcelable {
         return 0;
     }
 
+    //Write data to parcel
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(name);

@@ -7,7 +7,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class Movie implements Parcelable {
-    //TODO dodati sve atribute, ne samo url RIJEŠENO!
+    //Constructor for class Movie
     public Movie(Integer id, String name, String releaseDate, Integer season,
                  Integer episode, Double duration, Integer feedback, String coverPhoto ){
         this.id = id;
@@ -20,6 +20,7 @@ public class Movie implements Parcelable {
         this.coverPhoto = coverPhoto;
     }
 
+    //Serializing server output
     @SerializedName("ID")
     @Expose
     private Integer id;
@@ -51,6 +52,7 @@ public class Movie implements Parcelable {
     @Expose
     private Integer rating;
 
+    //Parcel work
     protected Movie(Parcel in) {
         if (in.readByte() == 0) {
             id = null;
@@ -100,6 +102,7 @@ public class Movie implements Parcelable {
         }
     };
 
+    //Getters and setters for class Movie
     public Integer getID() {
         return id;
     }
@@ -182,9 +185,9 @@ public class Movie implements Parcelable {
         return 0;
     }
 
+    //Write data to parcel
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        //TODO dodati sve ostale atribute po potrebi
         dest.writeInt(id);
         dest.writeString(coverPhoto);
     }

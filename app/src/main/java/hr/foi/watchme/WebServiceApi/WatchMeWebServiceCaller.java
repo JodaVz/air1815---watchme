@@ -34,6 +34,7 @@ public class WatchMeWebServiceCaller {
 
     public WatchMeWebServiceCaller(){
 
+        //Constructor initializes new Retrofit instance to communicate to webservice
         OkHttpClient client = new OkHttpClient();
 
         this.retrofit = new Retrofit.Builder()
@@ -43,11 +44,13 @@ public class WatchMeWebServiceCaller {
                 .build();
     }
 
+    //Getting all users in JSON from webservice
     public void getAllUsers(final GetDataCallback getDataCallback){
-
+        //Attaching relative path interface
         WatchMeWebService serviceCaller = retrofit.create(WatchMeWebService.class);
         Call<String> call = serviceCaller.getUsers();
 
+        //Calling webservice in another thread, handling response
         call.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
@@ -65,10 +68,13 @@ public class WatchMeWebServiceCaller {
         });
     }
 
+    //Getting all movies in JSON from webservice
     public void getMovies(final GetDataCallback getDataCallback){
+        //Attaching relative path interface
         WatchMeWebService serviceCaller = retrofit.create(WatchMeWebService.class);
         Call<String> call = serviceCaller.getMovies();
 
+        //Calling webservice in another thread, handling response
         call.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
@@ -86,10 +92,13 @@ public class WatchMeWebServiceCaller {
         });
     }
 
+    //Getting all categories (list of lists) in JSON from webservice
     public void getCategories (final GetDataCallback getDataCallback){
+        //Attaching relative path interface
         WatchMeWebService serviceCaller = retrofit.create(WatchMeWebService.class);
         Call<String> call = serviceCaller.getCategories();
 
+        //Calling webservice in another thread, handling response
         call.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
@@ -107,10 +116,13 @@ public class WatchMeWebServiceCaller {
         });
     }
 
+    //Getting all comments in JSON from webservice
     public void getAllComments (final GetDataCallback getDataCallback){
+        //Attaching relative path interface
         WatchMeWebService serviceCaller = retrofit.create(WatchMeWebService.class);
         Call<String> call = serviceCaller.getAllComments();
 
+        //Calling webservice in another thread, handling response
         call.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
@@ -128,10 +140,13 @@ public class WatchMeWebServiceCaller {
         });
     }
 
+    //Getting status code from webservice that describes whether user can login or not
     public void getUserLogin(final GetStatusCallback getStatusCallback){
+        //Attaching relative path interface
         WatchMeWebService serviceCaller = retrofit.create(WatchMeWebService.class);
         Call<Void> call = serviceCaller.getUserLogin();
 
+        //Calling webservice in another thread, handling response
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
@@ -146,10 +161,13 @@ public class WatchMeWebServiceCaller {
         });
     }
 
+    //Getting status code from webservice that describes whether user registered successfully or not
     public void getRegistrationSuccess(final GetStatusCallback getStatusCallback){
+        //Attaching relative path interface
         WatchMeWebService serviceCaller = retrofit.create(WatchMeWebService.class);
         Call<Void> call = serviceCaller.getUserRegistration();
 
+        //Calling webservice in another thread, handling response
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
@@ -164,10 +182,13 @@ public class WatchMeWebServiceCaller {
         });
     }
 
+    //Writing data to database and getting status code from webservice that describes whether user rated successfully
     public void getUserRating(final GetStatusCallback getStatusCallback){
+        //Attaching relative path interface
         WatchMeWebService serviceCaller = retrofit.create(WatchMeWebService.class);
         Call<Void> call = serviceCaller.getUserRating();
 
+        //Calling webservice in another thread, handling response
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
@@ -182,10 +203,13 @@ public class WatchMeWebServiceCaller {
         });
     }
 
+    //Getting status code from webservice that describes whether user already has and how it has rated the movie
     public void checkUserRating(final GetStatusCallback getStatusCallback){
+        //Attaching relative path interface
         WatchMeWebService serviceCaller = retrofit.create(WatchMeWebService.class);
         Call<Void> call = serviceCaller.checkUserRating();
 
+        //Calling webservice in another thread, handling response
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
@@ -200,10 +224,13 @@ public class WatchMeWebServiceCaller {
         });
     }
 
+    //Writing data to database and getting status code from webservice that describes whether user commented successfully
     public void getUserComment(final GetStatusCallback getStatusCallback){
+        //Attaching relative path interface
         WatchMeWebService serviceCaller = retrofit.create(WatchMeWebService.class);
         Call<Void> call = serviceCaller.getUserComment();
 
+        //Calling webservice in another thread, handling response
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
@@ -218,12 +245,15 @@ public class WatchMeWebServiceCaller {
         });
     }
 
+    //Sends data to webservice that it then uses for authentication
     public void postUserLogin(){
+        //Attaching relative path interface and preparing JSON data for sending
         WatchMeWebService serviceCaller = retrofit.create(WatchMeWebService.class);
         String jsonString = "{\"email\":\""+email+"\",\"Password\":\""+password+"\"}";
 
         Call<ResponseBody> call = serviceCaller.postUserLogin(jsonString);
 
+        //Calling webservice in another thread, handling response
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -236,12 +266,15 @@ public class WatchMeWebServiceCaller {
         });
     }
 
+    //Sends data to webservice that it then uses for registering the user
     public void postUserRegistration(){
+        //Attaching relative path interface and preparing JSON data for sending
         WatchMeWebService serviceCaller = retrofit.create(WatchMeWebService.class);
         String jsonString = "{\"Name\":\""+name+"\",\"Surname\":\""+surname+"\",\"Email\":\""+email+"\",\"Password\":\""+password+"\"}";
 
         Call<ResponseBody> call = serviceCaller.postUserRegistration(jsonString);
 
+        //Calling webservice in another thread, handling response
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -254,12 +287,15 @@ public class WatchMeWebServiceCaller {
         });
     }
 
+    //Sends data to webservice that it then uses for saving rating of the user
     public void postUserRating(){
+        //Attaching relative path interface and preparing JSON data for sending
         WatchMeWebService serviceCaller = retrofit.create(WatchMeWebService.class);
         String jsonString = "{\"LeftBy\":\""+userId+"\",\"CommentedOn\":\""+movieId+"\",\"Rating\":\""+rating+"\"}";
 
         Call<ResponseBody> call = serviceCaller.postUserRating(jsonString);
 
+        //Calling webservice in another thread, handling response
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -272,12 +308,15 @@ public class WatchMeWebServiceCaller {
         });
     }
 
+    //Sends data to webservice that it then uses for saving comment of the user
     public void postUserComment(){
+        //Attaching relative path interface and preparing JSON data for sending
         WatchMeWebService serviceCaller = retrofit.create(WatchMeWebService.class);
         String jsonString = "{\"LeftBy\":\""+userId+"\",\"CommentedOn\":\""+movieId+"\",\"Comments\":\""+comment+"\"}";
 
         Call<ResponseBody> call = serviceCaller.postUserComment(jsonString);
 
+        //Calling webservice in another thread, handling response
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -290,12 +329,15 @@ public class WatchMeWebServiceCaller {
         });
     }
 
+    //Sends data to webservice that it then uses for identifying the current movie
     public void postUserMovie(){
+        //Attaching relative path interface and preparing JSON data for sending
         WatchMeWebService serviceCaller = retrofit.create(WatchMeWebService.class);
         String jsonString = "{\"LeftBy\":\""+userId+"\",\"CommentedOn\":\""+movieId+"\"}";
 
         Call<ResponseBody> call = serviceCaller.postUserRating(jsonString);
 
+        //Calling webservice in another thread, handling response
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
