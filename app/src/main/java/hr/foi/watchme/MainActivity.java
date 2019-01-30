@@ -13,10 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.preference.PreferenceManager;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-<<<<<<< HEAD
 import android.widget.TextView;
-=======
->>>>>>> 2ab75eba9a1693c1824f1c4131d0204fc3877fb5
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -25,13 +22,8 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-<<<<<<< HEAD
-=======
-import java.util.Calendar;
->>>>>>> 2ab75eba9a1693c1824f1c4131d0204fc3877fb5
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import hr.foi.watchme.FragmentAssets.GridViewFragment;
 import hr.foi.watchme.FragmentAssets.ListViewFragment;
@@ -111,28 +103,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 };
                 //TODO prilagoditi JSON da jedna stavka polja izgleda kao uređeni par (ime kategorije, polje filmova) RIJEŠENO!
                 categoryList = gson.fromJson(dataResponse, token.getType());
-<<<<<<< HEAD
                 for (MovieCategory category : categoryList) {
                     for (Movie movie : category.getMovies()) {
                         parseDate(movie);
                     }
                 }
-                filteredCategoryList = new ArrayList<>();
-                for (MovieCategory m : categoryList) {
-                    if (!m.getMovies().isEmpty()) {
-=======
 
-                for (MovieCategory category : categoryList){
-                    for (Movie movie : category.getMovies()){
-                        parseDate(movie);
-                    }
-
-                }
+                
                 filteredCategoryList = new ArrayList<>();
 
                 for(MovieCategory m: categoryList){
                     if(!m.getMovies().isEmpty()){
->>>>>>> 2ab75eba9a1693c1824f1c4131d0204fc3877fb5
                         filteredCategoryList.add(m);
                     }
                 }
@@ -259,11 +240,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return super.onOptionsItemSelected(item);
     }
 
-<<<<<<< HEAD
-    public void parseDate(Movie m) {
-=======
     public void parseDate(Movie m){
->>>>>>> 2ab75eba9a1693c1824f1c4131d0204fc3877fb5
         DateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd");
         DateFormat outputFormat = new SimpleDateFormat("yyyy");
         String startDateStr = m.getReleaseDate();
