@@ -94,11 +94,14 @@ public class MovieDetails extends Fragment {
 
         list.setAdapter(adapter);
 
+        //Setting button listeners
         SetViewMoreButtonListener();
         SetLikeButtonListener();
         SetDislikeButtonListener();
-        SetPlayerListener();
         setCommentButtonListener();
+        //Calling media player
+        SetPlayerListener();
+        //Setting and delaying webservice listeners to give time to Azure to handle things
         AzureSender();
         Handler handler = new Handler();
         Runnable r = new Runnable() {
@@ -138,13 +141,13 @@ public class MovieDetails extends Fragment {
                 .into(moviePosterBack);
     }
 
+    //Starting media player on the click of movie image
     public void SetPlayerListener() {
         moviePosterFront.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View viewMovieDetails) {
                 Intent intentPlayerMovieDetails = new Intent(getActivity(), PlayerActivity.class);
                 startActivity(intentPlayerMovieDetails);
-
             }
         });
     }
@@ -166,10 +169,12 @@ public class MovieDetails extends Fragment {
         });
     }
 
+    //Disabling user input after like is clicked and sending user input to webservice
     public void SetLikeButtonListener() {
         likeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Handling like button after user clicks it
                 likeIsClicked = true;
 
                 if (likeIsClicked) {
@@ -178,46 +183,27 @@ public class MovieDetails extends Fragment {
                 } else {
                     likeButton.setClickable(true);
                 }
+                //Sending user input to webservice POST
                 final WatchMeWebServiceCaller webServiceCaller = new WatchMeWebServiceCaller();
                 webServiceCaller.movieId = movie.getID();
                 webServiceCaller.userId = MainActivity.userId;
                 webServiceCaller.rating = 1;
                 webServiceCaller.postUserRating();
 
+                //Delaying GET to wait for webservice to finish handling POST
                 Handler handler = new Handler();
-                Runnable r = new Runnable() {
-                    public void run() {
-                        webServiceCaller.getUserRating(new GetStatusCallback() {
-                            @Override
-                            public void onGetCode(int statusCode) {
-                                if (statusCode == 200) {
-                                    Context context = getContext();
-                                    CharSequence text = "Uspješno rejtano!";
-                                    int duration = Toast.LENGTH_SHORT;
-
-                                    Toast toast = Toast.makeText(context, text, duration);
-                                    toast.show();
-                                } else {
-                                    Context context = getContext();
-                                    CharSequence text = "Pogreška kod rejtanja!";
-                                    int duration = Toast.LENGTH_SHORT;
-
-                                    Toast toast = Toast.makeText(context, text, duration);
-                                    toast.show();
-                                }
-                            }
-                        });
-                    }
-                };
+                Runnable r = new Runnable() {public void run() { getUserRating(webServiceCaller); }};
                 handler.postDelayed(r, 200);
             }
         });
     }
 
+    //Disabling user input after dislike is clicked and sending user input to webservice
     public void SetDislikeButtonListener() {
         dislikeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Handling dislike button after user clicks it
                 dislikeIsClicked = true;
 
                 if (dislikeIsClicked) {
@@ -226,46 +212,27 @@ public class MovieDetails extends Fragment {
                 } else {
                     dislikeButton.setClickable(true);
                 }
+                //Sending user input to webservice POST
                 final WatchMeWebServiceCaller webServiceCaller = new WatchMeWebServiceCaller();
                 webServiceCaller.movieId = movie.getID();
                 webServiceCaller.userId = MainActivity.userId;
                 webServiceCaller.rating = 2;
                 webServiceCaller.postUserRating();
 
+                //Delaying GET to wait for webservice to finish handling POST
                 Handler handler = new Handler();
-                Runnable r = new Runnable() {
-                    public void run() {
-                        webServiceCaller.getUserRating(new GetStatusCallback() {
-                            @Override
-                            public void onGetCode(int statusCode) {
-                                if (statusCode == 200) {
-                                    Context context = getContext();
-                                    CharSequence text = "Uspješno rejtano!";
-                                    int duration = Toast.LENGTH_SHORT;
-
-                                    Toast toast = Toast.makeText(context, text, duration);
-                                    toast.show();
-                                } else {
-                                    Context context = getContext();
-                                    CharSequence text = "Pogreška kod rejtanja!";
-                                    int duration = Toast.LENGTH_SHORT;
-
-                                    Toast toast = Toast.makeText(context, text, duration);
-                                    toast.show();
-                                }
-                            }
-                        });
-                    }
-                };
+                Runnable r = new Runnable() {public void run() { getUserRating(webServiceCaller); }};
                 handler.postDelayed(r, 200);
             }
         });
     }
 
+    //Setting a listener that disables comment button after user sends a comment
     public void setCommentButtonListener(){
         commentButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Disabling button after click
                 commentIsClicked = true;
                 if (commentIsClicked) {
                     commentButton.setClickable(false);
@@ -273,7 +240,7 @@ public class MovieDetails extends Fragment {
                 } else {
                     commentButton.setClickable(true);
                 }
-
+                //Sending user input to webservice POST
                 commentText = movieComment.getText().toString();
                 final WatchMeWebServiceCaller webServiceCaller = new WatchMeWebServiceCaller();
                 webServiceCaller.userId = MainActivity.userId;
@@ -281,46 +248,77 @@ public class MovieDetails extends Fragment {
                 webServiceCaller.comment = commentText;
                 webServiceCaller.postUserComment();
 
+                //Delaying GET to wait for webservice to finish handling POST
                 Handler handler = new Handler();
-                Runnable r = new Runnable() {
-                    public void run() {
-                        webServiceCaller.getUserComment(new GetStatusCallback() {
-                            @Override
-                            public void onGetCode(int statusCode) {
-                                if (statusCode == 200) {
-                                    Context context = getContext();
-                                    CharSequence text = "Uspješno komentirano!";
-                                    int duration = Toast.LENGTH_SHORT;
-
-                                    Toast toast = Toast.makeText(context, text, duration);
-                                    toast.show();
-                                } else {
-                                    Context context = getContext();
-                                    CharSequence text = "Pogreška kod komentiranja!";
-                                    int duration = Toast.LENGTH_SHORT;
-
-                                    Toast toast = Toast.makeText(context, text, duration);
-                                    toast.show();
-                                }
-                            }
-                        });
-                    }
-                };
+                Runnable r = new Runnable() {public void run() { getUserComment(webServiceCaller); }};
                 handler.postDelayed(r, 200);
             }
         });
     }
 
+    //This method confirms user post and writes data to database; returns code after finishing
+    public void getUserRating(WatchMeWebServiceCaller webServiceCaller){
+        webServiceCaller.getUserRating(new GetStatusCallback() {
+            @Override
+            public void onGetCode(int statusCode) {
+                //Handling code value; 200 rating has been saved, anything else and an error occurred
+                if (statusCode == 200) {
+                    Context context = getContext();
+                    CharSequence text = "Uspješno rejtano!";
+                    int duration = Toast.LENGTH_SHORT;
+
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                } else {
+                    Context context = getContext();
+                    CharSequence text = "Pogreška kod rejtanja!";
+                    int duration = Toast.LENGTH_SHORT;
+
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                }
+            }
+        });
+    }
+
+    //This method confirms user post and writes data to database; returns code after finishing
+    public void getUserComment(WatchMeWebServiceCaller webServiceCaller) {
+        webServiceCaller.getUserComment(new GetStatusCallback() {
+            @Override
+            public void onGetCode(int statusCode) {
+                //Handling code value; 200 comment has been saved, anything else and an error occurred
+                if (statusCode == 200) {
+                    Context context = getContext();
+                    CharSequence text = "Uspješno komentirano!";
+                    int duration = Toast.LENGTH_SHORT;
+
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                } else {
+                    Context context = getContext();
+                    CharSequence text = "Pogreška kod komentiranja!";
+                    int duration = Toast.LENGTH_SHORT;
+
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                }
+            }
+        });
+    }
+
+    //Getting all comments from webservice for the chosen movie to display
     public void getAllComments(){
         final WatchMeWebServiceCaller webServiceCaller = new WatchMeWebServiceCaller();
         webServiceCaller.getAllComments(new GetDataCallback() {
             @Override
             public void onGetData(String dataResponse) {
+                //Parsing data from webservice
                 Gson gson = new Gson();
                 TypeToken<List<String>> token = new TypeToken<List<String>>() {
                 };
                 comments = gson.fromJson(dataResponse, token.getType());
 
+                //Appending comments to arraylist adapter
                 for (String comment : comments){
                     arrayList.add(comment);
                 }
@@ -329,6 +327,7 @@ public class MovieDetails extends Fragment {
         });
     }
 
+    //Pinging webservice to notify it about the currently selected movie
     public void AzureSender(){
         final WatchMeWebServiceCaller webServiceCaller = new WatchMeWebServiceCaller();
 
@@ -337,11 +336,13 @@ public class MovieDetails extends Fragment {
         webServiceCaller.postUserMovie();
     }
 
+    //Listening for webservice response on whether user liked, disliked or didn't do either on a current movie
     public void AzureListener(){
         final WatchMeWebServiceCaller webServiceCaller = new WatchMeWebServiceCaller();
         webServiceCaller.checkUserRating(new GetStatusCallback() {
             @Override
             public void onGetCode(int statusCode) {
+                //Handling code response; 200 movie is liked, 500 movie is disliked, 500 movie is FREE
                 if(statusCode == 200){
                     likeButton.setClickable(false);
                     dislikeButton.setVisibility(View.GONE);
