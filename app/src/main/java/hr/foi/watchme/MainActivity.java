@@ -13,7 +13,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.preference.PreferenceManager;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -98,12 +97,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 };
                 //TODO prilagoditi JSON da jedna stavka polja izgleda kao uređeni par (ime kategorije, polje filmova) RIJEŠENO!
                 categoryList = gson.fromJson(dataResponse, token.getType());
-                /*
+
+                filteredCategoryList = new ArrayList<>();
                 for(MovieCategory m: categoryList){
-                    if(m.getMovies() != null){
+                    if(!m.getMovies().isEmpty()){
                         filteredCategoryList.add(m);
                     }
-                }*/
+                }
             }
         });
 
@@ -175,7 +175,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public List<MovieCategory> getAllMoviesByCategories() {
-        return categoryList;
+        return filteredCategoryList;
     }
 
     @Override
