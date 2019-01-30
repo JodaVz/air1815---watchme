@@ -84,63 +84,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
         WatchMeWebServiceCaller webServiceCaller = new WatchMeWebServiceCaller();
-        webServiceCaller.getMovies(new GetDataCallback() {
-            @Override
-            public void onGetData(String dataResponse) {
-                Gson gson = new Gson();
-                TypeToken<List<Movie>> token = new TypeToken<List<Movie>>() {
-                };
-                movieList = gson.fromJson(dataResponse, token.getType());
-            }
-        });
 
-        webServiceCaller.getCategories(new GetDataCallback() {
-            @Override
-            public void onGetData(String dataResponse) {
-                Gson gson = new Gson();
-                TypeToken<List<MovieCategory>> token = new TypeToken<List<MovieCategory>>() {
-                };
-                //TODO prilagoditi JSON da jedna stavka polja izgleda kao uređeni par (ime kategorije, polje filmova) RIJEŠENO!
-                categoryList = gson.fromJson(dataResponse, token.getType());
-                for (MovieCategory category : categoryList) {
-                    for (Movie movie : category.getMovies()) {
-                        parseDate(movie);
-                    }
-                }
-
-
-                filteredCategoryList = new ArrayList<>();
-
-                for(MovieCategory m: categoryList){
-                    if(!m.getMovies().isEmpty()){
-                        filteredCategoryList.add(m);
-                    }
-                }
-            }
-        });
-
-        webServiceCaller.getAllUsers(new GetDataCallback() {
-            @Override
-            public void onGetData(String dataResponse) {
-                Gson gson = new Gson();
-                TypeToken<List<User>> token = new TypeToken<List<User>>() {
-                };
-                List<User> users = gson.fromJson(dataResponse, token.getType());
-                for (User user : users) {
-                    if (user.email.equals(userEmail)) {
-                        userName = user.getName() + " " + user.getSurname();
-                        userId = user.getId();
-                        
-                        username = findViewById(R.id.username);
-                        username.setText(userName);
-
-                        email = findViewById(R.id.emailAdress);
-                        email.setText(userEmail);
-                        break;
-                    }
-                }
-            }
-        });
+        getMovies(webServiceCaller);
+        getCategories(webServiceCaller);
+        getUsers(webServiceCaller);
     }
 
     @Override
@@ -251,6 +198,69 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } catch (ParseException e) {
             e.printStackTrace();
         }
+    }
+
+    public void getMovies(WatchMeWebServiceCaller webServiceCaller){
+        webServiceCaller.getMovies(new GetDataCallback() {
+            @Override
+            public void onGetData(String dataResponse) {
+                Gson gson = new Gson();
+                TypeToken<List<Movie>> token = new TypeToken<List<Movie>>() {
+                };
+                movieList = gson.fromJson(dataResponse, token.getType());
+            }
+        });
+    }
+
+    public void getCategories(WatchMeWebServiceCaller webServiceCaller){
+        webServiceCaller.getCategories(new GetDataCallback() {
+            @Override
+            public void onGetData(String dataResponse) {
+                Gson gson = new Gson();
+                TypeToken<List<MovieCategory>> token = new TypeToken<List<MovieCategory>>() {
+                };
+                //TODO prilagoditi JSON da jedna stavka polja izgleda kao uređeni par (ime kategorije, polje filmova) RIJEŠENO!
+                categoryList = gson.fromJson(dataResponse, token.getType());
+                for (MovieCategory category : categoryList) {
+                    for (Movie movie : category.getMovies()) {
+                        parseDate(movie);
+                    }
+                }
+
+                filteredCategoryList = new ArrayList<>();
+
+                for(MovieCategory m: categoryList){
+                    if(!m.getMovies().isEmpty()){
+                        filteredCategoryList.add(m);
+                    }
+                }
+            }
+        });
+    }
+
+    public void getUsers(WatchMeWebServiceCaller webServiceCaller){
+        webServiceCaller.getAllUsers(new GetDataCallback() {
+            @Override
+            public void onGetData(String dataResponse) {
+                Gson gson = new Gson();
+                TypeToken<List<User>> token = new TypeToken<List<User>>() {
+                };
+                List<User> users = gson.fromJson(dataResponse, token.getType());
+                for (User user : users) {
+                    if (user.email.equals(userEmail)) {
+                        userName = user.getName() + " " + user.getSurname();
+                        userId = user.getId();
+
+                        username = findViewById(R.id.username);
+                        username.setText(userName);
+
+                        email = findViewById(R.id.emailAdress);
+                        email.setText(userEmail);
+                        break;
+                    }
+                }
+            }
+        });
     }
 }
 
