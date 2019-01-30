@@ -77,7 +77,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        //It will show popular fragment on create
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                     new MovieFragment()).commit();
@@ -109,7 +108,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     }
                 }
 
-                
+
                 filteredCategoryList = new ArrayList<>();
 
                 for(MovieCategory m: categoryList){
@@ -157,18 +156,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        NavigationView navigationView = findViewById(R.id.nav_view);
         switch (item.getItemId()) {
             case R.id.nav_movie:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new MovieViewPager()).commit();
+                navigationView.setCheckedItem(R.id.nav_movie);
                 break;
             case R.id.nav_tv_series:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new MovieDetails()).commit();
+                navigationView.setCheckedItem(R.id.nav_tv_series);
                 break;
             case R.id.nav_settings:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new SettingsFragment()).commit();
+                navigationView.setCheckedItem(R.id.nav_settings);
                 break;
         }
 
