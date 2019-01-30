@@ -12,7 +12,6 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-import hr.foi.watchme.Fragments.MovieDetails;
 import hr.foi.watchme.Interfaces.MovieDetailsInterface;
 import hr.foi.watchme.POJO.Movie;
 import hr.foi.watchme.R;

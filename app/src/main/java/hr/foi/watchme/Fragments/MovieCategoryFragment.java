@@ -23,7 +23,6 @@ public class MovieCategoryFragment extends Fragment {
     private String catName;
     private ArrayList<Movie> movieList;
     MovieDetailsInterface listenerActivity;
-    public TextView itemView;
 
     @Nullable
     @Override

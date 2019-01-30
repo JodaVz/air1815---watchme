@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.CompoundButton;
-import android.widget.Switch;
 
 import java.util.Locale;
 
@@ -15,7 +14,6 @@ import hr.foi.watchme.Fragments.SettingsFragment;
 
 public class Settings extends AppCompatActivity implements CompoundButton.OnCheckedChangeListener {
 
-     public Switch aSwitch;
      public static final String KEY_PREF_EXAMPLE_SWITCH = "example_switch";
 
     public void setLanguage(Context context) {
