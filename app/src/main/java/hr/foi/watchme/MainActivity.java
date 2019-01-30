@@ -163,11 +163,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         new MovieViewPager()).commit();
                 navigationView.setCheckedItem(R.id.nav_movie);
                 break;
-            case R.id.nav_tv_series:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new MovieDetails()).commit();
-                navigationView.setCheckedItem(R.id.nav_tv_series);
-                break;
+
             case R.id.nav_settings:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new SettingsFragment()).commit();

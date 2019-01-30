@@ -6,7 +6,6 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
-import retrofit2.http.Path;
 
 public interface WatchMeWebService {
 
@@ -31,14 +30,8 @@ public interface WatchMeWebService {
     @GET("api/feedback/feedback/dohvati_komentare")
     Call<String> getAllComments();
 
-    @GET("api/feedback/feedback/dohvati_rating")
-    Call<String> getMovieRating();
-
     @GET("api/sadrzaj/sadrzaj/")
     Call<String> getMovies();
-
-    @GET("api/sadrzaj/sadrzaj/{id}")
-    Call<String> getMoviesByID(@Path("id") int id);
 
     @GET("api/sadrzaj/sadrzaj/dohvati_kategorije_filmova")
     Call<String> getCategories();

@@ -7,9 +7,8 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
-import java.util.List;
 
-//TODO refaktorirati ovu klasu tako da se stavi u pravi paket
+//TODO refaktorirati ovu klasu tako da se stavi u pravi paket RIJEŠENO!
 public class MovieCategory implements Parcelable {
 
     @SerializedName("Name")

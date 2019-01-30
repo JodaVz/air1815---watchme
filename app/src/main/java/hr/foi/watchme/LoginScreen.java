@@ -10,10 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.player.PlayerActivity;
-
 import hr.foi.watchme.WebServiceApi.WebServiceInterfaces.GetStatusCallback;
-import hr.foi.watchme.POJO.User;
 import hr.foi.watchme.WebServiceApi.WatchMeWebServiceCaller;
 
 public class LoginScreen extends AppCompatActivity implements View.OnClickListener {
@@ -35,52 +32,19 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
         textPasswordId = findViewById(R.id.input_login_password);
         buttonLogin.setOnClickListener(this);
         buttonRegistration.setOnClickListener(this);
-
-
-
     }
 
     @Override
     public void onClick(View viewLogin) {
-
         switch (viewLogin.getId()) {
             case R.id.confirm_login:
                 textEmail = textEmailId.getText().toString();
                 textPassword = textPasswordId.getText().toString();
-                final Intent intentLogin = new Intent(this, MainActivity.class);
-                intentLogin.putExtra("userEmail",textEmail);
-                final WatchMeWebServiceCaller webServiceCaller = new WatchMeWebServiceCaller();
-
-
-                webServiceCaller.email = textEmail;
-                webServiceCaller.password = textPassword;
-                webServiceCaller.postUserLogin();
 
                 Handler handler = new Handler();
-                Runnable r = new Runnable() {
-                    public void run() {
-                        webServiceCaller.getUserLogin(new GetStatusCallback() {
-                            @Override
-                            public void onGetCode(int statusCode) {
-                                if (statusCode == 200) {
-                                    startActivity(intentLogin);
-                                } else {
-                                    Context context = getApplicationContext();
-                                    CharSequence text = "Krivi login podaci!";
-                                    int duration = Toast.LENGTH_SHORT;
-
-                                    Toast toast = Toast.makeText(context, text, duration);
-                                    toast.show();
-                                }
-                            }
-                        });
-                    }
-                };
+                Runnable r = new Runnable() {public void run() { userLogin(); }};
                 handler.postDelayed(r, 200);
-
                 break;
-
-
             case R.id.confirm_registration:
                 Intent intentRegistration = new Intent(this, RegisterScreen.class);
                 startActivity(intentRegistration);
@@ -88,5 +52,31 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
             default:
                 break;
         }
+    }
+
+    public void userLogin(){
+        final Intent intentLogin = new Intent(this, MainActivity.class);
+        intentLogin.putExtra("userEmail",textEmail);
+        final WatchMeWebServiceCaller webServiceCaller = new WatchMeWebServiceCaller();
+
+        webServiceCaller.email = textEmail;
+        webServiceCaller.password = textPassword;
+        webServiceCaller.postUserLogin();
+
+        webServiceCaller.getUserLogin(new GetStatusCallback() {
+            @Override
+            public void onGetCode(int statusCode) {
+                if (statusCode == 200) {
+                    startActivity(intentLogin);
+                } else {
+                    Context context = getApplicationContext();
+                    CharSequence text = "Krivi login podaci!";
+                    int duration = Toast.LENGTH_SHORT;
+
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                }
+            }
+        });
     }
 }

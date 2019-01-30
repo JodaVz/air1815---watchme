@@ -46,9 +46,8 @@ public class RegisterScreen extends AppCompatActivity implements View.OnClickLis
                 textName = textNameId.getText().toString();
                 textSurname = textSurnameId.getText().toString();
 
-                final Intent intentRegister = new Intent(this, LoginScreen.class);
-                final WatchMeWebServiceCaller webServiceCaller = new WatchMeWebServiceCaller();
 
+                final WatchMeWebServiceCaller webServiceCaller = new WatchMeWebServiceCaller();
                 webServiceCaller.email = textEmail;
                 webServiceCaller.password = textPassword;
                 webServiceCaller.name = textName;
@@ -57,36 +56,38 @@ public class RegisterScreen extends AppCompatActivity implements View.OnClickLis
 
                 Handler handler = new Handler();
                 Runnable r = new Runnable() {
-                    public void run() {
-                        webServiceCaller.getRegistrationSuccess(new GetStatusCallback() {
-                            @Override
-                            public void onGetCode(int statusCode) {
-                                if (statusCode == 200) {
-                                    Context context = getApplicationContext();
-                                    CharSequence text = "Uspješna registracija!";
-                                    int duration = Toast.LENGTH_SHORT;
-
-                                    Toast toast = Toast.makeText(context, text, duration);
-                                    toast.show();
-
-                                    startActivity(intentRegister);
-                                } else {
-                                    Context context = getApplicationContext();
-                                    CharSequence text = "Već zauzet email!";
-                                    int duration = Toast.LENGTH_SHORT;
-
-                                    Toast toast = Toast.makeText(context, text, duration);
-                                    toast.show();
-                                }
-                            }
-                        });
-                    }
-                };
+                public void run() { registerUser(webServiceCaller); }};
                 handler.postDelayed(r, 200);
-
                 break;
             default:
                 break;
         }
+    }
+
+    public void registerUser(WatchMeWebServiceCaller webServiceCaller){
+        final Intent intentRegister = new Intent(this, LoginScreen.class);
+
+        webServiceCaller.getRegistrationSuccess(new GetStatusCallback() {
+            @Override
+            public void onGetCode(int statusCode) {
+                if (statusCode == 200) {
+                    Context context = getApplicationContext();
+                    CharSequence text = "Uspješna registracija!";
+                    int duration = Toast.LENGTH_SHORT;
+
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+
+                    startActivity(intentRegister);
+                } else {
+                    Context context = getApplicationContext();
+                    CharSequence text = "Već zauzet email!";
+                    int duration = Toast.LENGTH_SHORT;
+
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                }
+            }
+        });
     }
 }

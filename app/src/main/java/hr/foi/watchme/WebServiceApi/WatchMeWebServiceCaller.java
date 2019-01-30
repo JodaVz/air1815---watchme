@@ -3,13 +3,11 @@ package hr.foi.watchme.WebServiceApi;
 
 import android.util.Log;
 
-import java.io.IOException;
 
 import hr.foi.watchme.WebServiceApi.WebServiceInterfaces.GetDataCallback;
 import hr.foi.watchme.WebServiceApi.WebServiceInterfaces.GetStatusCallback;
 import hr.foi.watchme.WebServiceApi.WebServiceInterfaces.WatchMeWebService;
 import okhttp3.OkHttpClient;
-import okhttp3.Request;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -78,27 +76,6 @@ public class WatchMeWebServiceCaller {
                     getDataCallback.onGetData(response.body());
                 }else{
                     Log.d(TAG,"Nisu došli filmeki: " + response.code());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<String> call, Throwable t) {
-                Log.d(TAG,"Nije moguće povezivanje s bazom ");
-            }
-        });
-    }
-
-    public void getMoviesByID(final GetDataCallback getDataCallback, int id){
-        WatchMeWebService serviceCaller = retrofit.create(WatchMeWebService.class);
-        Call<String> call = serviceCaller.getMoviesByID(id);
-
-        call.enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-                if (response.isSuccessful()){
-                    getDataCallback.onGetData(response.body());
-                }else{
-                    Log.d(TAG,"Nije došel film: " + response.code());
                 }
             }
 
@@ -237,27 +214,6 @@ public class WatchMeWebServiceCaller {
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
                 t.printStackTrace();
-            }
-        });
-    }
-
-    public void getMovieRating (final GetDataCallback getDataCallback){
-        WatchMeWebService serviceCaller = retrofit.create(WatchMeWebService.class);
-        Call<String> call = serviceCaller.getMovieRating();
-
-        call.enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-                if (response.isSuccessful()){
-                    getDataCallback.onGetData(response.body());
-                }else{
-                    Log.d(TAG,"Nije došel rating: " + response.code());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<String> call, Throwable t) {
-                Log.d(TAG,"Nije moguće povezivanje s bazom ");
             }
         });
     }
