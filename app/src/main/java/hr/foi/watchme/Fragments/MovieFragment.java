@@ -11,9 +11,9 @@ import hr.foi.watchme.R;
 
 public class MovieFragment extends Fragment {
 
+    //Inflating welcome_fragment xml
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState){
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.welcome_fragment, container, false);
     }
-
 }

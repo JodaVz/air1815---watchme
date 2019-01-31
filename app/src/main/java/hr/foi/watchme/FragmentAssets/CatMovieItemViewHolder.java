@@ -22,6 +22,7 @@ public class CatMovieItemViewHolder extends RecyclerView.ViewHolder {
     Context c;
     public View itemView;
 
+    //Initializing text and image views. Setting toast to display title of selected movie
     public CatMovieItemViewHolder(@NonNull View itemView, final Context c) {
         super(itemView);
         movieId = itemView.findViewById(R.id.output_movie_menu_by_category_movie_id);
@@ -41,6 +42,7 @@ public class CatMovieItemViewHolder extends RecyclerView.ViewHolder {
         });
     }
 
+    //Binding title, id and cover photo of a movie to it's corresponding text and image views
     public void bind(Movie m) {
         movieId.setText("" + m.getID());
         movieTitle.setText(m.getName());

@@ -32,6 +32,7 @@ public class GridViewFragment extends Fragment implements CategoryDetailsInterfa
     GridView gridView;
     public View viewMain;
 
+    //Creating bundle for new instance
     public static GridViewFragment newInstance(String catName, ArrayList<Movie> movies) {
         GridViewFragment myFragment = new GridViewFragment();
 
@@ -43,6 +44,7 @@ public class GridViewFragment extends Fragment implements CategoryDetailsInterfa
         return myFragment;
     }
 
+    //Getting arguments from bundle
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +52,7 @@ public class GridViewFragment extends Fragment implements CategoryDetailsInterfa
         filmovi = getArguments().getParcelableArrayList("movies");
     }
 
+    //Inflating grid_layout xml and setting grid adapter
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -62,8 +65,8 @@ public class GridViewFragment extends Fragment implements CategoryDetailsInterfa
         return viewMain;
     }
 
+    //Extracting movie image URL's from list of movies
     public void FillWithUrls() {
-
         movieUrls = new String[filmovi.size()];
         names = new String[filmovi.size()];
 
@@ -82,6 +85,7 @@ public class GridViewFragment extends Fragment implements CategoryDetailsInterfa
         super.onResume();
     }
 
+    //Setting listener on MovieDetailsInterface
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);

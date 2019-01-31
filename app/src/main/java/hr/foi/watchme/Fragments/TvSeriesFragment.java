@@ -11,6 +11,7 @@ import hr.foi.watchme.R;
 
 public class TvSeriesFragment extends Fragment {
 
+    //Inflating fragmnt_tv_series xml
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState){
         return inflater.inflate(R.layout.fragment_tv_series, container, false);

@@ -30,6 +30,7 @@ public class MovieViewPager extends Fragment {
     private MoviesInterface mListenerActivity;
     LinearLayout catContainer;
 
+    //Inflating fragment_movies xml
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -39,6 +40,7 @@ public class MovieViewPager extends Fragment {
         return viewMain;
     }
 
+    //Setting adapter on view pager and filling container with categories
     @Override
     public void onResume() {
         super.onResume();
@@ -49,19 +51,19 @@ public class MovieViewPager extends Fragment {
         fillCategories();
     }
 
+    //Filling categoryFragContainer with MovieCategory(String catName, List<Movie> moviesInCategory) list
     private void fillCategories() {
-
-        for(MovieCategory cat : moviesByCategories){
+        for (MovieCategory cat : moviesByCategories) {
             MovieCategoryFragment frag = MovieCategoryFragment.newInstance(cat.getName(), cat.getMovies());
             FragmentManager fragMan = getChildFragmentManager();
             FragmentTransaction fragTransaction = fragMan.beginTransaction();
 
-            fragTransaction.add(R.id.categoryFragsContainer, frag , "" + cat.getName());
+            fragTransaction.add(R.id.categoryFragsContainer, frag, "" + cat.getName());
             fragTransaction.commit();
         }
     }
 
-
+    //Extracting movie image URL's from list of movies
     public void FillWithUrls() {
         moviesByCategories = mListenerActivity.getAllMoviesByCategories();
         movies = mListenerActivity.getMovieList();
@@ -77,10 +79,10 @@ public class MovieViewPager extends Fragment {
         }
     }
 
+    //setting listener on MoviesInterface
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-
         try {
             mListenerActivity = (MoviesInterface) getActivity();
         } catch (Exception e) {

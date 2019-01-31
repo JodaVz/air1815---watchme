@@ -66,6 +66,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             userEmail = extras.getString("userEmail");
         }
 
+        //Setting navigation view
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -96,6 +97,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onResume() {
         super.onResume();
 
+        //Getting users preference for catalog view
         PreferenceManager.setDefaultValues(this, R.xml.settings, false);
         SharedPreferences sharedPref =
                 PreferenceManager.getDefaultSharedPreferences(this);
@@ -103,6 +105,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 (Settings.KEY_PREF_EXAMPLE_SWITCH, false);
     }
 
+    //Opening new fragments on different item selection in navigation view
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -119,11 +122,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 navigationView.setCheckedItem(R.id.nav_settings);
                 break;
         }
-
+        //After an item is selected, automatically closes drawer menu
         drawer.closeDrawer(GravityCompat.START);
         return false;
     }
 
+    //By pressing back button on phone, drawer menu closes(if it's opened)
     @Override
     public void onBackPressed() {
         if (drawer.isDrawerOpen(GravityCompat.START)) {
@@ -143,6 +147,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return filteredCategoryList;
     }
 
+    //Sending data of pressed movie in a bundle
     @Override
     public void movieClicked(Movie m) {
         MovieDetails movieDetails = new MovieDetails();
@@ -153,13 +158,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 movieDetails).addToBackStack("movieDetails").commit();
     }
 
+    //Getting users preference for catalog view and setting catalog view accordingly
     @Override
     public void categoryClicked(String name, ArrayList<Movie> movies) {
-
-        //
-        // preferences
-        //
-
         PreferenceManager.setDefaultValues(this, R.xml.settings, false);
         SharedPreferences sharedPref =
                 PreferenceManager.getDefaultSharedPreferences(this);
@@ -177,6 +178,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
+    //Returning selected item in settings
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -189,7 +191,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     //Parsing date from webservice to a more readable format
-    public void parseDate(Movie m){
+    public void parseDate(Movie m) {
         DateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd");
         DateFormat outputFormat = new SimpleDateFormat("yyyy");
         String startDateStr = m.getReleaseDate();
@@ -204,7 +206,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     //Getting movie objects in a list from webservice
-    public void getMovies(WatchMeWebServiceCaller webServiceCaller){
+    public void getMovies(WatchMeWebServiceCaller webServiceCaller) {
         webServiceCaller.getMovies(new GetDataCallback() {
             @Override
             public void onGetData(String dataResponse) {
@@ -218,7 +220,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     //Getting a list of categories, category contains a list of movies from that category, from webservice
-    public void getCategories(WatchMeWebServiceCaller webServiceCaller){
+    public void getCategories(WatchMeWebServiceCaller webServiceCaller) {
         webServiceCaller.getCategories(new GetDataCallback() {
             @Override
             public void onGetData(String dataResponse) {
@@ -238,8 +240,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 //Removing empty categories from the list
                 filteredCategoryList = new ArrayList<>();
 
-                for(MovieCategory m: categoryList){
-                    if(!m.getMovies().isEmpty()){
+                for (MovieCategory m : categoryList) {
+                    if (!m.getMovies().isEmpty()) {
                         filteredCategoryList.add(m);
                     }
                 }
@@ -248,7 +250,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     //Getting user data from webservice
-    public void getUsers(WatchMeWebServiceCaller webServiceCaller){
+    public void getUsers(WatchMeWebServiceCaller webServiceCaller) {
         webServiceCaller.getAllUsers(new GetDataCallback() {
             @Override
             public void onGetData(String dataResponse) {

@@ -24,6 +24,7 @@ public class ViewPageAdapter extends PagerAdapter {
         return view == object;
     }
 
+    //Setting image to item in recycler view
     @NonNull
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
@@ -43,6 +44,8 @@ public class ViewPageAdapter extends PagerAdapter {
         container.removeView((View) object);
     }
 
+
+    //Returning length of image URL's
     @Override
     public int getCount() {
 

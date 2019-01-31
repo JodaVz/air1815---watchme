@@ -48,6 +48,7 @@ public class GridAdapter extends BaseAdapter {
         return 0;
     }
 
+    //Inflating layout, inflating one item in grid view and binding data to it
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 

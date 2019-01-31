@@ -24,6 +24,7 @@ public class MovieCategoryFragment extends Fragment {
     private ArrayList<Movie> movieList;
     MovieDetailsInterface listenerActivity;
 
+    //Getting data from selected category by getting arguments from bundle
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -39,11 +40,12 @@ public class MovieCategoryFragment extends Fragment {
             }
         });
 
-        movieList =  getArguments().getParcelableArrayList("MOVIES");
+        movieList = getArguments().getParcelableArrayList("MOVIES");
 
         return viewMain;
     }
 
+    //Creating bundle on new instance
     public static MovieCategoryFragment newInstance(String categoryName, ArrayList<Movie> movies) {
         MovieCategoryFragment fragment = new MovieCategoryFragment();
         Bundle bundle = new Bundle();
@@ -54,6 +56,7 @@ public class MovieCategoryFragment extends Fragment {
         return fragment;
     }
 
+    //Setting layoutManager and adapter on vertical recycle view for displaying movies
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -69,6 +72,7 @@ public class MovieCategoryFragment extends Fragment {
         myList.setAdapter(adapter);
     }
 
+    //Setting listener on MovieDetailsInterface
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);

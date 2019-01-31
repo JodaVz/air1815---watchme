@@ -62,6 +62,7 @@ public class MovieDetails extends Fragment {
     boolean commentIsClicked = false;
 
 
+    //Inflating activity_movie_details xml
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -73,10 +74,11 @@ public class MovieDetails extends Fragment {
         return viewMain;
     }
 
+    //Initializing text and item views and setting all the listeners
     @Override
     public void onResume() {
         super.onResume();
-
+        //Initializing text and item views
         movieTitle = getView().findViewById(R.id.output_movie_details_title);
         moviePosterFront = getView().findViewById(R.id.iv_movie_poster_front);
         moviePosterBack = getView().findViewById(R.id.iv_movie_poster_back);
@@ -115,12 +117,13 @@ public class MovieDetails extends Fragment {
                 getAllComments();
             }
         };
-        handler.postDelayed(r,200);
+        handler.postDelayed(r, 200);
         handler.postDelayed(rComment, 200);
 
         bind(movie);
     }
 
+    //Binding title, year, details, cover photo to a movie
     public void bind(Movie m) {
         movieTitle.setText(m.getName());
         movieYear.setText(m.getReleaseDate());
@@ -152,16 +155,19 @@ public class MovieDetails extends Fragment {
         });
     }
 
+    //Expanding and shrinking details of the movie
     public void SetViewMoreButtonListener() {
         viewMoreButton = getView().findViewById(R.id.action_movie_details_show_more);
 
         viewMoreButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Expanding text view to the length of the text and switching button icon to "show less"
                 if (viewMoreButton.getBackground().getConstantState() == getResources().getDrawable(R.drawable.ic_show_more).getConstantState()) {
                     movieAbout.setMaxLines(Integer.MAX_VALUE);
                     viewMoreButton.setBackground(getResources().getDrawable(R.drawable.ic_show_less));
                 } else {
+                    //Setting text view to a maximum of 2 lines and switching button icon to "show more"
                     movieAbout.setMaxLines(2);
                     viewMoreButton.setBackground(getResources().getDrawable(R.drawable.ic_show_more));
                 }
@@ -192,7 +198,11 @@ public class MovieDetails extends Fragment {
 
                 //Delaying GET to wait for webservice to finish handling POST
                 Handler handler = new Handler();
-                Runnable r = new Runnable() {public void run() { getUserRating(webServiceCaller); }};
+                Runnable r = new Runnable() {
+                    public void run() {
+                        getUserRating(webServiceCaller);
+                    }
+                };
                 handler.postDelayed(r, 200);
             }
         });
@@ -221,14 +231,18 @@ public class MovieDetails extends Fragment {
 
                 //Delaying GET to wait for webservice to finish handling POST
                 Handler handler = new Handler();
-                Runnable r = new Runnable() {public void run() { getUserRating(webServiceCaller); }};
+                Runnable r = new Runnable() {
+                    public void run() {
+                        getUserRating(webServiceCaller);
+                    }
+                };
                 handler.postDelayed(r, 200);
             }
         });
     }
 
     //Setting a listener that disables comment button after user sends a comment
-    public void setCommentButtonListener(){
+    public void setCommentButtonListener() {
         commentButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -250,14 +264,18 @@ public class MovieDetails extends Fragment {
 
                 //Delaying GET to wait for webservice to finish handling POST
                 Handler handler = new Handler();
-                Runnable r = new Runnable() {public void run() { getUserComment(webServiceCaller); }};
+                Runnable r = new Runnable() {
+                    public void run() {
+                        getUserComment(webServiceCaller);
+                    }
+                };
                 handler.postDelayed(r, 200);
             }
         });
     }
 
     //This method confirms user post and writes data to database; returns code after finishing
-    public void getUserRating(WatchMeWebServiceCaller webServiceCaller){
+    public void getUserRating(WatchMeWebServiceCaller webServiceCaller) {
         webServiceCaller.getUserRating(new GetStatusCallback() {
             @Override
             public void onGetCode(int statusCode) {
@@ -307,7 +325,7 @@ public class MovieDetails extends Fragment {
     }
 
     //Getting all comments from webservice for the chosen movie to display
-    public void getAllComments(){
+    public void getAllComments() {
         final WatchMeWebServiceCaller webServiceCaller = new WatchMeWebServiceCaller();
         webServiceCaller.getAllComments(new GetDataCallback() {
             @Override
@@ -319,7 +337,7 @@ public class MovieDetails extends Fragment {
                 comments = gson.fromJson(dataResponse, token.getType());
 
                 //Appending comments to arraylist adapter
-                for (String comment : comments){
+                for (String comment : comments) {
                     arrayList.add(comment);
                 }
                 adapter.notifyDataSetChanged();
@@ -328,7 +346,7 @@ public class MovieDetails extends Fragment {
     }
 
     //Pinging webservice to notify it about the currently selected movie
-    public void AzureSender(){
+    public void AzureSender() {
         final WatchMeWebServiceCaller webServiceCaller = new WatchMeWebServiceCaller();
 
         webServiceCaller.userId = MainActivity.userId;
@@ -337,21 +355,19 @@ public class MovieDetails extends Fragment {
     }
 
     //Listening for webservice response on whether user liked, disliked or didn't do either on a current movie
-    public void AzureListener(){
+    public void AzureListener() {
         final WatchMeWebServiceCaller webServiceCaller = new WatchMeWebServiceCaller();
         webServiceCaller.checkUserRating(new GetStatusCallback() {
             @Override
             public void onGetCode(int statusCode) {
                 //Handling code response; 200 movie is liked, 500 movie is disliked, 500 movie is FREE
-                if(statusCode == 200){
+                if (statusCode == 200) {
                     likeButton.setClickable(false);
                     dislikeButton.setVisibility(View.GONE);
-                }
-                else if (statusCode == 500){
+                } else if (statusCode == 500) {
                     dislikeButton.setClickable(false);
                     likeButton.setVisibility(View.GONE);
-                }
-                else if(statusCode == 401){
+                } else if (statusCode == 401) {
                 }
             }
         });

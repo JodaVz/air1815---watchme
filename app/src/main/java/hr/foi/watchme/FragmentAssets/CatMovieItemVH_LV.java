@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.squareup.picasso.Picasso;
 
 import hr.foi.watchme.POJO.Movie;
@@ -22,6 +23,7 @@ public class CatMovieItemVH_LV extends RecyclerView.ViewHolder {
     Context c;
     public View itemView;
 
+    //Initializing text and image views. Setting toast to display title of selected movie
     public CatMovieItemVH_LV(@NonNull View itemView, final Context c) {
         super(itemView);
         movieId = itemView.findViewById(R.id.movie_in_category_list_movie_id);
@@ -41,14 +43,16 @@ public class CatMovieItemVH_LV extends RecyclerView.ViewHolder {
             }
         });
     }
+
+    //Binding title, id and cover photo of a movie to it's corresponding text and image views
     public void bind(Movie m) {
         movieId.setText("" + m.getID());
         movieTitle.setText(m.getName());
-        year.setText(""+m.getReleaseDate());
+        year.setText("" + m.getReleaseDate());
         Picasso.get()
                 .load(m.getCoverPhoto())
                 .resize(100, 150)
                 .into(movieImage);
-        rating.setText(""+m.getRating());
+        rating.setText("" + m.getRating());
     }
 }

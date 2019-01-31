@@ -11,6 +11,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
 
     }
 
+    //Setting preferences
     @Override
     public void onCreatePreferences(Bundle bundle, String rootKey) {
         setPreferencesFromResource(R.xml.settings, rootKey);

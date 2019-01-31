@@ -29,6 +29,7 @@ public class ListViewFragment extends Fragment implements CategoryDetailsInterfa
 
     public View viewMain;
 
+    //Creating bundle for new instance
     public static ListViewFragment newInstance(String catName, ArrayList<Movie> movies) {
         ListViewFragment myFragment = new ListViewFragment();
 
@@ -40,6 +41,7 @@ public class ListViewFragment extends Fragment implements CategoryDetailsInterfa
         return myFragment;
     }
 
+    //Getting values from bundle
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +49,7 @@ public class ListViewFragment extends Fragment implements CategoryDetailsInterfa
         filmovi = getArguments().getParcelableArrayList("movies");
     }
 
+    //Inflating list_layout xml and setting category name on inflated layout
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -58,6 +61,7 @@ public class ListViewFragment extends Fragment implements CategoryDetailsInterfa
         return viewMain;
     }
 
+    //Setting layoutManager and adapter on vertical recycle view for displaying movies
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -71,6 +75,7 @@ public class ListViewFragment extends Fragment implements CategoryDetailsInterfa
         myList.setAdapter(adapter);
     }
 
+    //Setting listener on MovieDetailsInterface
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);

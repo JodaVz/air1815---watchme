@@ -20,20 +20,21 @@ public class LinearAdapter extends RecyclerView.Adapter<CatMovieItemVH_LV> {
     Context ctx;
     private static MovieDetailsInterface itemListener;
 
-    public LinearAdapter(ArrayList<Movie> movies, FragmentActivity context, MovieDetailsInterface listener){
+    public LinearAdapter(ArrayList<Movie> movies, FragmentActivity context, MovieDetailsInterface listener) {
         this.movieList = movies;
         this.ctx = context;
         this.itemListener = listener;
     }
 
+    //Inflating fragment_movie_item_list xml
     @NonNull
     @Override
     public CatMovieItemVH_LV onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View inflatedCatMovie = LayoutInflater.from(ctx).inflate(R.layout.fragment_movie_item_list, viewGroup, false);
-        return new CatMovieItemVH_LV(inflatedCatMovie,ctx);
+        return new CatMovieItemVH_LV(inflatedCatMovie, ctx);
     }
 
-
+    //Binding movie to its position in recycler view and setting listener to check if movie is selected
     @Override
     public void onBindViewHolder(@NonNull CatMovieItemVH_LV movieVH, int i) {
         final Movie m = movieList.get(i);
@@ -46,6 +47,7 @@ public class LinearAdapter extends RecyclerView.Adapter<CatMovieItemVH_LV> {
         });
     }
 
+    //Returning size of list of movies
     @Override
     public int getItemCount() {
         return movieList.size();
