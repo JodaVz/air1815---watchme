@@ -31,7 +31,7 @@ import hr.foi.watchme.FragmentAssets.MovieViewPager;
 import hr.foi.watchme.Fragments.MovieDetails;
 import hr.foi.watchme.Fragments.MovieFragment;
 import hr.foi.watchme.Fragments.SettingsFragment;
-import hr.foi.watchme.Interfaces.CategoryDetailsInterface;
+import com.example.category.CategoryDetailsInterface;
 import hr.foi.watchme.Interfaces.MovieDetailsInterface;
 import hr.foi.watchme.Interfaces.MoviesInterface;
 import hr.foi.watchme.POJO.Movie;

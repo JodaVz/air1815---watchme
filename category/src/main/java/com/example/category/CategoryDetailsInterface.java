@@ -1,4 +1,4 @@
-package hr.foi.watchme.Interfaces;
+package com.example.category;
 
 public interface CategoryDetailsInterface {
     /*

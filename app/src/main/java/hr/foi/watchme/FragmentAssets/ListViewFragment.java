@@ -15,7 +15,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import hr.foi.watchme.Adapters.LinearAdapter;
-import hr.foi.watchme.Interfaces.CategoryDetailsInterface;
+import com.example.category.CategoryDetailsInterface;
 import hr.foi.watchme.Interfaces.MovieDetailsInterface;
 import hr.foi.watchme.POJO.Movie;
 import hr.foi.watchme.R;
