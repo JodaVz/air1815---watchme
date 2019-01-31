@@ -12,10 +12,11 @@ import android.view.ViewGroup;
 import android.widget.GridView;
 import android.widget.TextView;
 
+import com.example.category.CategoryDetailsInterface;
+
 import java.util.ArrayList;
 
 import hr.foi.watchme.Adapters.GridAdapter;
-import com.example.category.CategoryDetailsInterface;
 import hr.foi.watchme.Interfaces.MovieDetailsInterface;
 import hr.foi.watchme.POJO.Movie;
 import hr.foi.watchme.R;
@@ -62,6 +63,8 @@ public class GridViewFragment extends Fragment implements CategoryDetailsInterfa
         gridView = viewMain.findViewById(R.id.gridView);
         GridAdapter gridAdapter = new GridAdapter(filmovi, listenerActivity, getActivity(), movieUrls, names);
         gridView.setAdapter(gridAdapter);
+
+        categoryName.setText(categoryNameString);
         return viewMain;
     }
 
