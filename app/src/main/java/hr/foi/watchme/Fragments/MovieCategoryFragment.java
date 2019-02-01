@@ -11,11 +11,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.pojo.Movie;
+
 import java.util.ArrayList;
 
 import hr.foi.watchme.Adapters.CategoryAdapter;
 import hr.foi.watchme.Interfaces.MovieDetailsInterface;
-import hr.foi.watchme.POJO.Movie;
 import hr.foi.watchme.R;
 
 public class MovieCategoryFragment extends Fragment {

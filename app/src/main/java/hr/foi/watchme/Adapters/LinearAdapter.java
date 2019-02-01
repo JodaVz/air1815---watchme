@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 import hr.foi.watchme.FragmentAssets.CatMovieItemVH_LV;
 import hr.foi.watchme.Interfaces.MovieDetailsInterface;
-import hr.foi.watchme.POJO.Movie;
+import com.example.pojo.Movie;
 import hr.foi.watchme.R;
 
 public class LinearAdapter extends RecyclerView.Adapter<CatMovieItemVH_LV> {

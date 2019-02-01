@@ -13,14 +13,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import com.example.pojo.Movie;
+import com.example.pojo.MovieCategory;
+
 import java.util.List;
 
+import hr.foi.watchme.Adapters.ViewPageAdapter;
 import hr.foi.watchme.Fragments.MovieCategoryFragment;
 import hr.foi.watchme.Interfaces.MoviesInterface;
-import hr.foi.watchme.POJO.Movie;
-import hr.foi.watchme.POJO.MovieCategory;
 import hr.foi.watchme.R;
-import hr.foi.watchme.Adapters.ViewPageAdapter;
 
 public class MovieViewPager extends Fragment {
 

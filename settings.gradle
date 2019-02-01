@@ -1,1 +1,1 @@
-include ':app', ':player', ':category'
+include ':app', ':player', ':category', ':pojo'

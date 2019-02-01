@@ -13,12 +13,12 @@ import android.widget.GridView;
 import android.widget.TextView;
 
 import com.example.category.CategoryDetailsInterface;
+import com.example.pojo.Movie;
 
 import java.util.ArrayList;
 
 import hr.foi.watchme.Adapters.GridAdapter;
 import hr.foi.watchme.Interfaces.MovieDetailsInterface;
-import hr.foi.watchme.POJO.Movie;
 import hr.foi.watchme.R;
 
 public class GridViewFragment extends Fragment implements CategoryDetailsInterface {
@@ -97,4 +97,8 @@ public class GridViewFragment extends Fragment implements CategoryDetailsInterfa
         }
     }
 
+    @Override
+    public String getName() {
+        return "Grid view";
+    }
 }

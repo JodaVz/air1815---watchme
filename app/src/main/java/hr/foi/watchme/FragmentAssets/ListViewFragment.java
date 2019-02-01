@@ -12,20 +12,24 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.category.CategoryDetailsInterface;
+import com.example.pojo.Movie;
+
 import java.util.ArrayList;
 
 import hr.foi.watchme.Adapters.LinearAdapter;
-import com.example.category.CategoryDetailsInterface;
 import hr.foi.watchme.Interfaces.MovieDetailsInterface;
-import hr.foi.watchme.POJO.Movie;
+import hr.foi.watchme.Interfaces.SettingsInterface;
 import hr.foi.watchme.R;
 
 public class ListViewFragment extends Fragment implements CategoryDetailsInterface {
     TextView categoryName;
     MovieDetailsInterface listenerActivity;
+    SettingsInterface settingsInterface;
 
     String categoryNameString;
     ArrayList<Movie> filmovi;
+    String fragName = "List view";
 
     public View viewMain;
 
@@ -84,4 +88,8 @@ public class ListViewFragment extends Fragment implements CategoryDetailsInterfa
         }
     }
 
+    @Override
+    public String getName() {
+        return fragName;
+    }
 }

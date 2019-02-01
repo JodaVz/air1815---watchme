@@ -11,6 +11,7 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/category" />
             <option value="$PROJECT_DIR$/player" />
+            <option value="$PROJECT_DIR$/pojo" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

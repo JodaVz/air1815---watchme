@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.player.PlayerActivity;
+import com.example.pojo.Movie;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.squareup.picasso.Picasso;
@@ -29,7 +30,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hr.foi.watchme.MainActivity;
-import hr.foi.watchme.POJO.Movie;
 import hr.foi.watchme.R;
 import hr.foi.watchme.WebServiceApi.WatchMeWebServiceCaller;
 import hr.foi.watchme.WebServiceApi.WebServiceInterfaces.GetDataCallback;

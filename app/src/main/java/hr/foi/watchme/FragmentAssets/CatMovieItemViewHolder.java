@@ -10,7 +10,7 @@ import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
-import hr.foi.watchme.POJO.Movie;
+import com.example.pojo.Movie;
 import hr.foi.watchme.R;
 
 public class CatMovieItemViewHolder extends RecyclerView.ViewHolder {

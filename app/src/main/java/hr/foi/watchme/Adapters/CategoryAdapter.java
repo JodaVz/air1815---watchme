@@ -8,11 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.pojo.Movie;
+
 import java.util.ArrayList;
 
 import hr.foi.watchme.FragmentAssets.CatMovieItemViewHolder;
 import hr.foi.watchme.Interfaces.MovieDetailsInterface;
-import hr.foi.watchme.POJO.Movie;
 import hr.foi.watchme.R;
 
 

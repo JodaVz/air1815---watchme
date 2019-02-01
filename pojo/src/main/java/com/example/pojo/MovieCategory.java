@@ -1,4 +1,4 @@
-package hr.foi.watchme.POJO;
+package com.example.pojo;
 
 import android.os.Parcel;
 import android.os.Parcelable;

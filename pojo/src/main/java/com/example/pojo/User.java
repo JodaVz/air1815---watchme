@@ -1,4 +1,4 @@
-package hr.foi.watchme.POJO;
+package com.example.pojo;
 
 public class User {
     public int ID;

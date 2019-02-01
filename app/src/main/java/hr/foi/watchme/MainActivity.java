@@ -15,6 +15,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.example.category.CategoryDetailsInterface;
+import com.example.pojo.Movie;
+import com.example.pojo.MovieCategory;
+import com.example.pojo.User;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -31,12 +35,8 @@ import hr.foi.watchme.FragmentAssets.MovieViewPager;
 import hr.foi.watchme.Fragments.MovieDetails;
 import hr.foi.watchme.Fragments.MovieFragment;
 import hr.foi.watchme.Fragments.SettingsFragment;
-import com.example.category.CategoryDetailsInterface;
 import hr.foi.watchme.Interfaces.MovieDetailsInterface;
 import hr.foi.watchme.Interfaces.MoviesInterface;
-import hr.foi.watchme.POJO.Movie;
-import hr.foi.watchme.POJO.MovieCategory;
-import hr.foi.watchme.POJO.User;
 import hr.foi.watchme.WebServiceApi.WatchMeWebServiceCaller;
 import hr.foi.watchme.WebServiceApi.WebServiceInterfaces.GetDataCallback;
 
@@ -161,6 +161,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     //Getting users preference for catalog view and setting catalog view accordingly
     @Override
     public void categoryClicked(String name, ArrayList<Movie> movies) {
+        //TODO ova aktivnost samo dohvaća postavke kroz sučelje koje je implementirano u postavkama.
+        //Settings activity će dinamički skužit koji sve moduli postoje i vratiti tip fragmenta kroz metodu sučelja
         PreferenceManager.setDefaultValues(this, R.xml.settings, false);
         SharedPreferences sharedPref =
                 PreferenceManager.getDefaultSharedPreferences(this);
@@ -168,6 +170,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 (Settings.KEY_PREF_EXAMPLE_SWITCH, false);
         CategoryDetailsInterface frag;
         if (switchPref) {
+
             frag = GridViewFragment.newInstance(name, movies);
         } else {
             frag = ListViewFragment.newInstance(name, movies);

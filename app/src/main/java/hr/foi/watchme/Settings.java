@@ -10,8 +10,6 @@ import android.widget.CompoundButton;
 
 import java.util.Locale;
 
-import hr.foi.watchme.Fragments.SettingsFragment;
-
 public class Settings extends AppCompatActivity implements CompoundButton.OnCheckedChangeListener {
 
      public static final String KEY_PREF_EXAMPLE_SWITCH = "example_switch";
@@ -27,11 +25,11 @@ public class Settings extends AppCompatActivity implements CompoundButton.OnChec
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+/*
         getSupportFragmentManager().beginTransaction()
                 .replace(android.R.id.content, new SettingsFragment())
                 .commit();
-
+*/
     }
 
     @Override

@@ -2,7 +2,7 @@ package hr.foi.watchme.Interfaces;
 
 import java.util.ArrayList;
 
-import hr.foi.watchme.POJO.Movie;
+import com.example.pojo.Movie;
 
 public interface MovieDetailsInterface {
     //Used to get name and list of movies that are in selected category
