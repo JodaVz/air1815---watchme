@@ -3,6 +3,7 @@ package hr.foi.watchme;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -37,6 +38,7 @@ import hr.foi.watchme.Fragments.MovieFragment;
 import hr.foi.watchme.Fragments.SettingsFragment;
 import hr.foi.watchme.Interfaces.MovieDetailsInterface;
 import hr.foi.watchme.Interfaces.MoviesInterface;
+import hr.foi.watchme.Interfaces.SettingsInterface;
 import hr.foi.watchme.WebServiceApi.WatchMeWebServiceCaller;
 import hr.foi.watchme.WebServiceApi.WebServiceInterfaces.GetDataCallback;
 
@@ -52,6 +54,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public TextView username;
     public TextView email;
     public Movie movie;
+    public List<User> users;
+
+    SettingsInterface settingsInterfaceListener;
 
     public Boolean switchPref;
 
@@ -91,6 +96,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         getMovies(webServiceCaller);
         getCategories(webServiceCaller);
         getUsers(webServiceCaller);
+        Handler handler = new Handler();
+        Runnable r = new Runnable() {
+            @Override
+            public void run() {
+                setUsers(users);
+            }
+        };
+        handler.postDelayed(r, 200);
+
     }
 
     @Override
@@ -163,19 +177,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void categoryClicked(String name, ArrayList<Movie> movies) {
         //TODO ova aktivnost samo dohvaća postavke kroz sučelje koje je implementirano u postavkama.
         //Settings activity će dinamički skužit koji sve moduli postoje i vratiti tip fragmenta kroz metodu sučelja
-        PreferenceManager.setDefaultValues(this, R.xml.settings, false);
-        SharedPreferences sharedPref =
-                PreferenceManager.getDefaultSharedPreferences(this);
-        switchPref = sharedPref.getBoolean
-                (Settings.KEY_PREF_EXAMPLE_SWITCH, false);
-        CategoryDetailsInterface frag;
-        if (switchPref) {
-
-            frag = GridViewFragment.newInstance(name, movies);
-        } else {
-            frag = ListViewFragment.newInstance(name, movies);
-        }
-
+        CategoryDetailsInterface frag = SettingsFragment.getDisplayMode(this);
+        if(frag == null)
+            return;
+        frag = frag.newInstance(name, movies);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                 (Fragment) frag).addToBackStack("gridLayout").commit();
 
@@ -261,23 +266,27 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Gson gson = new Gson();
                 TypeToken<List<User>> token = new TypeToken<List<User>>() {
                 };
-                List<User> users = gson.fromJson(dataResponse, token.getType());
-                for (User user : users) {
-                    if (user.email.equals(userEmail)) {
-                        //Setting user name, surname and email in navigation header
-                        userName = user.getName() + " " + user.getSurname();
-                        userId = user.getId();
+                users = gson.fromJson(dataResponse, token.getType());
 
-                        username = findViewById(R.id.username);
-                        username.setText(userName);
-
-                        email = findViewById(R.id.emailAdress);
-                        email.setText(userEmail);
-                        break;
-                    }
-                }
             }
         });
+    }
+
+    public void setUsers(List<User> users){
+        for ( User user : users) {
+            if (user.email.equals(userEmail)) {
+                //Setting user name, surname and email in navigation header
+                userName = user.getName() + " " + user.getSurname();
+                userId = user.getId();
+/*
+                username = findViewById(R.id.username);
+                username.setText(userName);
+
+                email = findViewById(R.id.emailAdress);
+                email.setText(userEmail);
+                break;*/
+            }
+        }
     }
 }
 

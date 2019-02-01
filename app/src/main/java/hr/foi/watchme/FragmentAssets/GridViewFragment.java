@@ -33,8 +33,11 @@ public class GridViewFragment extends Fragment implements CategoryDetailsInterfa
     GridView gridView;
     public View viewMain;
 
+    public static final String FRAG_NAME = "Grid";
+
     //Creating bundle for new instance
-    public static GridViewFragment newInstance(String catName, ArrayList<Movie> movies) {
+    @Override
+    public GridViewFragment newInstance(String catName, ArrayList<Movie> movies) {
         GridViewFragment myFragment = new GridViewFragment();
 
         Bundle args = new Bundle();
@@ -99,6 +102,11 @@ public class GridViewFragment extends Fragment implements CategoryDetailsInterfa
 
     @Override
     public String getName() {
-        return "Grid view";
+        return FRAG_NAME;
+    }
+
+    @Override
+    public Fragment getFragment() {
+        return this;
     }
 }

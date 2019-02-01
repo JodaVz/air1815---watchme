@@ -29,12 +29,13 @@ public class ListViewFragment extends Fragment implements CategoryDetailsInterfa
 
     String categoryNameString;
     ArrayList<Movie> filmovi;
-    String fragName = "List view";
+    public static final String FRAG_NAME = "List view";
 
     public View viewMain;
 
     //Creating bundle for new instance
-    public static ListViewFragment newInstance(String catName, ArrayList<Movie> movies) {
+    @Override
+    public ListViewFragment newInstance(String catName, ArrayList<Movie> movies) {
         ListViewFragment myFragment = new ListViewFragment();
 
         Bundle args = new Bundle();
@@ -90,6 +91,11 @@ public class ListViewFragment extends Fragment implements CategoryDetailsInterfa
 
     @Override
     public String getName() {
-        return fragName;
+        return FRAG_NAME;
+    }
+
+    @Override
+    public Fragment getFragment() {
+        return this;
     }
 }

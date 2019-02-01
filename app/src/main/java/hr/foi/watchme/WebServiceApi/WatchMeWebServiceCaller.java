@@ -57,7 +57,7 @@ public class WatchMeWebServiceCaller {
                 if (response.isSuccessful()){
                     getDataCallback.onGetData(response.body());
                 }else {
-                    System.out.print("Ne vela");
+                    Log.d(TAG,"Nisu došli useri: " + response.code());
                 }
             }
 

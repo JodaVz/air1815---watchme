@@ -1,7 +1,9 @@
 package hr.foi.watchme.Fragments;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -17,15 +19,14 @@ import java.util.ArrayList;
 
 import hr.foi.watchme.FragmentAssets.GridViewFragment;
 import hr.foi.watchme.FragmentAssets.ListViewFragment;
-import hr.foi.watchme.Interfaces.SettingsInterface;
 import hr.foi.watchme.R;
 
 public class SettingsFragment extends Fragment{
 
     ArrayList<CategoryDetailsInterface> fragmentList;
     RadioGroup radioGroup;
-    SettingsInterface settingsInterface;
-    CategoryDetailsInterface categoryDetailsInterface;
+    private static final String SP_DISPLAY_MODE = "displayMode";
+
 
     public SettingsFragment() {
 
@@ -53,14 +54,18 @@ public class SettingsFragment extends Fragment{
         radioGroup = getActivity().findViewById(R.id.radio_gaga);
         CreateRadioButtons();
 
-        for(int i=1 ; i<=fragmentList.size(); i++) {
-            radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(RadioGroup group, int checkedId) {
-                    //getActivity().findViewById(checkedId);
-                }
-            });
-        }
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                View selectedButton = group.findViewById(checkedId);
+                int radioId = radioGroup.indexOfChild(selectedButton);
+                RadioButton btn = (RadioButton) group.getChildAt(radioId);
+                String selection = (String) btn.getText();
+                SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(getContext()).edit();
+                editor.putString(SP_DISPLAY_MODE, selection);
+                editor.apply();
+            }
+        });
     }
 
     private void FragmentManagment() {
@@ -82,6 +87,18 @@ public class SettingsFragment extends Fragment{
     public void onAttach(Context context) {
         super.onAttach(context);
 
+    }
+
+    public static CategoryDetailsInterface getDisplayMode(Context context){
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        String restoredText = prefs.getString(SP_DISPLAY_MODE, ListViewFragment.FRAG_NAME);
+        if (restoredText == null)
+            return null;
+        if(restoredText.equals(ListViewFragment.FRAG_NAME))
+            return new ListViewFragment();
+        else if (restoredText.equals(GridViewFragment.FRAG_NAME))
+            return new GridViewFragment();
+        return null;
     }
 
 }
